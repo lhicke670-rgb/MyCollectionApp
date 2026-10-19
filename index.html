@@ -73,6 +73,91 @@ body.dark-mode .card-options-toggle{background:#211d31ed;color:var(--ink);border
 body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 @media(max-width:700px){.collection-grid.list-view .photo{width:112px;flex-basis:112px;min-height:120px}.collection-grid.list-view .item-card{min-height:120px}.collection-grid.list-view .card-actions{max-width:78%;left:8px;right:8px;top:auto;bottom:8px}.toolbar .view-mode-button{flex:1}.last-sync{width:100%;margin:3px 0 0}.category-add{align-items:stretch}.category-add .btn{padding-left:9px;padding-right:9px}}
 
+
+
+/* Physical binder spread and page-turn interaction */
+.binder-workspace{background:transparent;border:0;box-shadow:none;overflow:visible}
+.binder-workspace>.toolbar,.binder-workspace>.bulk-toolbar{background:#f9f7f0;border:1px solid #d9d1c1;border-radius:14px;box-shadow:0 4px 12px #19162212;margin-bottom:12px}
+.binder-book{--binder-spine:42px;position:relative;padding:17px 16px 12px;border-radius:20px;background:linear-gradient(145deg,#343139 0%,#19191e 48%,#29272e 100%);border:1px solid #121216;box-shadow:0 18px 32px #17121d2c,inset 0 1px 0 #ffffff20,inset 0 0 0 3px #ffffff07;overflow:hidden}
+.binder-book:before{content:"";position:absolute;inset:7px;border-radius:14px;border:1px dashed #ffffff23;pointer-events:none;z-index:0}
+.binder-book:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(112deg,#ffffff00 0 4px,#ffffff05 5px,#00000008 6px,#ffffff00 9px);pointer-events:none;mix-blend-mode:screen;opacity:.3;z-index:0}
+.binder-cover-seam{position:absolute;left:50%;top:10px;bottom:10px;width:8px;transform:translateX(-50%);background:linear-gradient(90deg,#00000055,#ffffff10 35%,#00000060 70%,#ffffff15);border-radius:8px;z-index:1;pointer-events:none}
+.binder-spread-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) var(--binder-spine) minmax(0,1fr);gap:0;padding:0;margin:0;overflow:visible;isolation:isolate;z-index:2;perspective:1800px}
+.binder-page{position:relative;min-width:0;min-height:600px;display:flex;flex-direction:column;padding:20px 15px 13px;background-color:#fdfbf5;background-image:linear-gradient(90deg,#e8e2d7 0,#fbf9f2 4%,#fffdf8 16%,#fffdf8 88%,#e8e2d7 100%),repeating-linear-gradient(0deg,#ffffff00 0 25px,#a8a0a018 26px);border:1px solid #d2caba;box-shadow:0 2px 5px #0000000d,inset 0 0 28px #b6aa9414;overflow:hidden;transform-style:preserve-3d}
+.binder-page-left{border-radius:7px 2px 2px 7px;box-shadow:inset -13px 0 17px -16px #342b1a75,0 2px 5px #00000010}
+.binder-page-right{border-radius:2px 7px 7px 2px;background-image:linear-gradient(90deg,#eee8dc 0,#fffdf8 7%,#fffdf8 92%,#e8e2d7 100%),repeating-linear-gradient(0deg,#ffffff00 0 25px,#a8a0a018 26px);box-shadow:inset 13px 0 17px -16px #342b1a75,0 2px 5px #00000010}
+.binder-page-header,.binder-page-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#8b8273;font-weight:850;font-size:9px;letter-spacing:1.1px;flex:0 0 auto}
+.binder-page-header{padding-bottom:11px;border-bottom:1px solid #d9d2c6;margin-bottom:12px}
+.binder-page-number{color:#766c5b;font-variant-numeric:tabular-nums;font-size:10px;letter-spacing:.8px}
+.binder-page-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:11px;flex:1;min-width:0}
+.binder-page-footer{padding-top:11px;border-top:1px solid #d9d2c6;margin-top:12px;font-size:8px;letter-spacing:.8px}
+.binder-rings{align-self:stretch;position:relative;z-index:5;display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:23px 0;background:linear-gradient(90deg,#1e1d21,#464249 35%,#141317 64%,#38353c);box-shadow:inset 3px 0 5px #0008,inset -3px 0 5px #0008}
+.binder-rings span{display:block;width:28px;height:16px;border-radius:50%;border:4px solid #c7c5c1;background:linear-gradient(135deg,#fff 0%,#777 26%,#e9e7e2 50%,#777 77%,#f5f4f0 100%);box-shadow:0 1px 3px #000a,inset 0 0 0 1px #ffffffa3;transform:rotate(-90deg)}
+.binder-page .item-card{background:#fff;border-color:#ded7ca;border-radius:8px;box-shadow:0 2px 4px #31261412;min-width:0}
+.binder-page .item-card:hover{transform:translateY(-2px);box-shadow:0 8px 15px #31261424}
+.binder-page .photo{height:clamp(95px,12vw,155px);background:linear-gradient(135deg,#f0eee8,#fff)}
+.binder-page .card-body{padding:8px 9px 10px;min-height:43px}
+.binder-page .item-title{font-size:12px;line-height:1.25;color:#2a2730}
+.binder-page .item-category{font-size:9px;color:#6b4dbb}
+.binder-page .status-chip,.binder-page .quantity-chip{font-size:8px;padding:4px 6px}
+.binder-page .card-options-toggle{right:5px;bottom:5px;width:27px;height:25px;border-radius:7px;font-size:17px}
+.binder-page .card-actions{left:4px;right:4px;bottom:4px;padding:5px;gap:4px;border-radius:8px}
+.binder-page .icon-btn{font-size:10px;padding:5px 5px;min-width:0}
+.binder-page .icon-btn.quantity-step{flex-basis:28px;font-size:14px}
+.binder-page .item-notes{font-size:10px}
+.binder-page-grid.list-view{grid-template-columns:1fr}
+.binder-spread-grid.list-view .binder-page .item-card{flex-direction:row;min-height:80px}
+.binder-spread-grid.list-view .binder-page .photo{width:77px;flex:0 0 77px;height:auto;min-height:80px}
+.binder-spread-grid.list-view .binder-page .card-body{min-width:0;justify-content:center;padding:7px}
+.binder-spread-grid.list-view .binder-page .item-title{font-size:11px}
+.binder-page-grid .empty{padding:30px 8px;font-size:11px;grid-column:1/-1}
+.binder-page-grid .empty h3{font-size:14px}
+.binder-page-grid .empty p{font-size:11px;line-height:1.45}
+.binder-page-grid .empty .symbol{font-size:26px}
+.binder-pagination-wrap{position:relative;z-index:2;min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 4px 3px;color:#e8e4ef}
+.binder-spread-label{font-size:9px;font-weight:850;letter-spacing:1.4px;white-space:nowrap;color:#e4ddec}
+.binder-pagination{padding:0;justify-content:center;gap:5px;flex:1}
+.binder-pagination .page-btn{min-width:30px;padding:7px 9px;border-radius:8px;border-color:#ffffff2c;background:#ffffff12;color:#fff;font-size:10px;box-shadow:none}
+.binder-pagination .page-btn.active{background:#ebe4ff;color:#4f31c7;border-color:#ebe4ff}
+.binder-pagination .page-btn:disabled{opacity:.3}
+.binder-hint{font-size:9px;color:#c6bdcf;white-space:nowrap;text-align:right}
+.binder-turn-overlay{position:absolute;z-index:20;pointer-events:none;perspective:1800px;overflow:visible}
+.binder-turn-snapshot{width:100%;height:100%;min-height:0!important;position:relative;box-sizing:border-box;overflow:hidden;transform-style:preserve-3d;backface-visibility:hidden}
+.binder-turn-snapshot::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#d7cdbb,#f7f3e9 14%,#fffdf7 85%,#d8cfbf);border:1px solid #d2caba;backface-visibility:hidden;transform:rotateY(180deg);box-shadow:inset 0 0 22px #9b8f7a2c}
+.binder-turn-overlay.next .binder-turn-snapshot{transform-origin:left center;animation:binder-turn-next .68s cubic-bezier(.35,.05,.38,1) forwards}
+.binder-turn-overlay.prev .binder-turn-snapshot{transform-origin:right center;animation:binder-turn-prev .68s cubic-bezier(.35,.05,.38,1) forwards}
+@keyframes binder-turn-next{0%{transform:rotateY(0);filter:brightness(1);box-shadow:0 2px 4px #0001}38%{filter:brightness(.88);box-shadow:-12px 7px 20px #0002}62%{transform:rotateY(-84deg);filter:brightness(.8);box-shadow:-14px 7px 22px #0003}100%{transform:rotateY(-96deg);filter:brightness(.72);box-shadow:-10px 5px 20px #0002}}
+@keyframes binder-turn-prev{0%{transform:rotateY(0);filter:brightness(1);box-shadow:0 2px 4px #0001}38%{filter:brightness(.88);box-shadow:12px 7px 20px #0002}62%{transform:rotateY(84deg);filter:brightness(.8);box-shadow:14px 7px 22px #0003}100%{transform:rotateY(96deg);filter:brightness(.72);box-shadow:10px 5px 20px #0002}}
+.binder-spread-grid.page-coming-next > .binder-page{animation:binder-page-reveal-next .28s ease-out both}
+.binder-spread-grid.page-coming-prev > .binder-page{animation:binder-page-reveal-prev .28s ease-out both}
+@keyframes binder-page-reveal-next{from{opacity:.72;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+@keyframes binder-page-reveal-prev{from{opacity:.72;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.binder-book.turning{pointer-events:none}
+@media(max-width:1000px){.binder-book{--binder-spine:34px;padding:13px 12px 10px}.binder-page{padding:16px 11px 11px;min-height:560px}.binder-page-grid{gap:8px}.binder-page .photo{height:118px}.binder-page .card-body{padding:7px}.binder-page .item-title{font-size:11px}.binder-rings span{width:24px;height:14px}}
+@media(max-width:700px){.binder-book{--binder-spine:25px;padding:10px 8px 8px;border-radius:15px}.binder-book:before{inset:5px}.binder-cover-seam{width:5px}.binder-page{padding:11px 6px 8px;min-height:390px}.binder-page-header{font-size:7px;letter-spacing:.6px;padding-bottom:7px;margin-bottom:8px}.binder-page-number{font-size:8px}.binder-page-grid{grid-template-columns:1fr;gap:7px}.binder-page .photo{height:95px}.binder-page .card-body{padding:6px;min-height:38px}.binder-page .item-title{font-size:10px;-webkit-line-clamp:2}.binder-page .item-category{font-size:8px}.binder-page .card-options-toggle{width:23px;height:22px;right:3px;bottom:3px}.binder-page .quantity-chip{top:5px;right:5px}.binder-page .status-chip{top:5px;left:5px}.binder-rings{padding:18px 0}.binder-rings span{width:19px;height:11px;border-width:3px}.binder-page-footer{font-size:6px;letter-spacing:.3px;padding-top:7px;margin-top:8px}.binder-pagination-wrap{flex-wrap:wrap;justify-content:center;padding-top:8px;gap:7px}.binder-spread-label{font-size:8px}.binder-pagination{flex:1 0 100%;order:2}.binder-hint{font-size:8px;order:3;width:100%;text-align:center}.binder-pagination .page-btn{min-width:26px;padding:6px 7px}.binder-spread-grid.list-view .binder-page .photo{width:52px;flex-basis:52px;min-height:65px}.binder-spread-grid.list-view .binder-page .item-card{min-height:65px}.binder-spread-grid.list-view .binder-page .card-options-toggle{display:none}}
+@media(max-width:390px){.binder-book{--binder-spine:20px;padding:8px 6px 6px}.binder-page{padding-left:5px;padding-right:5px;min-height:360px}.binder-page .photo{height:82px}.binder-page .item-title{font-size:9px}.binder-page .status-chip{font-size:6px;padding:3px 4px}.binder-rings span{width:16px;height:10px}.binder-page-grid{gap:6px}}
+@media(prefers-reduced-motion:reduce){.binder-turn-overlay.next .binder-turn-snapshot,.binder-turn-overlay.prev .binder-turn-snapshot,.binder-spread-grid.page-coming-next .binder-page,.binder-spread-grid.page-coming-prev .binder-page{animation-duration:.01ms!important}}
+
+
+/* Keep larger spread sizes tidy by reducing card image height, not by changing item order. */
+.binder-spread-grid.density-24 .binder-page .photo{height:clamp(76px,8vw,100px)}
+.binder-spread-grid.density-24 .binder-page .card-body{padding:6px 7px;min-height:34px}
+.binder-spread-grid.density-24 .binder-page .item-title{font-size:11px}
+.binder-spread-grid.density-24 .binder-page-grid{gap:7px}
+.binder-spread-grid.density-48 .binder-page .photo{height:clamp(48px,5.3vw,68px)}
+.binder-spread-grid.density-48 .binder-page .card-body{padding:4px 6px;min-height:27px}
+.binder-spread-grid.density-48 .binder-page .item-title{font-size:10px;-webkit-line-clamp:1}
+.binder-spread-grid.density-48 .binder-page-grid{gap:5px}
+.binder-spread-grid.density-48 .binder-page .card-options-toggle{width:22px;height:20px;font-size:14px}
+@media(max-width:700px){.binder-spread-grid.density-24 .binder-page .photo{height:70px}.binder-spread-grid.density-48 .binder-page .photo{height:43px}.binder-spread-grid.density-48 .binder-page .item-title{font-size:8px}}
+
+
+.binder-page-left::after,.binder-page-right::after{content:"";position:absolute;bottom:0;width:0;height:0;opacity:.7;pointer-events:none;filter:drop-shadow(0 -1px 1px #51463314)}
+.binder-page-left::after{left:0;border-style:solid;border-width:20px 20px 0 0;border-color:#ded6c6 transparent transparent transparent}
+.binder-page-right::after{right:0;border-style:solid;border-width:0 0 20px 20px;border-color:transparent transparent #ded6c6 transparent}
+.binder-dragging,.binder-dragging *{cursor:grabbing!important;user-select:none!important}
+@media(max-width:700px){.binder-page-left::after{border-width:14px 14px 0 0}.binder-page-right::after{border-width:0 0 14px 14px}}
+
 </style>
 </head>
 <body>
@@ -86,7 +171,23 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 </nav>
 <section class="content-page active" id="page-collection">
 <div class="page-heading"><div><h2 id="pageTitle">Collection</h2><p id="pageSubtitle">Browse the items you have collected.</p></div><button class="btn primary" id="addBtn">＋ Add item</button></div>
-<main class="workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per page"><option value="12">12 per page</option><option value="24">24 per page</option><option value="48">48 per page</option></select><button class="btn small view-mode-button" id="viewModeBtn" type="button">☷ List view</button><button class="btn small" id="selectVisibleBtn" type="button">Select page</button></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><section class="collection-grid" id="collectionGrid"></section><div class="pagination" id="pagination" aria-label="Collection pages"></div><div class="footer"><span id="itemCount">0 items shown</span><span class="sync-state"><span class="dot" id="syncDot"></span><span id="syncText">Saved on this device</span><span class="last-sync" id="lastSyncLabel">Never synced</span></span></div></main>
+<main class="workspace binder-workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per page"><option value="12">12 per page</option><option value="24">24 per page</option><option value="48">48 per page</option></select><button class="btn small view-mode-button" id="viewModeBtn" type="button">☷ List view</button><button class="btn small" id="selectVisibleBtn" type="button">Select page</button></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><div class="binder-book" id="binderBook" aria-label="Collection binder">
+<div class="binder-cover-seam" aria-hidden="true"></div>
+<section class="binder-spread-grid" id="collectionGrid" aria-label="Open collection binder" aria-live="polite">
+  <article class="binder-page binder-page-left" id="leftBinderPage">
+    <div class="binder-page-header"><span id="binderSectionLabelLeft">MY COLLECTION</span><span class="binder-page-number" id="binderLeftPageNo">01</span></div>
+    <div class="binder-page-grid" id="leftCollectionGrid"></div>
+    <div class="binder-page-footer"><span>MY COLLECTION</span><span id="binderLeftFolio">01</span></div>
+  </article>
+  <div class="binder-rings" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <article class="binder-page binder-page-right" id="rightBinderPage">
+    <div class="binder-page-header"><span id="binderSectionLabelRight">MY COLLECTION</span><span class="binder-page-number" id="binderRightPageNo">02</span></div>
+    <div class="binder-page-grid" id="rightCollectionGrid"></div>
+    <div class="binder-page-footer"><span>MY COLLECTION</span><span id="binderRightFolio">02</span></div>
+  </article>
+</section>
+<div class="binder-pagination-wrap"><div class="binder-spread-label" id="binderSpreadLabel">SPREAD 1</div><div class="pagination binder-pagination" id="pagination" aria-label="Collection pages"></div><div class="binder-hint">Use the arrows or swipe to turn a page</div></div>
+</div><div class="footer"><span id="itemCount">0 items shown</span><span class="sync-state"><span class="dot" id="syncDot"></span><span id="syncText">Saved on this device</span><span class="last-sync" id="lastSyncLabel">Never synced</span></span></div></main>
 </section>
 <section class="content-page" id="page-progress">
 <div class="page-heading"><div><h2>Progress</h2><p>Track how much of each category you have collected versus wishlisted.</p></div></div>
@@ -116,7 +217,12 @@ const CATEGORIES_KEY='myCollection.categories.v1';
 const SUPABASE_URL='https://yeiitvanmkqegixyeqok.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_nqQYvpgK_9M_Kc7F2wm43w_IJ7MICYn';
 const BUCKET='collection-photos';
+const PHOTO_MODE_KEY='myCollection.photoStorageMode.v1';
+const PHOTO_DB_NAME='MyCollectionPhotoStore';
+const PHOTO_STORE_NAME='itemPhotos';
 const $=id=>document.getElementById(id);
+let photoStorageMode=false,photoDBPromise=null,photoStoreWarningShown=false;
+try{photoStorageMode=localStorage.getItem(PHOTO_MODE_KEY)==='indexeddb'}catch(e){}
 function readSettings(){try{const x=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}');return x&&typeof x==='object'?x:{}}catch(e){return {}}}
 function readCustomCategories(){try{const x=JSON.parse(localStorage.getItem(CATEGORIES_KEY)||'[]');return Array.isArray(x)?x.filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()):[]}catch(e){return []}}
 function normalizePageSize(value){const n=Number.parseInt(value,10);return [12,24,48].includes(n)?n:12}
@@ -126,7 +232,68 @@ function makeId(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'item-'
 function readItems(){try{const x=JSON.parse(localStorage.getItem(ITEMS_KEY)||'[]');return Array.isArray(x)?x.map(normalizeItem).filter(Boolean):[]}catch(e){return []}}
 function normalizeItem(x){if(!x||typeof x!=='object')return null;const id=String(x.id||makeId());const rawQuantity=Number.parseInt(x.quantity??x.amount??1,10);const quantity=Number.isFinite(rawQuantity)?Math.min(99999,Math.max(1,rawQuantity)):1;return {id,name:String(x.name||'Untitled item'),category:String(x.category||'Other'),status:x.status==='wanted'?'wanted':'owned',quantity,notes:String(x.notes??x.description??''),photo:typeof x.photo==='string'?x.photo:'',photoHash:String(x.photoHash||''),photoRemoved:!!x.photoRemoved,createdAt:x.createdAt||x.created_at||new Date().toISOString(),updatedAt:x.updatedAt||x.updated_at||x.createdAt||new Date().toISOString()}}
 function readTombstones(){try{const x=JSON.parse(localStorage.getItem(DELETED_KEY)||'{}');return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}catch(e){return {}}}
-function persistItems(){localStorage.setItem(ITEMS_KEY,JSON.stringify(items))}
+function openPhotoDB(){
+  if(!window.indexedDB)return Promise.reject(new Error('This browser does not support local photo storage.'));
+  if(photoDBPromise)return photoDBPromise;
+  photoDBPromise=new Promise((resolve,reject)=>{
+    let request;
+    try{request=window.indexedDB.open(PHOTO_DB_NAME,1)}catch(err){photoDBPromise=null;reject(err);return}
+    request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains(PHOTO_STORE_NAME))db.createObjectStore(PHOTO_STORE_NAME,{keyPath:'id'})};
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>{photoDBPromise=null;reject(request.error||new Error('Could not open local photo storage.'))};
+  });
+  return photoDBPromise;
+}
+function writePhotosToIndexedDB(snapshot){
+  return openPhotoDB().then(db=>new Promise((resolve,reject)=>{
+    let tx;
+    try{tx=db.transaction(PHOTO_STORE_NAME,'readwrite')}catch(err){reject(err);return}
+    const store=tx.objectStore(PHOTO_STORE_NAME);
+    for(const item of snapshot){
+      if(item.photo&&item.photo.startsWith('data:image/'))store.put({id:String(item.id),photo:item.photo,photoHash:item.photoHash||hashPhoto(item.photo),updatedAt:item.updatedAt||isoNow()});
+      else if(item.photoRemoved)store.delete(String(item.id));
+    }
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error||new Error('Could not save local photos.'));
+    tx.onabort=()=>reject(tx.error||new Error('Local photo saving was interrupted.'));
+  }));
+}
+function reportPhotoStoreFailure(err){
+  console.warn('Local photo backup failed',err);
+  if(photoStoreWarningShown)return;
+  photoStoreWarningShown=true;
+  toast('Item details were saved, but the browser could not store its photos locally. Sign in to sync photos and keep a backup.');
+}
+function isQuotaError(err){return !!err&&(err.name==='QuotaExceededError'||err.name==='NS_ERROR_DOM_QUOTA_REACHED'||err.code===22||err.code===1014)}
+function persistItems(){
+  const full=JSON.stringify(items);
+  if(!photoStorageMode){
+    try{localStorage.setItem(ITEMS_KEY,full);return}
+    catch(err){if(!isQuotaError(err))throw err;photoStorageMode=true}
+  }
+  // Keep item names, categories, amounts and notes in localStorage; store large image data in IndexedDB.
+  const withoutPhotos=items.map(item=>({...item,photo:''}));
+  localStorage.setItem(ITEMS_KEY,JSON.stringify(withoutPhotos));
+  try{localStorage.setItem(PHOTO_MODE_KEY,'indexeddb')}catch(e){}
+  const snapshot=items.map(item=>({...item}));
+  writePhotosToIndexedDB(snapshot).catch(reportPhotoStoreFailure);
+}
+async function hydratePhotosFromIndexedDB(){
+  if(!photoStorageMode)return;
+  try{
+    const db=await openPhotoDB();
+    const records=await new Promise((resolve,reject)=>{
+      const tx=db.transaction(PHOTO_STORE_NAME,'readonly'),request=tx.objectStore(PHOTO_STORE_NAME).getAll();
+      request.onsuccess=()=>resolve(request.result||[]);request.onerror=()=>reject(request.error||new Error('Could not load saved photos.'));
+    });
+    let changed=false;
+    for(const record of records){
+      const item=items.find(x=>String(x.id)===String(record.id));
+      if(item&&record.photo&&!item.photo&&!item.photoRemoved){item.photo=record.photo;item.photoHash=record.photoHash||item.photoHash||hashPhoto(record.photo);changed=true}
+    }
+    if(changed)render();
+  }catch(err){reportPhotoStoreFailure(err)}
+}
 function persistTombstones(){localStorage.setItem(DELETED_KEY,JSON.stringify(tombstones))}
 function persistSettings(){userSettings={...userSettings,pageSize,viewMode,darkMode,progressBasis,lastSyncAt,viewStates,categoryGoals};try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(userSettings))}catch(e){console.warn('Could not save preferences',e)}}
 function persistCategories(){try{localStorage.setItem(CATEGORIES_KEY,JSON.stringify(customCategories))}catch(e){console.warn('Could not save categories',e)}}
@@ -149,6 +316,37 @@ function renderCategoryManager(){
   const categories=allCategories();
   container.innerHTML=categories.length?categories.map(category=>`<div class="category-manager-row"><span class="category-manager-name">${escapeHtml(category)}</span><div class="category-manager-actions"><button type="button" class="btn" data-category-action="rename" data-category="${escapeHtml(category)}">Rename</button><button type="button" class="btn danger" data-category-action="delete" data-category="${escapeHtml(category)}" ${category.toLowerCase()==='other'?'disabled':''}>Remove</button></div></div>`).join(''):'<p class="auth-status">No categories yet. Add one above or create your first item.</p>';
 }
+let pageTurnBusy=false,pageTurnMidTimer=null,pageTurnEndTimer=null;
+function turnToPage(targetPage){
+  const lastPage=Math.max(1,Math.ceil(lastShownCount()/pageSize));
+  const nextPage=Math.max(1,Math.min(lastPage,Number.parseInt(targetPage,10)||1));
+  if(pageTurnBusy||nextPage===currentPage){return}
+  const direction=nextPage>currentPage?'next':'prev';
+  const spread=$('collectionGrid'),source=$(direction==='next'?'rightBinderPage':'leftBinderPage');
+  if(!spread||!source){currentPage=nextPage;saveCurrentView();render();return}
+  const sourceRect=source.getBoundingClientRect(),spreadRect=spread.getBoundingClientRect();
+  const overlay=document.createElement('div');overlay.className='binder-turn-overlay '+direction;
+  overlay.style.left=(sourceRect.left-spreadRect.left)+'px';overlay.style.top=(sourceRect.top-spreadRect.top)+'px';overlay.style.width=sourceRect.width+'px';overlay.style.height=sourceRect.height+'px';
+  const snapshot=source.cloneNode(true);snapshot.removeAttribute('id');snapshot.classList.add('binder-turn-snapshot');
+  snapshot.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+  snapshot.querySelectorAll('button,input,select,textarea').forEach(el=>{el.setAttribute('tabindex','-1');el.setAttribute('aria-hidden','true')});
+  snapshot.querySelectorAll('img').forEach(img=>{img.loading='eager';img.decoding='async'});
+  overlay.appendChild(snapshot);spread.appendChild(overlay);
+  pageTurnBusy=true;$('binderBook').classList.add('turning');
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duration=reduced?10:680,midpoint=reduced?0:330;
+  pageTurnMidTimer=setTimeout(()=>{
+    pageTurnMidTimer=null;currentPage=nextPage;saveCurrentView();render();
+    gridPageReveal(direction);
+    pageTurnEndTimer=setTimeout(()=>{pageTurnEndTimer=null;overlay.remove();$('binderBook').classList.remove('turning');pageTurnBusy=false},Math.max(20,duration-midpoint));
+  },midpoint);
+}
+function lastShownCount(){
+  const cf=$('categoryFilter');const query=($('searchInput')?.value||'').trim().toLowerCase();
+  return items.filter(x=>(activePage==='wishlist'?x.status==='wanted':x.status==='owned')&&((!cf||cf.value==='all')||(String(x.category||'Other')===cf.value))&&(!query||[x.name,x.category,x.notes].join(' ').toLowerCase().includes(query))).length;
+}
+function gridPageReveal(direction){const grid=$('collectionGrid');grid.classList.remove('page-coming-next','page-coming-prev');void grid.offsetWidth;grid.classList.add(direction==='next'?'page-coming-next':'page-coming-prev');setTimeout(()=>grid.classList.remove('page-coming-next','page-coming-prev'),320)}
+
 function render(){
   const ownedItems=items.filter(x=>x.status==='owned');
   const wantedItems=items.filter(x=>x.status==='wanted');
@@ -208,10 +406,16 @@ function render(){
   lastVisibleIds=pageItems.map(x=>x.id);
   const grid=$('collectionGrid');
   grid.classList.toggle('list-view',viewMode==='list');
-  const oldCards=new Map([...grid.querySelectorAll('.item-card[data-item-id]')].map(card=>[card.dataset.itemId,card]));
+  grid.classList.toggle('density-24',pageSize>=24);grid.classList.toggle('density-48',pageSize>=48);
+  const oldCards=new Map([...grid.querySelectorAll('.binder-page-grid > .item-card[data-item-id]')].map(card=>[card.dataset.itemId,card]));
+  const leftGrid=$('leftCollectionGrid'),rightGrid=$('rightCollectionGrid');
+  leftGrid.classList.toggle('list-view',viewMode==='list');rightGrid.classList.toggle('list-view',viewMode==='list');
+  leftGrid.replaceChildren();rightGrid.replaceChildren();
   if(!pageItems.length){
-    grid.innerHTML=`<div class="empty"><div class="symbol">${items.length?'⌕':'✦'}</div><h3>${shown.length===0&&items.length?'No matching items':activePage==='wishlist'?'Your wishlist is empty':'Your collection starts here'}</h3><p>${items.length?'Try another search or category.':activePage==='wishlist'?'Add an item and choose “Add to wishlist” to build your wishlist.':'Add your first item to start building your personal binder.'}</p>${activePage==='collection'&&!items.length?'<button class="btn primary" id="emptyAddBtn">＋ Add to collection</button>':''}</div>`;
-    const b=$('emptyAddBtn');if(b)b.addEventListener('click',()=>openItemModal());
+    const empty=document.createElement('div');empty.className='empty binder-empty';
+    empty.innerHTML=`<div class="symbol">${items.length?'⌕':'✦'}</div><h3>${shown.length===0&&items.length?'No matching items':activePage==='wishlist'?'Your wishlist is empty':'Your collection starts here'}</h3><p>${items.length?'Try another search or category.':activePage==='wishlist'?'Add an item and choose “Add to wishlist” to build your wishlist.':'Add your first item to start building your personal binder.'}</p>${activePage==='collection'&&!items.length?'<button class="btn primary" id="emptyAddBtn">＋ Add to collection</button>':''}`;
+    leftGrid.appendChild(empty);
+    const emptyAdd=$('emptyAddBtn');if(emptyAdd)emptyAdd.addEventListener('click',()=>openItemModal());
   }else{
     const wrapper=document.createElement('div');
     wrapper.innerHTML=pageItems.map(x=>{
@@ -224,13 +428,20 @@ function render(){
       const previous=oldCards.get(card.dataset.itemId),next=card.querySelector('.photo img'),priorImage=previous?.querySelector('.photo img');
       if(priorImage&&next&&priorImage.getAttribute('src')===next.getAttribute('src')){priorImage.alt=next.alt;priorImage.loading='lazy';priorImage.decoding='async';next.replaceWith(priorImage)}
     }
-    grid.replaceChildren(...newCards);
+    const splitAt=Math.ceil(newCards.length/2);
+    leftGrid.replaceChildren(...newCards.slice(0,splitAt));rightGrid.replaceChildren(...newCards.slice(splitAt));
   }
+  const pageLeft=((currentPage-1)*2)+1,pageRight=pageLeft+1;
+  const sectionLabel=activePage==='wishlist'?'WISHLIST':'MY COLLECTION';
+  $('binderSectionLabelLeft').textContent=sectionLabel;$('binderSectionLabelRight').textContent=sectionLabel;
+  $('binderLeftPageNo').textContent=String(pageLeft).padStart(2,'0');$('binderRightPageNo').textContent=String(pageRight).padStart(2,'0');
+  $('binderLeftFolio').textContent=String(pageLeft).padStart(2,'0');$('binderRightFolio').textContent=String(pageRight).padStart(2,'0');
+  $('binderSpreadLabel').textContent=`SPREAD ${currentPage} / ${totalPages}`;
   const pagination=$('pagination');
   if(pagination){
     pagination.innerHTML='';
     if(totalPages>1){
-      const addPageButton=(label,page,disabled=false,active=false)=>{const b=document.createElement('button');b.className='page-btn'+(active?' active':'');b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',typeof label==='number'?'Page '+label:label);b.addEventListener('click',()=>{currentPage=page;saveCurrentView();render()});pagination.appendChild(b)};
+      const addPageButton=(label,page,disabled=false,active=false)=>{const b=document.createElement('button');b.className='page-btn'+(active?' active':'');b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',typeof label==='number'?'Page '+label:label);b.addEventListener('click',()=>turnToPage(page));pagination.appendChild(b)};
       addPageButton('← Previous',Math.max(1,currentPage-1),currentPage===1);
       for(let p=1;p<=totalPages;p++){if(totalPages>7&&p>2&&p<totalPages-1&&Math.abs(p-currentPage)>1){if(p===3||p===totalPages-2){const ell=document.createElement('span');ell.textContent='…';ell.style.color='var(--muted)';pagination.appendChild(ell)}continue}addPageButton(p,p,false,p===currentPage)}
       addPageButton('Next →',Math.min(totalPages,currentPage+1),currentPage===totalPages);
@@ -259,7 +470,52 @@ function openItemModal(item=null){$('itemForm').reset();$('itemId').value=item?.
 function updatePhotoPreview(){const img=$('photoPreview'),remove=$('removePhotoBtn');if(selectedPhoto){img.src=selectedPhoto;img.style.display='block';remove.style.display='inline-flex'}else{img.removeAttribute('src');img.style.display='none';remove.style.display='none'}}
 async function resizeImage(file){if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');if(file.size>12*1024*1024)throw new Error('Choose an image smaller than 12 MB.');const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});return await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{const max=1100,scale=Math.min(1,max/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.82))};img.onerror=()=>reject(new Error('Could not read that image.'));img.src=data})}
 $('itemPhoto').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{selectedPhoto=await resizeImage(file);selectedPhotoHash=hashPhoto(selectedPhoto);photoWasRemoved=false;updatePhotoPreview()}catch(err){toast(err.message||'Could not use that image.')}});$('removePhotoBtn').addEventListener('click',()=>{selectedPhoto=null;selectedPhotoHash='';photoWasRemoved=true;$('itemPhoto').value='';updatePhotoPreview()});
-$('itemForm').addEventListener('submit',e=>{e.preventDefault();const id=$('itemId').value||makeId(),now=isoNow(),existing=items.find(x=>x.id===id);const rawQuantity=Number.parseInt($('itemQuantity').value,10);const quantity=Number.isFinite(rawQuantity)?Math.min(99999,Math.max(1,rawQuantity)):1;const item={id,name:$('itemName').value.trim(),category:$('itemCategory').value.trim()||'Other',status:$('itemStatus').value==='wanted'?'wanted':'owned',quantity,notes:$('itemNotes').value.trim(),photo:selectedPhoto||'',photoHash:selectedPhoto?(selectedPhotoHash||hashPhoto(selectedPhoto)):'',photoRemoved:!!(photoWasRemoved&&!selectedPhoto),createdAt:existing?.createdAt||now,updatedAt:now};if(!item.name){toast('Please enter a name.');return}if(!existing){const duplicate=items.find(x=>x.status===item.status&&String(x.name).trim().toLowerCase()===item.name.toLowerCase()&&String(x.category||'Other').trim().toLowerCase()===item.category.toLowerCase());if(duplicate&&confirm(`“${duplicate.name}” already exists in this category. Add ${quantity} to its amount instead?`)){duplicate.quantity=Math.min(99999,Math.max(1,Number.parseInt(duplicate.quantity??1,10)||1)+quantity);duplicate.updatedAt=now;selectedIds.delete(duplicate.id);persistItems();currentPage=1;render();closeModal('itemModal');dispatchLocalSave();toast('Amount added to the existing item.');return}}const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=item;else items.unshift(item);delete tombstones[id];if(item.category&&!allCategories().includes(item.category)){customCategories.push(item.category);persistCategories()}persistItems();persistTombstones();selectedIds.delete(id);currentPage=1;saveCurrentView();render();closeModal('itemModal');dispatchLocalSave();toast(existing?'Item updated.':'Item added.')});
+let binderPointerStart=null;
+$('collectionGrid').addEventListener('pointerdown',e=>{
+  if(e.pointerType==='touch'||e.button!==0||e.target.closest('.item-card,button,input,select,textarea,.card-actions'))return;
+  const page=e.target.closest('.binder-page');if(!page)return;const r=page.getBoundingClientRect();
+  let direction='';if(page.id==='rightBinderPage'&&e.clientX>=r.right-44&&e.clientY>=r.bottom-44)direction='next';else if(page.id==='leftBinderPage'&&e.clientX<=r.left+44&&e.clientY>=r.bottom-44)direction='prev';
+  if(!direction)return;binderPointerStart={x:e.clientX,y:e.clientY,direction,pointerId:e.pointerId};document.body.classList.add('binder-dragging');e.preventDefault();
+});
+document.addEventListener('pointerup',e=>{const start=binderPointerStart;binderPointerStart=null;document.body.classList.remove('binder-dragging');if(!start||start.pointerId!==e.pointerId)return;const dx=e.clientX-start.x;if((start.direction==='next'&&dx<-28)||(start.direction==='prev'&&dx>28)){turnToPage(currentPage+(start.direction==='next'?1:-1))}});
+
+let binderTouchStart=null;
+$('collectionGrid').addEventListener('touchstart',e=>{const t=e.changedTouches?.[0];if(!t)return;binderTouchStart={x:t.clientX,y:t.clientY,interactive:!!e.target.closest('button,input,select,textarea,.card-actions,.pagination')};},{passive:true});
+$('collectionGrid').addEventListener('touchend',e=>{const t=e.changedTouches?.[0],start=binderTouchStart;binderTouchStart=null;if(!t||!start||start.interactive)return;const dx=t.clientX-start.x,dy=t.clientY-start.y;if(Math.abs(dx)>72&&Math.abs(dx)>Math.abs(dy)*1.35){if(dx<0)turnToPage(currentPage+1);else turnToPage(currentPage-1)}},{passive:true});
+document.addEventListener('keydown',e=>{if(!['collection','wishlist'].includes(activePage)||document.querySelector('.modal-backdrop.open')||e.altKey||e.ctrlKey||e.metaKey)return;const tag=e.target?.tagName?.toLowerCase();if(['input','textarea','select'].includes(tag)||e.target?.isContentEditable)return;if(e.key==='ArrowRight'){e.preventDefault();turnToPage(currentPage+1)}else if(e.key==='ArrowLeft'){e.preventDefault();turnToPage(currentPage-1)}});
+
+function saveItemFromForm(e){
+  e.preventDefault();
+  try{
+    const id=$('itemId').value||makeId(),now=isoNow(),existing=items.find(x=>x.id===id);
+    const rawQuantity=Number.parseInt($('itemQuantity').value,10);
+    const quantity=Number.isFinite(rawQuantity)?Math.min(99999,Math.max(1,rawQuantity)):1;
+    const item={id,name:$('itemName').value.trim(),category:$('itemCategory').value.trim()||'Other',status:$('itemStatus').value==='wanted'?'wanted':'owned',quantity,notes:$('itemNotes').value.trim(),photo:selectedPhoto||'',photoHash:selectedPhoto?(selectedPhotoHash||hashPhoto(selectedPhoto)):'',photoRemoved:!!(photoWasRemoved&&!selectedPhoto),createdAt:existing?.createdAt||now,updatedAt:now};
+    if(!item.name){toast('Please enter a name.');$('itemName').focus();return}
+    if(!existing){
+      const duplicate=items.find(x=>x.status===item.status&&String(x.name).trim().toLowerCase()===item.name.toLowerCase()&&String(x.category||'Other').trim().toLowerCase()===item.category.toLowerCase());
+      if(duplicate&&confirm(`“${duplicate.name}” already exists in this category. Add ${quantity} to its amount instead?`)){
+        duplicate.quantity=Math.min(99999,Math.max(1,Number.parseInt(duplicate.quantity??1,10)||1)+quantity);duplicate.updatedAt=now;selectedIds.delete(duplicate.id);persistItems();currentPage=1;render();closeModal('itemModal');dispatchLocalSave();toast('Amount added to the existing item.');return;
+      }
+    }
+    const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=item;else items.unshift(item);
+    delete tombstones[id];if(item.category&&!allCategories().includes(item.category)){customCategories.push(item.category);persistCategories()}
+    persistItems();persistTombstones();selectedIds.delete(id);currentPage=1;saveCurrentView();
+    closeModal('itemModal');
+    try{render()}catch(renderError){console.error('Item saved, but collection view refresh failed',renderError);dispatchLocalSave();toast('Item saved. Reload the page if the binder does not refresh.');return}
+    dispatchLocalSave();toast(existing?'Item updated.':'Item added.');
+  }catch(err){
+    console.error('Could not save collection item',err);
+    toast('Could not save item: '+(err?.message||'Check browser storage and try again.'));
+  }
+}
+$('itemForm').addEventListener('submit',saveItemFromForm);
+$('saveItemBtn').addEventListener('click',e=>{
+  // Run the same save path explicitly on button click; Enter key still uses the form submit event.
+  e.preventDefault();
+  if(!$('itemForm').reportValidity())return;
+  saveItemFromForm(e);
+});
 function deleteItem(id,skipConfirm=false){const item=items.find(x=>x.id===id);if(!item)return;if(!skipConfirm&&!confirm(`Delete “${item.name}” from your collection? This deletion will sync to your other devices when cloud sync is connected.`))return;const snapshot={...item},deletedAt=isoNow();items=items.filter(x=>x.id!==id);selectedIds.delete(id);tombstones[id]={deletedAt,updatedAt:deletedAt};lastDeletedItem={item:snapshot,deletedAt};persistItems();persistTombstones();render();dispatchLocalSave();toast('Item deleted.','Undo',()=>{const restored={...snapshot,updatedAt:new Date(Math.max(Date.now(),timeOf(deletedAt)+1)).toISOString()};items.unshift(restored);delete tombstones[id];persistItems();persistTombstones();render();dispatchLocalSave();toast('Deletion undone.')})}
 $('collectionGrid').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const item=items.find(x=>x.id===b.dataset.id);if(b.dataset.action==='options'){const card=b.closest('.item-card');if(card){const open=card.classList.toggle('options-open');b.setAttribute('aria-expanded',String(open))}return}if(!item)return;if(b.dataset.action==='select'){if(selectedIds.has(item.id))selectedIds.delete(item.id);else selectedIds.add(item.id);render();return}if(b.dataset.action==='quantity-plus'||b.dataset.action==='quantity-minus'){const old=Math.max(1,Number.parseInt(item.quantity??1,10)||1);item.quantity=b.dataset.action==='quantity-plus'?Math.min(99999,old+1):Math.max(1,old-1);item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(`Amount updated to ${item.quantity}.`);return}if(b.dataset.action==='edit')openItemModal(item);else if(b.dataset.action==='delete')deleteItem(item.id);else if(b.dataset.action==='toggle'){item.status=item.status==='owned'?'wanted':'owned';item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(item.status==='owned'?'Added to your collection.':'Moved to your wishlist.')}});
 $('addBtn').addEventListener('click',()=>openItemModal());
@@ -274,7 +530,7 @@ $('clearSelectionBtn').addEventListener('click',()=>{selectedIds.clear();render(
 function bulkMove(status){const selected=items.filter(x=>selectedIds.has(x.id));if(!selected.length)return;const now=isoNow();selected.forEach(item=>{item.status=status;item.updatedAt=now});selectedIds.clear();persistItems();render();dispatchLocalSave();toast(`${selected.length} item${selected.length===1?'':'s'} moved to ${status==='owned'?'your collection':'your wishlist'}.`)}
 $('bulkMoveOwned').addEventListener('click',()=>bulkMove('owned'));$('bulkMoveWanted').addEventListener('click',()=>bulkMove('wanted'));
 $('bulkDeleteBtn').addEventListener('click',()=>{const selected=items.filter(x=>selectedIds.has(x.id));if(!selected.length)return;if(!confirm(`Delete ${selected.length} selected item${selected.length===1?'':'s'}? This will sync the deletion to your other devices.`))return;const snapshots=selected.map(item=>({...item})),deletedAt=isoNow();selected.forEach(item=>{tombstones[item.id]={deletedAt,updatedAt:deletedAt}});items=items.filter(x=>!selectedIds.has(x.id));selectedIds.clear();persistItems();persistTombstones();render();dispatchLocalSave();toast(`${selected.length} item${selected.length===1?'':'s'} deleted.`,'Undo',()=>{const restoreTime=new Date(Math.max(Date.now(),timeOf(deletedAt)+1)).toISOString();snapshots.forEach(item=>{items.unshift({...item,updatedAt:restoreTime});delete tombstones[item.id]});persistItems();persistTombstones();render();dispatchLocalSave();toast('Deleted items restored.')})});
-document.querySelectorAll('.main-tab').forEach(t=>t.addEventListener('click',()=>{saveCurrentView();selectedIds.clear();activePage=t.dataset.page;if(activePage==='collection'||activePage==='wishlist')restoreCurrentView();else currentPage=1;document.querySelectorAll('.content-page').forEach(p=>p.classList.toggle('active',p.id==='page-'+activePage||(activePage==='wishlist'&&p.id==='page-collection')));render()}));$('openAccountBtn').addEventListener('click',openAccount);
+document.querySelectorAll('.main-tab').forEach(t=>t.addEventListener('click',()=>{saveCurrentView();selectedIds.clear();if(pageTurnBusy){clearTimeout(pageTurnMidTimer);clearTimeout(pageTurnEndTimer);pageTurnMidTimer=null;pageTurnEndTimer=null;document.querySelectorAll('.binder-turn-overlay').forEach(el=>el.remove());$('binderBook').classList.remove('turning');pageTurnBusy=false}activePage=t.dataset.page;if(activePage==='collection'||activePage==='wishlist')restoreCurrentView();else currentPage=1;document.querySelectorAll('.content-page').forEach(p=>p.classList.toggle('active',p.id==='page-'+activePage||(activePage==='wishlist'&&p.id==='page-collection')));render()}));$('openAccountBtn').addEventListener('click',openAccount);
 $('addCategoryBtn').addEventListener('click',()=>{const input=$('newCategoryInput'),name=input.value.trim();if(!name){toast('Enter a category name.');return}if(allCategories().some(c=>c.toLowerCase()===name.toLowerCase())){toast('That category already exists.');return}customCategories.push(name);persistCategories();input.value='';render();toast('Category added.')});$('newCategoryInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('addCategoryBtn').click()}});
 $('categoryManager').addEventListener('click',e=>{const b=e.target.closest('button[data-category-action]');if(!b)return;const old=b.dataset.category;if(b.dataset.categoryAction==='rename'){const proposed=prompt(`Rename category “${old}” to:`,old);if(proposed===null)return;const name=proposed.trim();if(!name){toast('Category name cannot be empty.');return}if(name.toLowerCase()!==old.toLowerCase()&&allCategories().some(c=>c.toLowerCase()===name.toLowerCase())){toast('That category already exists.');return}const now=isoNow();items=items.map(item=>item.category===old?{...item,category:name,updatedAt:now}:item);customCategories=customCategories.map(c=>c===old?name:c);if(!customCategories.includes(name))customCategories.push(name);if(Object.prototype.hasOwnProperty.call(categoryGoals,old)){categoryGoals[name]=categoryGoals[old];delete categoryGoals[old]}persistCategories();persistSettings();persistItems();render();dispatchLocalSave();toast(`Category renamed to “${name}”.`)}else if(b.dataset.categoryAction==='delete'){if(old.toLowerCase()==='other')return;if(!confirm(`Remove category “${old}”? Items in this category will be moved to Other.`))return;const now=isoNow();items=items.map(item=>item.category===old?{...item,category:'Other',updatedAt:now}:item);customCategories=customCategories.filter(c=>c!==old);delete categoryGoals[old];persistCategories();persistSettings();persistItems();render();dispatchLocalSave();toast('Category removed; its items were moved to Other.')}});
 function dispatchLocalSave(){window.dispatchEvent(new CustomEvent('collection-local-saved'))}
@@ -303,7 +559,7 @@ async function signUp(){if(!ensureClient())return;const email=$('authEmail').val
 $('signInBtn').addEventListener('click',signIn);$('signUpBtn').addEventListener('click',signUp);$('syncNowBtn').addEventListener('click',()=>syncEverything(true));$('signOutBtn').addEventListener('click',async()=>{if(!supabase)return;const {error}=await supabase.auth.signOut();if(error){toast(error.message);return}currentUser=null;if(realtimeChannel){supabase.removeChannel(realtimeChannel);realtimeChannel=null}setAccountUI();closeModal('accountModal');toast('Signed out. Your local collection remains on this device.')});
 async function initCloud(){if(!ensureClient()){setSyncState('Cloud library unavailable',false);return}const {data:{session},error}=await supabase.auth.getSession();if(error)console.warn(error);if(session?.user)await startForUser(session.user);else setAccountUI();supabase.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){currentUser=null;if(realtimeChannel){supabase.removeChannel(realtimeChannel);realtimeChannel=null}setAccountUI()}else if(session?.user&&(!currentUser||currentUser.id!==session.user.id)){currentUser=session.user;setAccountUI();setTimeout(()=>startForUser(session.user),0)}})}
 window.addEventListener('online',()=>{if(currentUser)scheduleSync()});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&currentUser&&Date.now()-lastSyncAt>60000)scheduleSync()});
-applyAppearance();render();restoreCurrentView();applyAppearance();render();initCloud();
+applyAppearance();render();restoreCurrentView();applyAppearance();render();hydratePhotosFromIndexedDB().finally(()=>initCloud());
 })();
 </script>
 </body>
