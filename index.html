@@ -311,10 +311,21 @@ async function mergeLocalToCloud() {
     }
   }
 
-  $('mergeBtn').addEventListener('click', mergeLocalToCloud);
+  } else if (typeof renderItems === 'function') {
+        renderItems();
+      } else {
+        location.reload();
+      }
+    } catch (error) {
+      showMessage('Cloud merge stopped: ' + error.message);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  $('loadCloudBtn').addEventListener('click', loadCloudItems);
 
   $('signOutBtn').addEventListener('click', async () => {
-    showMessage('Signing out…');
 
     const { error } = await supabaseClient.auth.signOut();
 
