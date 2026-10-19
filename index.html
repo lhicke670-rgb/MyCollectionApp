@@ -1,363 +1,110 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#6750a4">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6d4aff">
 <title>My Collection</title>
 <style>
-:root{color-scheme:light dark;--bg:#f5f3fa;--panel:#fff;--text:#211d2b;--muted:#6d6878;--line:#e5e0ee;--accent:#6750a4;--soft:#eee8fb;--danger:#b3261e;--shadow:0 8px 26px #28194614}
-@media(prefers-color-scheme:dark){:root{--bg:#15131b;--panel:#211e29;--text:#f3effa;--muted:#b6afc3;--line:#393342;--accent:#c7b6ff;--soft:#342a4c;--danger:#ffb4ab;--shadow:0 8px 26px #0003}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1200px;margin:auto;padding:clamp(14px,3vw,32px)}header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--accent);color:white;font-size:25px}h1{font-size:clamp(1.45rem,3vw,2.1rem);margin:0;letter-spacing:-.04em}.subtitle{color:var(--muted);margin:3px 0 0;font-size:.92rem}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--panel);color:var(--text);font-weight:650}.btn.primary{background:var(--accent);border-color:var(--accent);color:white}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat{padding:17px;border:1px solid var(--line);background:var(--panel);border-radius:17px}.stat-label{color:var(--muted);font-size:.84rem}.stat-number{font-size:1.7rem;font-weight:750;margin-top:3px}.progress{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}.progress>div{height:100%;background:var(--accent);width:0}.toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(145px,220px) minmax(135px,180px);gap:10px;margin-bottom:18px}.field{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:11px 12px;min-width:0}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}.section-heading h2{margin:0;font-size:1.12rem}.count{color:var(--muted);font-size:.9rem}.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);min-width:0}.photo{height:155px;background:linear-gradient(135deg,var(--soft),var(--bg));display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:2.6rem}.photo img{width:100%;height:100%;object-fit:cover;display:block}.card-body{padding:13px}.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.card h3{font-size:1.02rem;line-height:1.25;margin:0 0 7px;overflow-wrap:anywhere}.category{color:var(--muted);font-size:.82rem}.pill{font-size:.73rem;border-radius:99px;padding:4px 8px;background:var(--soft);white-space:nowrap}.pill.wanted{background:var(--line)}.notes{color:var(--muted);font-size:.88rem;margin:10px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.card-buttons{display:flex;gap:7px;margin-top:13px}.card-buttons button{flex:1;padding:8px 7px;border-radius:10px;border:1px solid var(--line);color:var(--text);background:transparent;font-size:.8rem}.empty{text-align:center;border:1px dashed var(--line);border-radius:18px;padding:42px 20px;color:var(--muted)}.empty strong{display:block;color:var(--text);font-size:1.08rem;margin-bottom:5px}dialog{width:min(560px,calc(100% - 24px));max-height:90vh;overflow:auto;border:1px solid var(--line);border-radius:20px;padding:0;color:var(--text);background:var(--panel);box-shadow:0 20px 80px #0005}dialog::backdrop{background:#08061199;backdrop-filter:blur(3px)}.modal-head{padding:20px 22px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center}.modal-head h2{margin:0;font-size:1.25rem}.modal-body{padding:8px 22px 22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-row{display:flex;flex-direction:column;gap:6px;min-width:0}.form-row.full{grid-column:1/-1}.form-row label{font-size:.88rem;font-weight:650}.help,.notice{font-size:.82rem;color:var(--muted)}.preview{display:none;max-width:100%;max-height:180px;border-radius:12px;margin-top:8px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}footer{color:var(--muted);font-size:.82rem;margin-top:28px;text-align:center}@media(max-width:620px){header{align-items:flex-start;flex-direction:column}.actions{width:100%}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.stats{gap:8px}.stat{padding:12px}.stat-number{font-size:1.4rem}.shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:125px}.card-body{padding:10px}.form-grid{grid-template-columns:1fr}.form-row.full{grid-column:auto}.btn{padding:9px 11px}}@media(max-width:370px){.shelf{grid-template-columns:1fr}.photo{height:170px}}
-</style></head>
-<body><main class="app">
-<header><div class="brand"><div class="logo" aria-hidden="true">▤</div><div><h1>My Collection</h1><p class="subtitle">Your personal digital binder</p></div></div><div class="actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import backup</button><button class="btn primary" id="addBtn">＋ Add item</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></header>
-<section class="auth-panel" style="padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:17px;margin-bottom:18px">
-  <strong>Cloud sync across devices</strong>
-  <p class="subtitle">Sign in with the same account on each device.</p>
+:root{--purple:#6d4aff;--purple-dark:#4f31c7;--purple-light:#eee9ff;--ink:#25213a;--muted:#77738b;--paper:#fff;--bg:#f5f2ff;--line:#e5e0f2;--green:#1e9565;--red:#c7445c;--shadow:0 10px 30px #35206c12}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f8f6ff,#f0ecff);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}.shell{max-width:1240px;margin:auto;padding:24px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:54px;height:54px;flex:0 0 54px;object-fit:contain;border-radius:14px;background:#f7f5ef;border:1px solid #e8e3d8;display:block;box-shadow:0 5px 14px #25213a20}.brand h1{font-size:clamp(22px,4vw,30px);margin:0;letter-spacing:-.8px}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.btn{border:1px solid var(--line);background:white;color:var(--ink);padding:10px 14px;border-radius:12px;font-weight:650;font-size:13px;transition:.15s}.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.btn.primary{background:var(--purple);border-color:var(--purple);color:white}.btn.danger{color:var(--red)}.btn.small{padding:7px 10px;font-size:12px}.account-pill{display:flex;align-items:center;gap:8px;background:white;border:1px solid var(--line);border-radius:14px;padding:8px 11px;font-size:12px;color:var(--muted);max-width:260px}.dot{width:8px;height:8px;border-radius:50%;background:#aaa}.dot.online{background:#2eae79}.hero{background:linear-gradient(120deg,#6d4aff,#8b6aff 65%,#aa95ff);color:white;border-radius:24px;padding:25px 28px;margin-bottom:20px;box-shadow:0 16px 35px #6d4aff25;position:relative;overflow:hidden}.hero:after{content:'✦';position:absolute;right:30px;top:-32px;font-size:150px;opacity:.12}.hero h2{margin:0 0 6px;font-size:24px;letter-spacing:-.6px}.hero p{margin:0;color:#f1edff;font-size:14px;max-width:600px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat{background:white;border:1px solid var(--line);border-radius:18px;padding:17px 18px;box-shadow:var(--shadow)}.stat .label{font-size:12px;color:var(--muted);font-weight:650}.stat .value{font-size:28px;font-weight:800;letter-spacing:-1px;margin-top:5px}.stat .sub{font-size:11px;color:var(--muted);margin-top:2px}.workspace{background:white;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.toolbar{padding:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}.search-wrap{flex:1;min-width:180px;position:relative}.search-wrap input{width:100%;padding:11px 13px 11px 38px;border:1px solid var(--line);border-radius:12px;outline:none;background:#fbfaff}.search-wrap span{position:absolute;left:13px;top:10px;color:#9992b0}.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);max-width:170px}.tabs{display:flex;gap:6px;padding:14px 18px 0}.tab{border:0;background:transparent;padding:9px 13px;border-radius:10px;color:var(--muted);font-weight:700;font-size:13px}.tab.active{background:var(--purple-light);color:var(--purple-dark)}.collection-grid{padding:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.item-card{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:white;min-width:0;transition:.18s;display:flex;flex-direction:column}.item-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px #34205d12}.photo{height:155px;background:linear-gradient(135deg,#f1edff,#faf9ff);display:grid;place-items:center;overflow:hidden;position:relative}.photo img{width:100%;height:100%;object-fit:cover}.photo-placeholder{font-size:42px;opacity:.45}.status-chip{position:absolute;top:10px;left:10px;background:#fffdf0;color:#9b6a10;border:1px solid #f1dfb3;padding:5px 8px;border-radius:8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}.status-chip.owned{background:#e7f8f0;color:#14784e;border-color:#bcebd5}.card-body{padding:13px;display:flex;flex-direction:column;gap:7px;flex:1}.item-category{font-size:10px;color:var(--purple);font-weight:800;text-transform:uppercase;letter-spacing:.7px}.item-title{font-weight:800;font-size:15px;line-height:1.25;overflow-wrap:anywhere}.item-notes{font-size:12px;color:var(--muted);line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.card-actions{display:flex;gap:6px;margin-top:auto;padding-top:5px}.icon-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px;font-size:12px;color:var(--muted);flex:1}.icon-btn:hover{background:var(--purple-light);color:var(--purple-dark)}.icon-btn.delete:hover{background:#fff0f2;color:var(--red)}.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}.empty .symbol{font-size:42px;margin-bottom:10px}.empty h3{color:var(--ink);margin:0 0 6px}.empty p{margin:0 0 18px;font-size:13px}.footer{padding:13px 18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted)}.sync-state{display:flex;align-items:center;gap:6px}.modal-backdrop{position:fixed;inset:0;background:#1b143a88;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.open{display:flex}.modal{background:white;border-radius:22px;width:min(540px,100%);max-height:92vh;overflow:auto;box-shadow:0 25px 80px #17102f44}.modal-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.modal-head h2{margin:0;font-size:19px}.close{border:0;background:#f4f1ff;border-radius:10px;width:34px;height:34px;font-size:20px;color:var(--muted)}.modal-content{padding:20px 22px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:15px}.field label{font-size:12px;font-weight:750;color:#5b5670}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;outline:none;background:#fdfcff;color:var(--ink)}.field input:focus,.field textarea:focus,.field select:focus{border-color:#a99aff;box-shadow:0 0 0 3px #6d4aff14}.field textarea{resize:vertical;min-height:88px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.photo-preview{width:100%;max-height:180px;object-fit:contain;background:#f7f5ff;border-radius:12px;margin-top:8px;display:none}.modal-actions{display:flex;justify-content:flex-end;gap:8px;padding:0 22px 22px}.auth-box{background:#f8f6ff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:15px}.auth-box p{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 10px}.auth-status{font-size:12px;color:var(--muted);margin-bottom:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#27213d;color:white;border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 10px 30px #1b143a30;opacity:0;pointer-events:none;transition:.2s;z-index:20;max-width:calc(100vw - 30px)}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}
+@media(max-width:1000px){.collection-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.shell{padding:14px}.topbar{align-items:flex-start}.brand-mark{width:46px;height:46px;flex-basis:46px}.top-actions{max-width:150px}.top-actions .btn{padding:8px 10px}.account-pill{display:none}.hero{padding:21px;border-radius:19px}.hero h2{font-size:21px}.stats{gap:8px}.stat{padding:13px}.stat .value{font-size:23px}.collection-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:10px}.photo{height:130px}.toolbar{padding:12px}.toolbar select{flex:1;max-width:none}.tabs{padding:12px 12px 0;overflow:auto}.form-row{grid-template-columns:1fr}}@media(max-width:390px){.collection-grid{grid-template-columns:1fr}.photo{height:180px}.brand p{font-size:11px}}
 
-  <div id="signedOut">
-    <input class="field" id="authEmail" type="email" autocomplete="email" placeholder="Email address" style="width:100%;margin:8px 0">
-    <input class="field" id="authPassword" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)" style="width:100%;margin-bottom:8px">
+.main-nav{display:flex;gap:8px;align-items:center;overflow-x:auto;padding:0 0 16px;margin-bottom:4px;border-bottom:1px solid var(--line)}.main-tab{flex:0 0 auto;border:0;background:transparent;color:var(--muted);padding:12px 16px;border-radius:12px;font-weight:750;font-size:14px;white-space:nowrap}.main-tab.active{background:var(--purple-light);color:var(--purple-dark)}.content-page{display:none}.content-page.active{display:block}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:18px 0 16px}.page-heading h2{margin:0;font-size:24px;letter-spacing:-.5px}.page-heading p{margin:5px 0 0;color:var(--muted);font-size:13px}.pagination{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;padding:0 18px 18px}.page-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;min-width:38px;padding:9px 12px;font-size:12px;font-weight:750}.page-btn.active{background:var(--purple);color:#fff;border-color:var(--purple)}.page-btn:disabled{opacity:.35;cursor:not-allowed}.totals-panel,.settings-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.totals-panel h3,.settings-panel h3{margin:0 0 14px;font-size:16px}.category-totals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.category-total{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#faf9ff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}.category-total strong{font-size:15px}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.settings-panel p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 16px}.settings-sync-state{margin:0 0 16px;font-size:13px}.settings-actions{display:flex;gap:8px;flex-wrap:wrap}.top-actions #exportBtn,.top-actions #importBtn{display:none}
+@media(max-width:700px){.main-nav{gap:4px}.main-tab{padding:10px 12px;font-size:12px}.page-heading h2{font-size:21px}.settings-grid{grid-template-columns:1fr}.category-totals{grid-template-columns:1fr}.pagination{padding-left:12px;padding-right:12px}}
 
-    <div class="actions">
-      <button class="btn primary" id="signInBtn" type="button">Sign in</button>
-      <button class="btn" id="signUpBtn" type="button">Create account</button>
-    </div>
-  </div>
-
-  <div id="signedIn" hidden>
-    <p id="accountLine"></p>
-    <div class="actions">
-      <button class="btn primary" id="mergeBtn" type="button">Merge this device into cloud</button>
-      <button class="btn" id="loadCloudBtn" type="button">Merge cloud items onto this device</button>
-      <button class="btn" id="signOutBtn" type="button">Sign out</button>
-    </div>
-  </div>
-
-  <p id="authMessage" class="subtitle" role="status" aria-live="polite"></p>
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar"><div class="brand"><img class="brand-mark" src="data:image/webp;base64,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" alt="My Collection logo"><div><h1>My Collection</h1><p>Your personal collection binder</p></div></div></header>
+<nav class="main-nav" aria-label="Main pages">
+<button class="main-tab active" data-page="collection">Collection</button>
+<button class="main-tab" data-page="wishlist">Wishlist</button>
+<button class="main-tab" data-page="totals">Collection totals</button>
+<button class="main-tab" data-page="settings">Settings / Sync</button>
+</nav>
+<section class="content-page active" id="page-collection">
+<div class="page-heading"><div><h2 id="pageTitle">Collection</h2><p id="pageSubtitle">Browse the items you have collected.</p></div><button class="btn primary" id="addBtn">＋ Add item</button></div>
+<main class="workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter"><option value="all">All categories</option></select><select id="sortSelect"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="category">Category</option><option value="oldest">Oldest first</option></select></div><section class="collection-grid" id="collectionGrid"></section><div class="pagination" id="pagination" aria-label="Collection pages"></div><div class="footer"><span id="itemCount">0 items shown</span><span class="sync-state"><span class="dot" id="syncDot"></span><span id="syncText">Saved on this device</span></span></div></main>
 </section>
-
-<section class="stats"><div class="stat"><div class="stat-label">Items in binder</div><div class="stat-number" id="totalStat">0</div></div><div class="stat"><div class="stat-label">Collected</div><div class="stat-number" id="ownedStat">0</div></div><div class="stat"><div class="stat-label">Collection completion</div><div class="stat-number" id="percentStat">0%</div><div class="progress"><div id="progressBar"></div></div></div></section>
-<div class="toolbar"><input class="field" id="search" type="search" placeholder="Search your collection…" aria-label="Search items"><select class="field" id="categoryFilter" aria-label="Filter by category"><option value="">All categories</option></select><select class="field" id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="owned">Collected</option><option value="wanted">Want to collect</option></select></div>
-<div class="section-heading"><h2>Your binder</h2><span class="count" id="shownCount">0 items</span></div><section id="shelf" class="shelf" aria-live="polite"></section><footer>Saved in this browser on this device. Export a backup regularly to keep your collection safe.</footer></main>
-<dialog id="itemDialog"><div class="modal-head"><h2 id="dialogTitle">Add an item</h2><button class="btn" id="closeDialog" aria-label="Close">✕</button></div><form id="itemForm" class="modal-body"><div class="form-grid">
-<div class="form-row full"><label for="itemName">Item name *</label><input class="field" id="itemName" required maxlength="120" placeholder="e.g. Spider-Man figure"></div>
-<div class="form-row"><label for="itemCategory">Category *</label><input class="field" id="itemCategory" required list="categorySuggestions" maxlength="60" placeholder="e.g. Figures"><datalist id="categorySuggestions"></datalist><span class="help">Type a new category to create one.</span></div>
-<div class="form-row"><label for="itemStatus">Status</label><select class="field" id="itemStatus"><option value="owned">Collected</option><option value="wanted">Want to collect</option></select></div>
-<div class="form-row full"><label for="itemPhoto">Your photo</label><input class="field" id="itemPhoto" type="file" accept="image/*"><img class="preview" id="photoPreview" alt="Selected photo preview"><span class="help">Photos are stored in this browser. Large images use more storage.</span></div>
-<div class="form-row full"><label for="itemNotes">Notes (optional)</label><textarea class="field" id="itemNotes" rows="3" maxlength="1000" placeholder="Condition, edition, where you found it…"></textarea></div></div><div class="modal-actions"><button class="btn" type="button" id="cancelBtn">Cancel</button><button class="btn primary" type="submit">Save item</button></div><p class="notice">Tip: use “Want to collect” for items you’re still looking for. Mark them “Collected” when you get them.</p></form></dialog>
-
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-   <script>
-(()=>{const KEY='myCollection.items.v1';let items=[],editingId=null,pendingPhoto='';const $=id=>document.getElementById(id),shelf=$('shelf'),dialog=$('itemDialog'),form=$('itemForm');try{items=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(items))items=[]}catch{items=[]}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(items));window.dispatchEvent(new Event('collection-local-saved'));return true}catch{alert("The browser couldn't save this item. Its photo may be too large. Try a smaller photo, then save again. Export a backup regularly.");return false}}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function cats(){return [...new Set(items.map(i=>i.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
-function refreshCats(){const selected=$('categoryFilter').value,cs=cats();$('categoryFilter').innerHTML='<option value="">All categories</option>'+cs.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(cs.includes(selected))$('categoryFilter').value=selected;$('categorySuggestions').innerHTML=cs.map(c=>`<option value="${esc(c)}"></option>`).join('')}
-function render(){const q=$('search').value.trim().toLowerCase(),cat=$('categoryFilter').value,status=$('statusFilter').value;const filtered=items.filter(i=>(!q||[i.name,i.category,i.notes].some(v=>String(v||'').toLowerCase().includes(q)))&&(!cat||i.category===cat)&&(!status||i.status===status));const owned=items.filter(i=>i.status==='owned').length,pct=items.length?Math.round(owned/items.length*100):0;$('totalStat').textContent=items.length;$('ownedStat').textContent=owned;$('percentStat').textContent=pct+'%';$('progressBar').style.width=pct+'%';$('shownCount').textContent=`${filtered.length} ${filtered.length===1?'item':'items'}`;refreshCats();if(!filtered.length){shelf.innerHTML=`<div class="empty" style="grid-column:1/-1"><strong>${items.length?'No matching items':'Your binder is empty'}</strong>${items.length?'Try a different search or filter.':'Add your first collectible to get started.'}</div>`;return}shelf.innerHTML=filtered.map(i=>`<article class="card"><div class="photo">${i.photo?`<img src="${i.photo}" alt="${esc(i.name)}">`:'<span aria-hidden="true">▧</span>'}</div><div class="card-body"><div class="card-top"><div><h3>${esc(i.name)}</h3><div class="category">${esc(i.category)}</div></div><span class="pill ${i.status==='wanted'?'wanted':''}">${i.status==='owned'?'Collected':'Wanted'}</span></div>${i.notes?`<p class="notes">${esc(i.notes)}</p>`:''}<div class="card-buttons"><button data-action="toggle" data-id="${i.id}">${i.status==='owned'?'Mark wanted':'Mark collected'}</button><button data-action="edit" data-id="${i.id}">Edit</button><button data-action="delete" data-id="${i.id}">Delete</button></div></div></article>`).join('')}
-function reset(){form.reset();editingId=null;pendingPhoto='';$('photoPreview').src='';$('photoPreview').style.display='none';$('dialogTitle').textContent='Add an item'}function add(){reset();dialog.showModal();$('itemName').focus()}function edit(id){const i=items.find(x=>x.id===id);if(!i)return;reset();editingId=id;pendingPhoto=i.photo||'';$('dialogTitle').textContent='Edit item';$('itemName').value=i.name;$('itemCategory').value=i.category;$('itemStatus').value=i.status;$('itemNotes').value=i.notes||'';if(pendingPhoto){$('photoPreview').src=pendingPhoto;$('photoPreview').style.display='block'}dialog.showModal()}
-$('addBtn').onclick=add;$('closeDialog').onclick=()=>dialog.close();$('cancelBtn').onclick=()=>dialog.close();$('search').addEventListener('input',render);$('categoryFilter').addEventListener('change',render);$('statusFilter').addEventListener('change',render);
-$('itemPhoto').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){alert('Please choose an image file.');return}if(file.size>8*1024*1024){alert('That photo is over 8 MB. Please choose a smaller image.');e.target.value='';return}pendingPhoto=await new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>resolve('');r.readAsDataURL(file)});if(pendingPhoto){$('photoPreview').src=pendingPhoto;$('photoPreview').style.display='block'}});
-form.addEventListener('submit',e=>{e.preventDefault();const name=$('itemName').value.trim(),category=$('itemCategory').value.trim();if(!name||!category)return;const old=items.find(i=>i.id===editingId),item={id:editingId||(crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())),name,category,status:$('itemStatus').value,notes:$('itemNotes').value.trim(),photo:pendingPhoto,createdAt:old?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};const previous=items;items=editingId?items.map(i=>i.id===editingId?item:i):[...items,item];if(!save()){items=previous;return}dialog.close();reset();render()});
-shelf.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const {action,id}=b.dataset,i=items.find(x=>x.id===id);if(!i)return;if(action==='edit')edit(id);if(action==='toggle'){const old=items;items=items.map(x=>x.id===id?{...x,status:x.status==='owned'?'wanted':'owned',updatedAt:new Date().toISOString()}:x);if(!save())items=old;render()}if(action==='delete'&&confirm(`Delete "${i.name}" from your binder?`)){const old=items;items=items.filter(x=>x.id!==id);if(!save())items=old;render()}});
-$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collection',version:1,exportedAt:new Date().toISOString(),items},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='my-collection-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importBtn').onclick=()=>$('importFile').click();$('importFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text()),incoming=Array.isArray(data)?data:data.items;if(!Array.isArray(incoming)||!incoming.every(i=>i&&typeof i.name==='string'&&typeof i.category==='string'))throw Error('Invalid');if(!confirm(`Import ${incoming.length} items? This replaces the collection currently saved in this browser.`))return;const old=items;items=incoming.map(i=>({...i,id:String(i.id||(crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random())),status:i.status==='wanted'?'wanted':'owned',notes:String(i.notes||''),photo:typeof i.photo==='string'?i.photo:''}));if(!save())items=old;else render()}catch{alert("Couldn't import that file. Choose a valid My Collection JSON backup.")}finally{e.target.value=''}});render()})();
-</script><script>
+<section class="content-page" id="page-totals">
+<div class="page-heading"><div><h2>Collection totals</h2><p>A quick breakdown of your collection and wishlist.</p></div></div>
+<section class="stats"><div class="stat"><div class="label">TOTAL ITEMS</div><div class="value" id="totalStat">0</div><div class="sub">Collected and wanted</div></div><div class="stat"><div class="label">COLLECTED</div><div class="value" id="ownedStat">0</div><div class="sub">Already in your hands</div></div><div class="stat"><div class="label">WISHLIST</div><div class="value" id="wantedStat">0</div><div class="sub">Still on your wishlist</div></div></section>
+<div class="totals-panel"><h3>Items by category</h3><div id="categoryTotals" class="category-totals"></div></div>
+</section>
+<section class="content-page" id="page-settings">
+<div class="page-heading"><div><h2>Settings / Sync</h2><p>Manage your cloud connection and collection backups.</p></div></div>
+<div class="settings-grid"><section class="settings-panel"><h3>Cloud sync</h3><p>Sign in on each device with the same account to keep your collection and wishlist synced.</p><div class="sync-state settings-sync-state"><span class="dot" id="settingsSyncDot"></span><span id="settingsSyncText">Saved on this device</span></div><button class="btn primary" id="openAccountBtn" type="button">☁ Account & sync</button></section><section class="settings-panel"><h3>Backups</h3><p>Export a backup before making major changes, or import a backup you previously saved.</p><div class="settings-actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import backup</button></div></section></div>
+</section>
+</div>
+<div class="modal-backdrop" id="itemModal"><form class="modal" id="itemForm"><div class="modal-head"><h2 id="modalTitle">Add to your collection</h2><button type="button" class="close" data-close="itemModal">×</button></div><div class="modal-content"><input type="hidden" id="itemId"><div class="field"><label for="itemName">Name *</label><input id="itemName" required maxlength="180" placeholder="What are you collecting?"></div><div class="form-row"><div class="field"><label for="itemCategory">Category</label><input id="itemCategory" maxlength="80" list="categoryOptions" placeholder="e.g. Pokémon cards"><datalist id="categoryOptions"><option value="Pokémon"><option value="Trading cards"><option value="Figures"><option value="Games"><option value="Comics"><option value="Toys"><option value="Other"></datalist></div><div class="field"><label for="itemStatus">Status</label><select id="itemStatus"><option value="owned">Collected</option><option value="wanted">Wanted</option></select></div></div><div class="field"><label for="itemNotes">Notes / details</label><textarea id="itemNotes" maxlength="5000" placeholder="Edition, condition, where you found it…"></textarea></div><div class="field"><label for="itemPhoto">Photo (optional)</label><input type="file" id="itemPhoto" accept="image/png,image/jpeg,image/webp,image/gif"><img id="photoPreview" class="photo-preview" alt="Selected photo preview"><small style="color:var(--muted);font-size:11px">Images are resized before saving. If signed in, photos can sync through your private cloud storage.</small><button type="button" class="btn small" id="removePhotoBtn" style="align-self:flex-start;margin-top:6px;display:none">Remove photo</button></div></div><div class="modal-actions"><button type="button" class="btn" data-close="itemModal">Cancel</button><button type="submit" class="btn primary" id="saveItemBtn">Save item</button></div></form></div>
+<div class="modal-backdrop" id="accountModal"><section class="modal"><div class="modal-head"><h2>Cloud sync</h2><button type="button" class="close" data-close="accountModal">×</button></div><div class="modal-content"><div class="auth-box"><p>Sign in on each device with the same account to keep your collection synced. Your collection remains stored locally too.</p><div id="signedOutFields"><div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div><div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters"></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="signInBtn" type="button">Sign in</button><button class="btn" id="signUpBtn" type="button">Create account</button></div></div><div id="signedInFields" class="hidden"><div class="auth-status" id="signedInEmail"></div><button class="btn" id="syncNowBtn" type="button">Sync now</button> <button class="btn danger" id="signOutBtn" type="button">Sign out</button></div></div><p id="authMessage" class="auth-status">Not signed in. Items are saved on this device.</p><p style="font-size:11px">Cloud sync uses your Supabase account. Do not share your password. Keep your local backup/export for extra safety.</p></div></section></div>
+<input type="file" id="importFile" accept="application/json,.json" class="hidden"><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 (() => {
-  const SUPABASE_URL = 'https://yeiitvanmkqegixyeqok.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_nqQYvpgK_9M_Kc7F2wm43w_IJ7MICYn';
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  const $ = id => document.getElementById(id);
-  const message = $('authMessage');
-
-  function showMessage(text) {
-    message.textContent = text;
-  }
-
-  function setBusy(busy) {
-    $('signInBtn').disabled = busy;
-    $('signUpBtn').disabled = busy;
-  }
-
-  async function updateAccountDisplay() {
-    const { data, error } = await supabaseClient.auth.getSession();
-    if (error) {
-      showMessage('Could not check sign-in status: ' + error.message);
-      return;
-    }
-
-    const user = data.session?.user;
-    $('signedOut').hidden = !!user;
-    $('signedIn').hidden = !user;
-
-    if (user) {
-      $('accountLine').textContent = 'Signed in as ' + user.email;
-      $('mergeBtn').disabled = false;
-      $('loadCloudBtn').disabled = false;
-      showMessage('Signed in successfully.');
-    } else {
-      showMessage('Sign in or create an account to get started.');
-    }
-  }
-
-  $('signInBtn').addEventListener('click', async () => {
-    const email = $('authEmail').value.trim();
-    const password = $('authPassword').value;
-    if (!email || !password) {
-      showMessage('Enter your email address and password.');
-      return;
-    }
-
-    setBusy(true);
-    showMessage('Signing in…');
-    try {
-      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      $('authPassword').value = '';
-      await updateAccountDisplay();
-      showMessage('Signed in successfully!');
-    } catch (error) {
-      showMessage('Sign-in failed: ' + error.message);
-    } finally {
-      setBusy(false);
-    }
-  });
-
-  $('signUpBtn').addEventListener('click', async () => {
-    const email = $('authEmail').value.trim();
-    const password = $('authPassword').value;
-    if (!email || !password) {
-      showMessage('Enter your email address and choose a password.');
-      return;
-    }
-    if (password.length < 6) {
-      showMessage('Your password must be at least 6 characters.');
-      return;
-    }
-
-    setBusy(true);
-    showMessage('Creating your account…');
-    try {
-      const { data, error } = await supabaseClient.auth.signUp({ email, password });
-      if (error) throw error;
-
-      if (data.session) {
-        $('authPassword').value = '';
-        await updateAccountDisplay();
-        showMessage('Account created and signed in!');
-      } else {
-        showMessage('Account created. Check your email for a confirmation link, then sign in.');
-      }
-    } catch (error) {
-      showMessage('Account creation failed: ' + error.message);
-    } finally {
-      setBusy(false);
-    }
-  });
-
-  async function mergeLocalToCloud() {
-    const button = $('mergeBtn');
-    button.disabled = true;
-
-    try {
-      const { data, error: sessionError } = await supabaseClient.auth.getSession();
-      if (sessionError) throw sessionError;
-      const user = data.session?.user;
-      if (!user) throw new Error('Please sign in first.');
-
-      const localItems = JSON.parse(localStorage.getItem('myCollection.items.v1') || '[]');
-      if (!Array.isArray(localItems)) throw new Error('Your local collection format was unexpected.');
-      if (localItems.length === 0) {
-        showMessage('There are no local items to upload.');
-        return;
-      }
-
-      let completed = 0;
-      for (const item of localItems) {
-        if (!item.id || !item.name) throw new Error('An item is missing its ID or name.');
-
-        let photoPath = null;
-        if (item.photo && item.photo.startsWith('data:image/')) {
-          const blob = await fetch(item.photo).then(r => r.blob());
-          const mime = blob.type.toLowerCase();
-          const extensions = {
-            'image/jpeg': 'jpg',
-            'image/png': 'png',
-            'image/webp': 'webp',
-            'image/gif': 'gif'
-          };
-          const extension = extensions[mime];
-          if (!extension) throw new Error('Unsupported photo format on "' + item.name + '".');
-          if (blob.size > 8 * 1024 * 1024) throw new Error('The photo for "' + item.name + '" exceeds 8 MB.');
-
-          photoPath = user.id + '/' + String(item.id).replace(/[^a-zA-Z0-9_-]/g, '_') + '.' + extension;
-          const { error: uploadError } = await supabaseClient.storage
-            .from('collection-photos')
-            .upload(photoPath, blob, { upsert: true, contentType: mime });
-          if (uploadError) throw uploadError;
-        }
-
-        const row = {
-          user_id: user.id,
-          local_id: String(item.id),
-          name: item.name,
-          category: item.category || 'Other',
-          description: item.notes || '',
-          image_url: photoPath,
-          status: item.status === 'wanted' ? 'wanted' : 'collected',
-          metadata: {
-            createdAt: item.createdAt || null,
-            updatedAt: item.updatedAt || null,
-            photoPath
-          },
-          updated_at: new Date().toISOString()
-        };
-
-        const { data: existing, error: lookupError } = await supabaseClient
-          .from('collection_items')
-          .select('id, image_url')
-          .eq('user_id', user.id)
-          .eq('local_id', String(item.id))
-          .maybeSingle();
-        if (lookupError) throw lookupError;
-row.image_url = photoPath || existing?.image_url || null;
-row.metadata.photoPath = row.image_url;
-        
-        const result = existing
-          ? await supabaseClient.from('collection_items').update(row).eq('id', existing.id).eq('user_id', user.id)
-          : await supabaseClient.from('collection_items').insert(row);
-        if (result.error) throw result.error;
-
-        completed++;
-        showMessage('Uploading collection… ' + completed + ' of ' + localItems.length);
-      }
-
-      showMessage('Upload complete! ' + completed + ' item(s) copied. Your local collection remains in place.');
-    } catch (error) {
-      showMessage('Upload stopped: ' + error.message);
-    } finally {
-      button.disabled = false;
-    }
-  }
-
-  async function loadCloudItems() {
-    const button = $('loadCloudBtn');
-    button.disabled = true;
-
-    try {
-      const { data, error: sessionError } = await supabaseClient.auth.getSession();
-      if (sessionError) throw sessionError;
-      const user = data.session?.user;
-      if (!user) throw new Error('Please sign in first.');
-
-      const { data: cloudItems, error } = await supabaseClient
-        .from('collection_items')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: true });
-      if (error) throw error;
-      if (!Array.isArray(cloudItems)) throw new Error('The cloud collection could not be read.');
-
-      const localItems = JSON.parse(localStorage.getItem('myCollection.items.v1') || '[]');
-      if (!Array.isArray(localItems)) throw new Error('Your local collection format was unexpected.');
-
-      const mergedItems = [...localItems];
-      let added = 0;
-      let updated = 0;
-
-      for (const cloudItem of cloudItems) {
-        if (!cloudItem.local_id) continue;
-        const localId = String(cloudItem.local_id);
-        const index = mergedItems.findIndex(item => String(item.id) === localId);
-        const metadata = cloudItem.metadata || {};
-
-        const converted = {
-          id: localId,
-          name: cloudItem.name,
-          category: cloudItem.category || 'Other',
-          status: cloudItem.status === 'wanted' ? 'wanted' : 'owned',
-          notes: cloudItem.description || '',
-          createdAt: metadata.createdAt || cloudItem.created_at,
-          updatedAt: metadata.updatedAt || cloudItem.updated_at
-        };
-
-        if (index === -1) {
-          mergedItems.push({ ...converted, photo: '' });
-          added++;
-        } else {
-          mergedItems[index] = {
-            ...mergedItems[index],
-            ...converted,
-            photo: mergedItems[index].photo || ''
-          };
-          updated++;
-        }
-      }
-
-      localStorage.setItem('myCollection.items.v1', JSON.stringify(mergedItems));
-      showMessage('Cloud merge complete! ' + added + ' item(s) added and ' + updated + ' matching item(s) updated. Other local items were preserved.');
-      location.reload();
-    } catch (error) {
-      showMessage('Cloud merge stopped: ' + error.message);
-    } finally {
-      button.disabled = false;
-    }
-  }
-
-  $('mergeBtn').addEventListener('click', mergeLocalToCloud);
-   let autoSyncTimer = null;
-  let autoSyncRunning = false;
-  let autoSyncAgain = false;
-
-  window.addEventListener('collection-local-saved', () => {
-    clearTimeout(autoSyncTimer);
-
-    autoSyncTimer = setTimeout(async () => {
-      try {
-        const { data, error } = await supabaseClient.auth.getSession();
-        if (error) throw error;
-
-        if (!data.session) {
-          showMessage('Saved on this device. Sign in to sync to the cloud.');
-          return;
-        }
-
-        if (autoSyncRunning) {
-          autoSyncAgain = true;
-          return;
-        }
-
-        autoSyncRunning = true;
-
-        do {
-          autoSyncAgain = false;
-          await mergeLocalToCloud();
-        } while (autoSyncAgain);
-
-      } catch (error) {
-        showMessage(
-          'Saved on this device, but cloud sync could not start: ' +
-          error.message
-        );
-      } finally {
-        autoSyncRunning = false;
-      }
-    }, 800);
-  });
-  $('loadCloudBtn').addEventListener('click', loadCloudItems);
-
-  $('signOutBtn').addEventListener('click', async () => {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) {
-      showMessage('Sign-out failed: ' + error.message);
-      return;
-    }
-    await updateAccountDisplay();
-    showMessage('Signed out.');
-  });
-
-  supabaseClient.auth.onAuthStateChange(() => {
-    updateAccountDisplay();
-  });
-
-  updateAccountDisplay();
+'use strict';
+const ITEMS_KEY='myCollection.items.v1';
+const DELETED_KEY='myCollection.deleted.v1';
+const SUPABASE_URL='https://yeiitvanmkqegixyeqok.supabase.co';
+const SUPABASE_ANON_KEY='sb_publishable_nqQYvpgK_9M_Kc7F2wm43w_IJ7MICYn';
+const BUCKET='collection-photos';
+const $=id=>document.getElementById(id);
+let items=readItems(), tombstones=readTombstones(), activePage='collection', currentPage=1, pageSize=12, selectedPhoto=null, photoWasRemoved=false, supabase=null, currentUser=null, realtimeChannel=null, syncTimer=null, syncInProgress=false, lastSyncAt=0;
+function makeId(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'item-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
+function readItems(){try{const x=JSON.parse(localStorage.getItem(ITEMS_KEY)||'[]');return Array.isArray(x)?x.map(normalizeItem).filter(Boolean):[]}catch(e){return []}}
+function normalizeItem(x){if(!x||typeof x!=='object')return null;const id=String(x.id||makeId());return {id,name:String(x.name||'Untitled item'),category:String(x.category||'Other'),status:x.status==='wanted'?'wanted':'owned',notes:String(x.notes??x.description??''),photo:typeof x.photo==='string'?x.photo:'',createdAt:x.createdAt||x.created_at||new Date().toISOString(),updatedAt:x.updatedAt||x.updated_at||x.createdAt||new Date().toISOString()}}
+function readTombstones(){try{const x=JSON.parse(localStorage.getItem(DELETED_KEY)||'{}');return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}catch(e){return {}}}
+function persistItems(){localStorage.setItem(ITEMS_KEY,JSON.stringify(items))}
+function persistTombstones(){localStorage.setItem(DELETED_KEY,JSON.stringify(tombstones))}
+function isoNow(){return new Date().toISOString()}
+function timeOf(x){const n=Date.parse(x||'');return Number.isFinite(n)?n:0}
+function newer(a,b){return timeOf(a)>=timeOf(b)}
+function strictlyNewer(a,b){return timeOf(a)>timeOf(b)}
+function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),3000)}
+function setSyncState(text,online=false){$('syncText').textContent=text;$('syncDot').classList.toggle('online',!!online);const settingsText=$('settingsSyncText'),settingsDot=$('settingsSyncDot');if(settingsText)settingsText.textContent=text;if(settingsDot)settingsDot.classList.toggle('online',!!online)}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function photoSrc(item){return item.photo||''}
+function render(){const owned=items.filter(x=>x.status==='owned').length,wanted=items.filter(x=>x.status==='wanted').length;$('totalStat').textContent=items.length;$('ownedStat').textContent=owned;$('wantedStat').textContent=wanted;const categoryCounts=new Map();for(const item of items){const category=item.category||'Other';categoryCounts.set(category,(categoryCounts.get(category)||0)+1)}const totals=$('categoryTotals');if(totals){const entries=[...categoryCounts.entries()].sort((a,b)=>a[0].localeCompare(b[0]));totals.innerHTML=entries.length?entries.map(([name,count])=>`<div class="category-total"><span>${escapeHtml(name)}</span><strong>${count}</strong></div>`).join(''):'<div class="empty">No items yet.</div>'}const categories=[...new Set(items.map(x=>x.category||'Other'))].sort((a,b)=>a.localeCompare(b));const cf=$('categoryFilter'),old=cf.value;cf.innerHTML='<option value="all">All categories</option>'+categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');cf.value=categories.includes(old)?old:'all';const query=$('searchInput').value.trim().toLowerCase();let shown=items.filter(x=>(activePage==='wishlist'?x.status==='wanted':x.status==='owned')&&(cf.value==='all'||x.category===cf.value)&&(!query||[x.name,x.category,x.notes].join(' ').toLowerCase().includes(query)));const sort=$('sortSelect').value;if(sort==='name')shown.sort((a,b)=>a.name.localeCompare(b.name));else if(sort==='category')shown.sort((a,b)=>a.category.localeCompare(b.category)||a.name.localeCompare(b.name));else if(sort==='oldest')shown.sort((a,b)=>timeOf(a.createdAt)-timeOf(b.createdAt));else shown.sort((a,b)=>timeOf(b.updatedAt)-timeOf(a.updatedAt));const totalPages=Math.max(1,Math.ceil(shown.length/pageSize));if(currentPage>totalPages)currentPage=totalPages;const start=(currentPage-1)*pageSize;const pageItems=shown.slice(start,start+pageSize);const grid=$('collectionGrid');const oldImages=new Map([...grid.querySelectorAll('.item-card[data-item-id]')].map(card=>[card.dataset.itemId,card.querySelector('.photo img')]));if(!pageItems.length){grid.innerHTML=`<div class="empty"><div class="symbol">${items.length?'⌕':'✦'}</div><h3>${shown.length===0&&items.length?'No matching items':activePage==='wishlist'?'Your wishlist is empty':'Your collection starts here'}</h3><p>${items.length?'Try another search or category.':activePage==='wishlist'?'Add an item and mark it as wanted to build your wishlist.':'Add your first item to start building your personal binder.'}</p>${activePage==='collection'&&!items.length?'<button class="btn primary" id="emptyAddBtn">＋ Add your first item</button>':''}</div>`;const b=$('emptyAddBtn');if(b)b.addEventListener('click',()=>openItemModal())}else{grid.innerHTML=pageItems.map(x=>`<article class="item-card" data-item-id="${escapeHtml(x.id)}"><div class="photo">${photoSrc(x)?`<img src="${escapeHtml(photoSrc(x))}" alt="${escapeHtml(x.name)}" loading="lazy" decoding="async">`:'<div class="photo-placeholder">✧</div>'}<span class="status-chip ${x.status}">${x.status==='owned'?'Collected':'Wanted'}</span></div><div class="card-body"><div class="item-category">${escapeHtml(x.category||'Other')}</div><div class="item-title">${escapeHtml(x.name)}</div>${x.notes?`<div class="item-notes">${escapeHtml(x.notes)}</div>`:''}<div class="card-actions"><button class="icon-btn" data-action="toggle" data-id="${escapeHtml(x.id)}">${x.status==='owned'?'Move to wishlist':'Mark collected'}</button><button class="icon-btn" data-action="edit" data-id="${escapeHtml(x.id)}" aria-label="Edit ${escapeHtml(x.name)}">Edit</button><button class="icon-btn delete" data-action="delete" data-id="${escapeHtml(x.id)}" aria-label="Delete ${escapeHtml(x.name)}">×</button></div></div></article>`).join('');for(const card of grid.querySelectorAll('.item-card[data-item-id]')){const previous=oldImages.get(card.dataset.itemId),next=card.querySelector('.photo img');if(previous&&next&&previous.getAttribute('src')===next.getAttribute('src'))next.replaceWith(previous)}}const pagination=$('pagination');if(pagination){pagination.innerHTML='';if(totalPages>1){const addPageButton=(label,page,disabled=false,active=false)=>{const b=document.createElement('button');b.className='page-btn'+(active?' active':'');b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',typeof label==='number'?'Page '+label:label);b.addEventListener('click',()=>{currentPage=page;render();});pagination.appendChild(b)};addPageButton('← Previous',Math.max(1,currentPage-1),currentPage===1);for(let p=1;p<=totalPages;p++){if(totalPages>7&&p>2&&p<totalPages-1&&Math.abs(p-currentPage)>1){if(p===3||p===totalPages-2){const ell=document.createElement('span');ell.textContent='…';ell.style.color='var(--muted)';pagination.appendChild(ell)}continue}addPageButton(p,p,false,p===currentPage)}addPageButton('Next →',Math.min(totalPages,currentPage+1),currentPage===totalPages)}}$('itemCount').textContent=shown.length?`Showing ${start+1}–${Math.min(start+pageSize,shown.length)} of ${shown.length} item${shown.length===1?'':'s'}`:`0 items shown`;document.querySelectorAll('.main-tab').forEach(t=>t.classList.toggle('active',t.dataset.page===activePage));document.querySelectorAll('.content-page').forEach(p=>p.classList.toggle('active',p.id==='page-'+activePage||(activePage==='wishlist'&&p.id==='page-collection')));$('pageTitle').textContent=activePage==='wishlist'?'Wishlist':'Collection';$('pageSubtitle').textContent=activePage==='wishlist'?'Items you are still hunting for.':'Browse the items you have collected.';$('addBtn').classList.toggle('hidden',activePage!=='collection'&&activePage!=='wishlist');$('searchInput').placeholder=activePage==='wishlist'?'Search your wishlist…':'Search your collection…'}
+function openModal(id){$(id).classList.add('open')};function closeModal(id){$(id).classList.remove('open')}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));document.querySelectorAll('.modal-backdrop').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id)}));
+function openItemModal(item=null){$('itemForm').reset();$('itemId').value=item?.id||'';$('modalTitle').textContent=item?'Edit item':(activePage==='wishlist'?'Add to wishlist':'Add to your collection');$('itemName').value=item?.name||'';$('itemCategory').value=item?.category||'';$('itemStatus').value=item?.status||(activePage==='wishlist'?'wanted':'owned');$('itemNotes').value=item?.notes||'';selectedPhoto=item?.photo||null;photoWasRemoved=false;updatePhotoPreview();openModal('itemModal');setTimeout(()=>$('itemName').focus(),50)}
+function updatePhotoPreview(){const img=$('photoPreview'),remove=$('removePhotoBtn');if(selectedPhoto){img.src=selectedPhoto;img.style.display='block';remove.style.display='inline-flex'}else{img.removeAttribute('src');img.style.display='none';remove.style.display='none'}}
+async function resizeImage(file){if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');if(file.size>12*1024*1024)throw new Error('Choose an image smaller than 12 MB.');const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});return await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{const max=1100,scale=Math.min(1,max/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.82))};img.onerror=()=>reject(new Error('Could not read that image.'));img.src=data})}
+$('itemPhoto').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{selectedPhoto=await resizeImage(file);photoWasRemoved=false;updatePhotoPreview()}catch(err){toast(err.message||'Could not use that image.')}});$('removePhotoBtn').addEventListener('click',()=>{selectedPhoto=null;photoWasRemoved=true;$('itemPhoto').value='';updatePhotoPreview()});
+$('itemForm').addEventListener('submit',e=>{e.preventDefault();const id=$('itemId').value||makeId(),now=isoNow(),existing=items.find(x=>x.id===id);const item={id,name:$('itemName').value.trim(),category:$('itemCategory').value.trim()||'Other',status:$('itemStatus').value==='wanted'?'wanted':'owned',notes:$('itemNotes').value.trim(),photo:selectedPhoto||'',createdAt:existing?.createdAt||now,updatedAt:now};if(!item.name){toast('Please enter a name.');return}const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=item;else items.unshift(item);delete tombstones[id];persistItems();persistTombstones();render();closeModal('itemModal');dispatchLocalSave();toast(existing?'Item updated.':'Item added.')});
+function deleteItem(id){const item=items.find(x=>x.id===id);if(!item)return;if(!confirm(`Delete “${item.name}” from your collection? This deletion will sync to your other devices when cloud sync is connected.`))return;const deletedAt=isoNow();items=items.filter(x=>x.id!==id);tombstones[id]={deletedAt,updatedAt:deletedAt};persistItems();persistTombstones();render();dispatchLocalSave();toast('Item deleted.')}
+$('collectionGrid').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const item=items.find(x=>x.id===b.dataset.id);if(!item)return;if(b.dataset.action==='edit')openItemModal(item);else if(b.dataset.action==='delete')deleteItem(item.id);else if(b.dataset.action==='toggle'){item.status=item.status==='owned'?'wanted':'owned';item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(item.status==='owned'?'Marked as collected.':'Moved to wanted list.')}});
+$('addBtn').addEventListener('click',()=>openItemModal());$('searchInput').addEventListener('input',()=>{currentPage=1;render()});$('categoryFilter').addEventListener('change',()=>{currentPage=1;render()});$('sortSelect').addEventListener('change',()=>{currentPage=1;render()});document.querySelectorAll('.main-tab').forEach(t=>t.addEventListener('click',()=>{activePage=t.dataset.page;currentPage=1;document.querySelectorAll('.content-page').forEach(p=>p.classList.toggle('active',p.id==='page-'+activePage||(activePage==='wishlist'&&p.id==='page-collection')));render()}));$('openAccountBtn').addEventListener('click',openAccount);
+function dispatchLocalSave(){window.dispatchEvent(new CustomEvent('collection-local-saved'))}
+$('exportBtn').addEventListener('click',()=>{const data={app:'MyCollectionApp',version:1,exportedAt:isoNow(),items,tombstones};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='my-collection-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);toast('Backup exported.')});$('importBtn').addEventListener('click',()=>$('importFile').click());$('importFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const incoming=Array.isArray(parsed)?parsed:parsed.items;if(!Array.isArray(incoming))throw new Error('That file does not contain a collection.');if(!confirm(`Import ${incoming.length} item(s)? Items with matching IDs will be updated. This will not automatically delete other items.`))return;const map=new Map(items.map(x=>[x.id,x]));for(const raw of incoming){const x=normalizeItem(raw);if(!x)continue;const old=map.get(x.id);if(!old||newer(x.updatedAt,old.updatedAt))map.set(x.id,x)}items=[...map.values()];if(parsed.tombstones&&typeof parsed.tombstones==='object'){for(const [id,t] of Object.entries(parsed.tombstones)){if(!tombstones[id]||newer(t.deletedAt,tombstones[id].deletedAt))tombstones[id]=t}}items=items.filter(x=>!tombstones[x.id]||newer(x.updatedAt,tombstones[x.id].deletedAt));persistItems();persistTombstones();render();dispatchLocalSave();toast('Import complete.')}catch(err){toast(err.message||'Could not import that file.')}finally{$('importFile').value=''}});
+// Sync tombstones and items via the same local-save event. A tombstone prevents old copies from returning.
+function cloudItemToLocal(row){const meta=row.metadata||{};return {id:String(row.local_id||row.id),name:row.name||'Untitled item',category:row.category||'Other',status:row.status==='wanted'?'wanted':'owned',notes:row.description||'',photo:'',createdAt:meta.createdAt||row.created_at||isoNow(),updatedAt:meta.updatedAt||row.updated_at||row.created_at||isoNow(),_cloudPhotoPath:meta.photoPath||row.image_url||''}}
+function setAccountUI(){const signed=!!currentUser;$('signedOutFields').classList.toggle('hidden',signed);$('signedInFields').classList.toggle('hidden',!signed);$('signedInEmail').textContent=currentUser?.email||'';$('authMessage').textContent=signed?'Signed in. Your collection syncs across devices.':'Not signed in. Items are saved on this device.';setSyncState(signed?'Cloud connected':'Saved on this device',signed)}
+function openAccount(){openModal('accountModal')}
+// The account controls live on the Settings / Sync page; the footer status is also clickable.
+$('syncText').style.cursor='pointer';$('syncText').title='Open cloud sync settings';$('syncText').addEventListener('click',openAccount);$('syncDot').style.cursor='pointer';$('syncDot').addEventListener('click',openAccount);
+function ensureClient(){if(!window.supabase?.createClient){toast('Cloud sync library did not load. Check your internet connection.');return false}if(!supabase)supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return true}
+function scheduleSync(){if(!currentUser||!supabase)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncEverything(false),900)}window.addEventListener('collection-local-saved',scheduleSync);
+async function getCloudRows(){const {data,error}=await supabase.from('collection_items').select('*').eq('user_id',currentUser.id);if(error)throw error;return data||[]}
+async function findCloudRow(localId){const {data,error}=await supabase.from('collection_items').select('*').eq('user_id',currentUser.id).eq('local_id',localId).limit(1);if(error)throw error;return data?.[0]||null}
+async function writeCloudRow(localId,values){const existing=await findCloudRow(localId);if(existing){const {error}=await supabase.from('collection_items').update(values).eq('id',existing.id).eq('user_id',currentUser.id);if(error)throw error}else{const {error}=await supabase.from('collection_items').insert({...values,user_id:currentUser.id,local_id:localId});if(error)throw error}}
+async function uploadPhoto(item){if(!item.photo||!item.photo.startsWith('data:image/'))return null;const response=await fetch(item.photo);const blob=await response.blob();if(blob.size>8*1024*1024)throw new Error('A photo is larger than the cloud storage limit.');const ext=blob.type==='image/png'?'png':blob.type==='image/webp'?'webp':blob.type==='image/gif'?'gif':'jpg';const path=`${currentUser.id}/${item.id}.${ext}`;const {error}=await supabase.storage.from(BUCKET).upload(path,blob,{upsert:true,contentType:blob.type});if(error)throw error;return path}
+async function downloadPhoto(path){if(!path||!currentUser)return '';try{const {data,error}=await supabase.storage.from(BUCKET).download(path);if(error||!data)return '';return await new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(String(r.result||''));r.onerror=()=>resolve('');r.readAsDataURL(data)})}catch(e){return ''}}
+async function pushItem(item,knownRow=null){const tomb=tombstones[item.id];if(tomb&&newer(tomb.deletedAt,item.updatedAt))return;let row=knownRow||await findCloudRow(item.id);if(row?.deleted_at&&newer(row.deleted_at,item.updatedAt))return;const cloudUpdated=row?.metadata?.updatedAt||row?.updated_at||'';if(row&&cloudUpdated&&!strictlyNewer(item.updatedAt,cloudUpdated))return;let photoPath=row?.metadata?.photoPath||row?.image_url||'';if(item.photo&&item.photo.startsWith('data:image/')){try{photoPath=await uploadPhoto(item)}catch(e){console.warn('Photo upload failed',e);toast('Item synced, but a photo could not upload: '+(e.message||'storage error'))}}const now=isoNow();const values={name:item.name,category:item.category||'Other',description:item.notes||'',image_url:photoPath||null,status:item.status==='wanted'?'wanted':'collected',metadata:{...(row?.metadata||{}),createdAt:item.createdAt,updatedAt:item.updatedAt,photoPath:photoPath||null},deleted_at:null,updated_at:now};await writeCloudRow(item.id,values)}
+async function pushTombstone(id,tomb,knownRow=null){let row=knownRow||await findCloudRow(id);if(row){const rowTime=row.deleted_at||row.metadata?.updatedAt||'';if(rowTime&&newer(rowTime,tomb.deletedAt))return;await writeCloudRow(id,{deleted_at:tomb.deletedAt,updated_at:isoNow(),metadata:{...(row.metadata||{}),updatedAt:tomb.deletedAt,deleted:true}})}else{await writeCloudRow(id,{name:'Deleted item',category:'Other',description:'',image_url:null,status:'collected',metadata:{updatedAt:tomb.deletedAt,deleted:true},deleted_at:tomb.deletedAt,updated_at:isoNow()})}}
+async function applyCloudRows(rows){let changed=false;for(const row of rows){const remote=cloudItemToLocal(row),id=remote.id;if(!id)continue;const local=items.find(x=>x.id===id),tomb=tombstones[id];const remoteTime=row.deleted_at||remote.updatedAt;if(row.deleted_at){if(!tomb||strictlyNewer(row.deleted_at,tomb.deletedAt)){tombstones[id]={deletedAt:row.deleted_at,updatedAt:row.deleted_at};changed=true}if(local&&newer(row.deleted_at,local.updatedAt)){items=items.filter(x=>x.id!==id);changed=true}continue}if(tomb&&newer(tomb.deletedAt,remote.updatedAt)){continue}if(local&&!strictlyNewer(remote.updatedAt,local.updatedAt))continue;remote.photo=local?.photo||'';if(!remote.photo&&remote._cloudPhotoPath)remote.photo=await downloadPhoto(remote._cloudPhotoPath);delete remote._cloudPhotoPath;const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=remote;else items.unshift(remote);if(tomb&&newer(remote.updatedAt,tomb.deletedAt))delete tombstones[id];changed=true}if(changed){persistItems();persistTombstones();render()}}
+async function syncEverything(manual=true){if(!currentUser||!supabase||syncInProgress)return;syncInProgress=true;setSyncState('Syncing…',true);try{let rows=await getCloudRows();await applyCloudRows(rows);rows=await getCloudRows();const rowMap=new Map(rows.filter(r=>r.local_id).map(r=>[String(r.local_id),r]));for(const [id,tomb] of Object.entries(tombstones)){const row=rowMap.get(id);const local=items.find(x=>x.id===id);if(local&&newer(local.updatedAt,tomb.deletedAt)){delete tombstones[id];continue}await pushTombstone(id,tomb,row)}persistTombstones();for(const item of [...items]){const tomb=tombstones[item.id];if(tomb&&newer(tomb.deletedAt,item.updatedAt))continue;await pushItem(item,rowMap.get(item.id))}lastSyncAt=Date.now();setSyncState('Synced just now',true);if(manual)toast('Cloud sync complete.')}catch(err){console.error('Cloud sync failed',err);setSyncState('Sync issue — tap for details',false);if(manual)toast('Sync failed: '+(err.message||'Please check your connection and Supabase settings.'))}finally{syncInProgress=false}}
+function subscribeRealtime(){if(!supabase||!currentUser)return;if(realtimeChannel){supabase.removeChannel(realtimeChannel);realtimeChannel=null}realtimeChannel=supabase.channel('collection-live-'+currentUser.id).on('postgres_changes',{event:'*',schema:'public',table:'collection_items',filter:'user_id=eq.'+currentUser.id},async payload=>{if(!currentUser)return;const row=payload.new&&Object.keys(payload.new).length?payload.new:payload.old;if(!row||row.user_id!==currentUser.id)return;try{await applyCloudRows([row])}catch(e){console.warn('Realtime update failed',e)}}).subscribe(status=>{if(status==='SUBSCRIBED')setSyncState('Live cloud sync',true)})}
+async function startForUser(user){currentUser=user;setAccountUI();if(!user){if(realtimeChannel&&supabase){supabase.removeChannel(realtimeChannel);realtimeChannel=null}setSyncState('Saved on this device',false);return}subscribeRealtime();await syncEverything(false)}
+async function signIn(){if(!ensureClient())return;const email=$('authEmail').value.trim(),password=$('authPassword').value;if(!email||!password){toast('Enter your email and password.');return}const {data,error}=await supabase.auth.signInWithPassword({email,password});if(error){toast(error.message);return}await startForUser(data.user);closeModal('accountModal');toast('Signed in and syncing.')}
+async function signUp(){if(!ensureClient())return;const email=$('authEmail').value.trim(),password=$('authPassword').value;if(!email||!password){toast('Enter your email and password.');return}if(password.length<6){toast('Use a password with at least 6 characters.');return}const {data,error}=await supabase.auth.signUp({email,password});if(error){toast(error.message);return}if(data.session){await startForUser(data.user);toast('Account created and signed in.')}else{toast('Account created. Check your email to confirm, then sign in.')}}
+$('signInBtn').addEventListener('click',signIn);$('signUpBtn').addEventListener('click',signUp);$('syncNowBtn').addEventListener('click',()=>syncEverything(true));$('signOutBtn').addEventListener('click',async()=>{if(!supabase)return;const {error}=await supabase.auth.signOut();if(error){toast(error.message);return}currentUser=null;if(realtimeChannel){supabase.removeChannel(realtimeChannel);realtimeChannel=null}setAccountUI();closeModal('accountModal');toast('Signed out. Your local collection remains on this device.')});
+async function initCloud(){if(!ensureClient()){setSyncState('Cloud library unavailable',false);return}const {data:{session},error}=await supabase.auth.getSession();if(error)console.warn(error);if(session?.user)await startForUser(session.user);else setAccountUI();supabase.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){currentUser=null;if(realtimeChannel){supabase.removeChannel(realtimeChannel);realtimeChannel=null}setAccountUI()}else if(session?.user&&(!currentUser||currentUser.id!==session.user.id)){currentUser=session.user;setAccountUI();setTimeout(()=>startForUser(session.user),0)}})}
+window.addEventListener('online',()=>{if(currentUser)scheduleSync()});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&currentUser&&Date.now()-lastSyncAt>60000)scheduleSync()});
+render();initCloud();
 })();
 </script>
+</body>
+</html>
