@@ -89,7 +89,7 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 .binder-page-header,.binder-page-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#8b8273;font-weight:850;font-size:9px;letter-spacing:1.1px;flex:0 0 auto}
 .binder-page-header{padding-bottom:11px;border-bottom:1px solid #d9d2c6;margin-bottom:12px}
 .binder-page-number{color:#766c5b;font-variant-numeric:tabular-nums;font-size:10px;letter-spacing:.8px}
-.binder-page-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:11px;flex:1;min-width:0}
+.binder-page-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:11px;flex:1;min-width:0}
 .binder-page-footer{padding-top:11px;border-top:1px solid #d9d2c6;margin-top:12px;font-size:8px;letter-spacing:.8px}
 .binder-rings{align-self:stretch;position:relative;z-index:5;display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:23px 0;background:linear-gradient(90deg,#1e1d21,#464249 35%,#141317 64%,#38353c);box-shadow:inset 3px 0 5px #0008,inset -3px 0 5px #0008}
 .binder-rings span{display:block;width:28px;height:16px;border-radius:50%;border:4px solid #c7c5c1;background:linear-gradient(135deg,#fff 0%,#777 26%,#e9e7e2 50%,#777 77%,#f5f4f0 100%);box-shadow:0 1px 3px #000a,inset 0 0 0 1px #ffffffa3;transform:rotate(-90deg)}
@@ -139,17 +139,16 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 @media(prefers-reduced-motion:reduce){.binder-turn-overlay.next .binder-turn-snapshot,.binder-turn-overlay.prev .binder-turn-snapshot,.binder-spread-grid.page-coming-next .binder-page,.binder-spread-grid.page-coming-prev .binder-page{animation-duration:.01ms!important}}
 
 
-/* Keep larger spread sizes tidy by reducing card image height, not by changing item order. */
-.binder-spread-grid.density-24 .binder-page .photo{height:clamp(76px,8vw,100px)}
-.binder-spread-grid.density-24 .binder-page .card-body{padding:6px 7px;min-height:34px}
-.binder-spread-grid.density-24 .binder-page .item-title{font-size:11px}
-.binder-spread-grid.density-24 .binder-page-grid{gap:7px}
-.binder-spread-grid.density-48 .binder-page .photo{height:clamp(48px,5.3vw,68px)}
-.binder-spread-grid.density-48 .binder-page .card-body{padding:4px 6px;min-height:27px}
-.binder-spread-grid.density-48 .binder-page .item-title{font-size:10px;-webkit-line-clamp:1}
-.binder-spread-grid.density-48 .binder-page-grid{gap:5px}
-.binder-spread-grid.density-48 .binder-page .card-options-toggle{width:22px;height:20px;font-size:14px}
-@media(max-width:700px){.binder-spread-grid.density-24 .binder-page .photo{height:70px}.binder-spread-grid.density-48 .binder-page .photo{height:43px}.binder-spread-grid.density-48 .binder-page .item-title{font-size:8px}}
+/* Each physical paper page holds 9 items (3×3) or 16 items (4×4). */
+.binder-spread-grid.density-9 .binder-page-grid:not(.list-view){grid-template-columns:repeat(3,minmax(0,1fr))}
+.binder-spread-grid.density-16 .binder-page-grid:not(.list-view){grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.binder-spread-grid.density-16 .binder-page .photo{height:clamp(48px,6vw,82px)}
+.binder-spread-grid.density-16 .binder-page .card-body{padding:4px 5px;min-height:27px;gap:4px}
+.binder-spread-grid.density-16 .binder-page .item-title{font-size:10px;-webkit-line-clamp:2}
+.binder-spread-grid.density-16 .binder-page .item-category,.binder-spread-grid.density-16 .binder-page .item-notes{display:none}
+.binder-spread-grid.density-16 .binder-page .card-options-toggle{width:22px;height:20px;font-size:14px}
+.binder-pagination{display:none!important}
+@media(max-width:700px){.binder-spread-grid.density-9 .binder-page-grid:not(.list-view){grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.binder-spread-grid.density-9 .binder-page .photo{height:74px}.binder-spread-grid.density-9 .binder-page .item-title{font-size:9px}.binder-spread-grid.density-16 .binder-page-grid:not(.list-view){grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.binder-spread-grid.density-16 .binder-page .photo{height:66px}.binder-spread-grid.density-16 .binder-page .item-title{font-size:9px}}
 
 
 .binder-page-left::after,.binder-page-right::after{content:"";position:absolute;bottom:0;width:0;height:0;opacity:.7;pointer-events:none;filter:drop-shadow(0 -1px 1px #51463314)}
@@ -171,22 +170,22 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 </nav>
 <section class="content-page active" id="page-collection">
 <div class="page-heading"><div><h2 id="pageTitle">Collection</h2><p id="pageSubtitle">Browse the items you have collected.</p></div><button class="btn primary" id="addBtn">＋ Add item</button></div>
-<main class="workspace binder-workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per page"><option value="12">12 per page</option><option value="24">24 per page</option><option value="48">48 per page</option></select><button class="btn small view-mode-button" id="viewModeBtn" type="button">☷ List view</button><button class="btn small" id="selectVisibleBtn" type="button">Select page</button></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><div class="binder-book" id="binderBook" aria-label="Collection binder">
+<main class="workspace binder-workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Open a category binder"><option value="all">All items binder</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per paper page"><option value="9">9 per page</option><option value="16">16 per page</option></select><button class="btn small view-mode-button" id="viewModeBtn" type="button">☷ List view</button><button class="btn small" id="selectVisibleBtn" type="button">Select page</button></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><div class="binder-book" id="binderBook" aria-label="Collection binder">
 <div class="binder-cover-seam" aria-hidden="true"></div>
 <section class="binder-spread-grid" id="collectionGrid" aria-label="Open collection binder" aria-live="polite">
   <article class="binder-page binder-page-left" id="leftBinderPage">
     <div class="binder-page-header"><span id="binderSectionLabelLeft">MY COLLECTION</span><span class="binder-page-number" id="binderLeftPageNo">01</span></div>
     <div class="binder-page-grid" id="leftCollectionGrid"></div>
-    <div class="binder-page-footer"><span>MY COLLECTION</span><span id="binderLeftFolio">01</span></div>
+    <div class="binder-page-footer"><span id="binderLeftFooterLabel">MY COLLECTION</span><span id="binderLeftFolio">01</span></div>
   </article>
   <div class="binder-rings" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <article class="binder-page binder-page-right" id="rightBinderPage">
     <div class="binder-page-header"><span id="binderSectionLabelRight">MY COLLECTION</span><span class="binder-page-number" id="binderRightPageNo">02</span></div>
     <div class="binder-page-grid" id="rightCollectionGrid"></div>
-    <div class="binder-page-footer"><span>MY COLLECTION</span><span id="binderRightFolio">02</span></div>
+    <div class="binder-page-footer"><span id="binderRightFooterLabel">MY COLLECTION</span><span id="binderRightFolio">02</span></div>
   </article>
 </section>
-<div class="binder-pagination-wrap"><div class="binder-spread-label" id="binderSpreadLabel">SPREAD 1</div><div class="pagination binder-pagination" id="pagination" aria-label="Collection pages"></div><div class="binder-hint">Use the arrows or swipe to turn a page</div></div>
+<div class="binder-pagination-wrap"><div class="binder-spread-label" id="binderSpreadLabel">PAGES 1–2</div><div class="pagination binder-pagination" id="pagination" aria-label="Collection page controls" hidden></div><div class="binder-hint">Drag a bottom page corner or swipe to turn pages</div></div>
 </div><div class="footer"><span id="itemCount">0 items shown</span><span class="sync-state"><span class="dot" id="syncDot"></span><span id="syncText">Saved on this device</span><span class="last-sync" id="lastSyncLabel">Never synced</span></span></div></main>
 </section>
 <section class="content-page" id="page-progress">
@@ -198,7 +197,7 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 <div class="page-heading"><div><h2>Settings</h2><p>Manage your cloud connection and collection backups.</p></div></div>
 <div class="settings-grid"><section class="settings-panel"><h3>Cloud sync</h3><p>Sign in on each device with the same account to keep your collection and wishlist synced.</p><div class="sync-state settings-sync-state"><span class="dot" id="settingsSyncDot"></span><span id="settingsSyncText">Saved on this device</span><span class="last-sync" id="settingsLastSyncLabel">Never synced yet</span></div><button class="btn primary" id="openAccountBtn" type="button">☁ Account & sync</button></section><section class="settings-panel"><h3>Backups</h3><p>Export a backup before making major changes, or import a backup you previously saved.</p><div class="settings-actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import backup</button></div></section></div>
 <div class="settings-grid settings-extra-grid">
-<section class="settings-panel"><h3>Appearance & browsing</h3><p>Choose how your collection looks and how many items appear on each page.</p><div class="field"><label for="viewModeSetting">Collection layout</label><select id="viewModeSetting"><option value="grid">Grid view</option><option value="list">List view</option></select></div><div class="field"><label for="pageSizeSetting">Items per page</label><select id="pageSizeSetting"><option value="12">12 items</option><option value="24">24 items</option><option value="48">48 items</option></select></div><button class="btn" id="themeToggleBtn" type="button">Enable dark mode</button></section>
+<section class="settings-panel"><h3>Appearance & browsing</h3><p>Choose how your collection looks and how many items appear on each page.</p><div class="field"><label for="viewModeSetting">Collection layout</label><select id="viewModeSetting"><option value="grid">Grid view</option><option value="list">List view</option></select></div><div class="field"><label for="pageSizeSetting">Items per page</label><select id="pageSizeSetting"><option value="9">9 items per paper page</option><option value="16">16 items per paper page</option></select></div><button class="btn" id="themeToggleBtn" type="button">Enable dark mode</button></section>
 <section class="settings-panel"><h3>Manage categories</h3><p>Add categories or rename/remove existing ones. Removing a category moves its items to Other.</p><div class="category-add"><input id="newCategoryInput" maxlength="80" placeholder="New category name" aria-label="New category name"><button class="btn primary" id="addCategoryBtn" type="button">Add category</button></div><div id="categoryManager" class="category-manager"></div><p class="category-sync-note">Categories used by items sync with those items. Empty custom categories are saved on this device.</p></section>
 </div>
 </section>
@@ -225,9 +224,9 @@ let photoStorageMode=false,photoDBPromise=null,photoStoreWarningShown=false;
 try{photoStorageMode=localStorage.getItem(PHOTO_MODE_KEY)==='indexeddb'}catch(e){}
 function readSettings(){try{const x=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}');return x&&typeof x==='object'?x:{}}catch(e){return {}}}
 function readCustomCategories(){try{const x=JSON.parse(localStorage.getItem(CATEGORIES_KEY)||'[]');return Array.isArray(x)?x.filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()):[]}catch(e){return []}}
-function normalizePageSize(value){const n=Number.parseInt(value,10);return [12,24,48].includes(n)?n:12}
-let userSettings=readSettings(), customCategories=readCustomCategories(), viewStates=userSettings.viewStates&&typeof userSettings.viewStates==='object'?userSettings.viewStates:{}, categoryGoals=userSettings.categoryGoals&&typeof userSettings.categoryGoals==='object'?userSettings.categoryGoals:{};
-let items=readItems(), tombstones=readTombstones(), activePage='collection', currentPage=1, pageSize=normalizePageSize(userSettings.pageSize||12), viewMode=userSettings.viewMode==='list'?'list':'grid', darkMode=!!userSettings.darkMode, progressBasis=userSettings.progressBasis==='pieces'?'pieces':'items', selectedIds=new Set(), lastVisibleIds=[], selectedPhoto=null, selectedPhotoHash="", photoWasRemoved=false, supabase=null, currentUser=null, realtimeChannel=null, syncTimer=null, syncInProgress=false, lastSyncAt=Number(userSettings.lastSyncAt)||0, lastDeletedItem=null;
+function normalizePageSize(value){const n=Number.parseInt(value,10);return [9,16].includes(n)?n:(n===12?9:16===n?16:9)}
+let userSettings=readSettings(), customCategories=readCustomCategories(), viewStates=userSettings.viewStates&&typeof userSettings.viewStates==='object'?userSettings.viewStates:{}, categoryGoals=userSettings.categoryGoals&&typeof userSettings.categoryGoals==='object'?userSettings.categoryGoals:{}, binderPageStates=userSettings.binderPageStates&&typeof userSettings.binderPageStates==='object'?userSettings.binderPageStates:{};
+let items=readItems(), tombstones=readTombstones(), activePage='collection', currentPage=1, pageSize=normalizePageSize(userSettings.pageSize||9), viewMode=userSettings.viewMode==='list'?'list':'grid', darkMode=!!userSettings.darkMode, progressBasis=userSettings.progressBasis==='pieces'?'pieces':'items', selectedIds=new Set(), lastVisibleIds=[], selectedPhoto=null, selectedPhotoHash="", photoWasRemoved=false, supabase=null, currentUser=null, realtimeChannel=null, syncTimer=null, syncInProgress=false, lastSyncAt=Number(userSettings.lastSyncAt)||0, lastDeletedItem=null;
 function makeId(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'item-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
 function readItems(){try{const x=JSON.parse(localStorage.getItem(ITEMS_KEY)||'[]');return Array.isArray(x)?x.map(normalizeItem).filter(Boolean):[]}catch(e){return []}}
 function normalizeItem(x){if(!x||typeof x!=='object')return null;const id=String(x.id||makeId());const rawQuantity=Number.parseInt(x.quantity??x.amount??1,10);const quantity=Number.isFinite(rawQuantity)?Math.min(99999,Math.max(1,rawQuantity)):1;return {id,name:String(x.name||'Untitled item'),category:String(x.category||'Other'),status:x.status==='wanted'?'wanted':'owned',quantity,notes:String(x.notes??x.description??''),photo:typeof x.photo==='string'?x.photo:'',photoHash:String(x.photoHash||''),photoRemoved:!!x.photoRemoved,createdAt:x.createdAt||x.created_at||new Date().toISOString(),updatedAt:x.updatedAt||x.updated_at||x.createdAt||new Date().toISOString()}}
@@ -295,11 +294,12 @@ async function hydratePhotosFromIndexedDB(){
   }catch(err){reportPhotoStoreFailure(err)}
 }
 function persistTombstones(){localStorage.setItem(DELETED_KEY,JSON.stringify(tombstones))}
-function persistSettings(){userSettings={...userSettings,pageSize,viewMode,darkMode,progressBasis,lastSyncAt,viewStates,categoryGoals};try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(userSettings))}catch(e){console.warn('Could not save preferences',e)}}
+function persistSettings(){userSettings={...userSettings,pageSize,viewMode,darkMode,progressBasis,lastSyncAt,viewStates,categoryGoals,binderPageStates};try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(userSettings))}catch(e){console.warn('Could not save preferences',e)}}
 function persistCategories(){try{localStorage.setItem(CATEGORIES_KEY,JSON.stringify(customCategories))}catch(e){console.warn('Could not save categories',e)}}
 function allCategories(){return [...new Set([...customCategories,...items.map(x=>String(x.category||'Other').trim()||'Other')])].sort((a,b)=>a.localeCompare(b))}
-function saveCurrentView(){viewStates[activePage]={query:$('searchInput')?.value||'',category:$('categoryFilter')?.value||'all',sort:$('sortSelect')?.value||'recent',page:currentPage};persistSettings()}
-function restoreCurrentView(){const state=viewStates[activePage]||{};$('searchInput').value=state.query||'';$('categoryFilter').value=state.category||'all';$('sortSelect').value=state.sort||'recent';currentPage=Math.max(1,Number.parseInt(state.page,10)||1)}
+function binderPageKey(page=activePage,category=$('categoryFilter')?.value||'all'){return `${page}::${category||'all'}`}
+function saveCurrentView(){const category=$('categoryFilter')?.value||'all';viewStates[activePage]={query:$('searchInput')?.value||'',category,sort:$('sortSelect')?.value||'recent',page:currentPage};binderPageStates[binderPageKey(activePage,category)]=currentPage;persistSettings()}
+function restoreCurrentView(){const state=viewStates[activePage]||{};$('searchInput').value=state.query||'';const requestedCategory=state.category||'all';$('categoryFilter').value=[...$('categoryFilter').options].some(o=>o.value===requestedCategory)?requestedCategory:'all';$('sortSelect').value=state.sort||'recent';const savedPage=binderPageStates[binderPageKey(activePage,$('categoryFilter').value)]??state.page;currentPage=Math.max(1,Number.parseInt(savedPage,10)||1)}
 function applyAppearance(){document.body.classList.toggle('dark-mode',darkMode);if($('themeToggleBtn'))$('themeToggleBtn').textContent=darkMode?'Switch to light mode':'Enable dark mode';if($('viewModeSetting'))$('viewModeSetting').value=viewMode;if($('pageSizeSetting'))$('pageSizeSetting').value=String(pageSize);if($('pageSizeSelect'))$('pageSizeSelect').value=String(pageSize);if($('progressBasis'))$('progressBasis').value=progressBasis} 
 function updateLastSyncLabel(){const label=lastSyncAt?`Last synced ${new Date(lastSyncAt).toLocaleString([], {dateStyle:'medium',timeStyle:'short'})}`:'Never synced yet';for(const id of ['lastSyncLabel','settingsLastSyncLabel'])if($(id))$(id).textContent=label}
 function isoNow(){return new Date().toISOString()}
@@ -318,7 +318,7 @@ function renderCategoryManager(){
 }
 let pageTurnBusy=false,pageTurnMidTimer=null,pageTurnEndTimer=null;
 function turnToPage(targetPage){
-  const lastPage=Math.max(1,Math.ceil(lastShownCount()/pageSize));
+  const lastPage=Math.max(1,Math.ceil(lastShownCount()/(pageSize*2)));
   const nextPage=Math.max(1,Math.min(lastPage,Number.parseInt(targetPage,10)||1));
   if(pageTurnBusy||nextPage===currentPage){return}
   const direction=nextPage>currentPage?'next':'prev';
@@ -386,7 +386,7 @@ function render(){
   }
 
   const cf=$('categoryFilter'),oldCategory=cf.value;
-  cf.innerHTML='<option value="all">All categories</option>'+categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+  cf.innerHTML='<option value="all">All items binder</option>'+categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
   cf.value=categories.includes(oldCategory)?oldCategory:'all';
   const query=$('searchInput').value.trim().toLowerCase();
   let shown=items.filter(x=>(activePage==='wishlist'?x.status==='wanted':x.status==='owned')&&((cf.value==='all')||(String(x.category||'Other')===cf.value))&&(!query||[x.name,x.category,x.notes].join(' ').toLowerCase().includes(query)));
@@ -399,14 +399,15 @@ function render(){
   else if(sort==='quantity-asc')shown.sort((a,b)=>quantityOf(a)-quantityOf(b)||a.name.localeCompare(b.name));
   else shown.sort((a,b)=>timeOf(b.updatedAt)-timeOf(a.updatedAt));
 
-  const totalPages=Math.max(1,Math.ceil(shown.length/pageSize));
+  const totalPhysicalPages=Math.max(1,Math.ceil(shown.length/pageSize));
+  const totalPages=Math.max(1,Math.ceil(shown.length/(pageSize*2)));
   if(currentPage>totalPages)currentPage=totalPages;
-  const start=(currentPage-1)*pageSize;
-  const pageItems=shown.slice(start,start+pageSize);
+  const start=(currentPage-1)*pageSize*2;
+  const pageItems=shown.slice(start,start+(pageSize*2));
   lastVisibleIds=pageItems.map(x=>x.id);
   const grid=$('collectionGrid');
   grid.classList.toggle('list-view',viewMode==='list');
-  grid.classList.toggle('density-24',pageSize>=24);grid.classList.toggle('density-48',pageSize>=48);
+  grid.classList.toggle('density-9',pageSize===9);grid.classList.toggle('density-16',pageSize===16);
   const oldCards=new Map([...grid.querySelectorAll('.binder-page-grid > .item-card[data-item-id]')].map(card=>[card.dataset.itemId,card]));
   const leftGrid=$('leftCollectionGrid'),rightGrid=$('rightCollectionGrid');
   leftGrid.classList.toggle('list-view',viewMode==='list');rightGrid.classList.toggle('list-view',viewMode==='list');
@@ -428,29 +429,22 @@ function render(){
       const previous=oldCards.get(card.dataset.itemId),next=card.querySelector('.photo img'),priorImage=previous?.querySelector('.photo img');
       if(priorImage&&next&&priorImage.getAttribute('src')===next.getAttribute('src')){priorImage.alt=next.alt;priorImage.loading='lazy';priorImage.decoding='async';next.replaceWith(priorImage)}
     }
-    const splitAt=Math.ceil(newCards.length/2);
-    leftGrid.replaceChildren(...newCards.slice(0,splitAt));rightGrid.replaceChildren(...newCards.slice(splitAt));
+    const splitAt=Math.min(pageSize,newCards.length);
+    leftGrid.replaceChildren(...newCards.slice(0,splitAt));rightGrid.replaceChildren(...newCards.slice(splitAt,splitAt+pageSize));
   }
   const pageLeft=((currentPage-1)*2)+1,pageRight=pageLeft+1;
-  const sectionLabel=activePage==='wishlist'?'WISHLIST':'MY COLLECTION';
-  $('binderSectionLabelLeft').textContent=sectionLabel;$('binderSectionLabelRight').textContent=sectionLabel;
-  $('binderLeftPageNo').textContent=String(pageLeft).padStart(2,'0');$('binderRightPageNo').textContent=String(pageRight).padStart(2,'0');
-  $('binderLeftFolio').textContent=String(pageLeft).padStart(2,'0');$('binderRightFolio').textContent=String(pageRight).padStart(2,'0');
-  $('binderSpreadLabel').textContent=`SPREAD ${currentPage} / ${totalPages}`;
-  const pagination=$('pagination');
-  if(pagination){
-    pagination.innerHTML='';
-    if(totalPages>1){
-      const addPageButton=(label,page,disabled=false,active=false)=>{const b=document.createElement('button');b.className='page-btn'+(active?' active':'');b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',typeof label==='number'?'Page '+label:label);b.addEventListener('click',()=>turnToPage(page));pagination.appendChild(b)};
-      addPageButton('← Previous',Math.max(1,currentPage-1),currentPage===1);
-      for(let p=1;p<=totalPages;p++){if(totalPages>7&&p>2&&p<totalPages-1&&Math.abs(p-currentPage)>1){if(p===3||p===totalPages-2){const ell=document.createElement('span');ell.textContent='…';ell.style.color='var(--muted)';pagination.appendChild(ell)}continue}addPageButton(p,p,false,p===currentPage)}
-      addPageButton('Next →',Math.min(totalPages,currentPage+1),currentPage===totalPages);
-    }
-  }
-  $('itemCount').textContent=shown.length?`Showing ${start+1}–${Math.min(start+pageSize,shown.length)} of ${shown.length} item${shown.length===1?'':'s'}`:'0 items shown';
+  const chosenCategory=cf.value;
+  const sectionLabel=chosenCategory!=='all'?`${chosenCategory.toLocaleUpperCase()} ${activePage==='wishlist'?'WISHLIST':'COLLECTION'} BINDER`:(activePage==='wishlist'?'WISHLIST':'MY COLLECTION');
+  $('binderSectionLabelLeft').textContent=sectionLabel;$('binderSectionLabelRight').textContent=sectionLabel;$('binderLeftFooterLabel').textContent=sectionLabel;$('binderRightFooterLabel').textContent=sectionLabel;
+  $('leftBinderPage').setAttribute('aria-label',`${sectionLabel}, page ${pageLeft}`);$('rightBinderPage').setAttribute('aria-label',`${sectionLabel}, page ${pageRight}`);
+  $('binderLeftPageNo').textContent=String(pageLeft).padStart(2,'0');$('binderRightPageNo').textContent=pageRight<=totalPhysicalPages?String(pageRight).padStart(2,'0'):'';
+  $('binderLeftFolio').textContent=String(pageLeft).padStart(2,'0');$('binderRightFolio').textContent=pageRight<=totalPhysicalPages?String(pageRight).padStart(2,'0'):'';
+  $('binderSpreadLabel').textContent=shown.length?`PAGES ${pageLeft}–${Math.min(pageRight,totalPhysicalPages)} OF ${totalPhysicalPages}`:'EMPTY BINDER';
+  const pagination=$('pagination');if(pagination)pagination.replaceChildren();
+  $('itemCount').textContent=shown.length?`Showing ${start+1}–${Math.min(start+(pageSize*2),shown.length)} of ${shown.length} item${shown.length===1?'':'s'}`:'0 items shown';
   $('selectedCount').textContent=`${selectedIds.size} selected`;
   $('bulkToolbar').classList.toggle('hidden',selectedIds.size===0);
-  $('selectVisibleBtn').textContent=lastVisibleIds.length&&lastVisibleIds.every(id=>selectedIds.has(id))?'Deselect page':'Select page';
+  $('selectVisibleBtn').textContent=lastVisibleIds.length&&lastVisibleIds.every(id=>selectedIds.has(id))?'Deselect spread':'Select spread';
   $('viewModeBtn').textContent=viewMode==='grid'?'☷ List view':'▦ Grid view';
   $('pageSizeSelect').value=String(pageSize);
   document.querySelectorAll('.main-tab').forEach(t=>t.classList.toggle('active',t.dataset.page===activePage));
@@ -477,7 +471,7 @@ $('collectionGrid').addEventListener('pointerdown',e=>{
   let direction='';if(page.id==='rightBinderPage'&&e.clientX>=r.right-44&&e.clientY>=r.bottom-44)direction='next';else if(page.id==='leftBinderPage'&&e.clientX<=r.left+44&&e.clientY>=r.bottom-44)direction='prev';
   if(!direction)return;binderPointerStart={x:e.clientX,y:e.clientY,direction,pointerId:e.pointerId};document.body.classList.add('binder-dragging');e.preventDefault();
 });
-document.addEventListener('pointerup',e=>{const start=binderPointerStart;binderPointerStart=null;document.body.classList.remove('binder-dragging');if(!start||start.pointerId!==e.pointerId)return;const dx=e.clientX-start.x;if((start.direction==='next'&&dx<-28)||(start.direction==='prev'&&dx>28)){turnToPage(currentPage+(start.direction==='next'?1:-1))}});
+document.addEventListener('pointerup',e=>{const start=binderPointerStart;binderPointerStart=null;document.body.classList.remove('binder-dragging');if(!start||start.pointerId!==e.pointerId)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;const isTurn=(start.direction==='next'&&dx<-28)||(start.direction==='prev'&&dx>28);const isCornerClick=Math.hypot(dx,dy)<9;if(isTurn||isCornerClick)turnToPage(currentPage+(start.direction==='next'?1:-1))});
 
 let binderTouchStart=null;
 $('collectionGrid').addEventListener('touchstart',e=>{const t=e.changedTouches?.[0];if(!t)return;binderTouchStart={x:t.clientX,y:t.clientY,interactive:!!e.target.closest('button,input,select,textarea,.card-actions,.pagination')};},{passive:true});
@@ -519,9 +513,9 @@ $('saveItemBtn').addEventListener('click',e=>{
 function deleteItem(id,skipConfirm=false){const item=items.find(x=>x.id===id);if(!item)return;if(!skipConfirm&&!confirm(`Delete “${item.name}” from your collection? This deletion will sync to your other devices when cloud sync is connected.`))return;const snapshot={...item},deletedAt=isoNow();items=items.filter(x=>x.id!==id);selectedIds.delete(id);tombstones[id]={deletedAt,updatedAt:deletedAt};lastDeletedItem={item:snapshot,deletedAt};persistItems();persistTombstones();render();dispatchLocalSave();toast('Item deleted.','Undo',()=>{const restored={...snapshot,updatedAt:new Date(Math.max(Date.now(),timeOf(deletedAt)+1)).toISOString()};items.unshift(restored);delete tombstones[id];persistItems();persistTombstones();render();dispatchLocalSave();toast('Deletion undone.')})}
 $('collectionGrid').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const item=items.find(x=>x.id===b.dataset.id);if(b.dataset.action==='options'){const card=b.closest('.item-card');if(card){const open=card.classList.toggle('options-open');b.setAttribute('aria-expanded',String(open))}return}if(!item)return;if(b.dataset.action==='select'){if(selectedIds.has(item.id))selectedIds.delete(item.id);else selectedIds.add(item.id);render();return}if(b.dataset.action==='quantity-plus'||b.dataset.action==='quantity-minus'){const old=Math.max(1,Number.parseInt(item.quantity??1,10)||1);item.quantity=b.dataset.action==='quantity-plus'?Math.min(99999,old+1):Math.max(1,old-1);item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(`Amount updated to ${item.quantity}.`);return}if(b.dataset.action==='edit')openItemModal(item);else if(b.dataset.action==='delete')deleteItem(item.id);else if(b.dataset.action==='toggle'){item.status=item.status==='owned'?'wanted':'owned';item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(item.status==='owned'?'Added to your collection.':'Moved to your wishlist.')}});
 $('addBtn').addEventListener('click',()=>openItemModal());
-$('searchInput').addEventListener('input',()=>{currentPage=1;saveCurrentView();render()});$('categoryFilter').addEventListener('change',()=>{currentPage=1;saveCurrentView();render()});$('sortSelect').addEventListener('change',()=>{currentPage=1;saveCurrentView();render()});
+$('searchInput').addEventListener('input',()=>{currentPage=1;saveCurrentView();render()});$('categoryFilter').addEventListener('change',()=>{const category=$('categoryFilter').value||'all';currentPage=Math.max(1,Number.parseInt(binderPageStates[binderPageKey(activePage,category)],10)||1);saveCurrentView();render()});$('sortSelect').addEventListener('change',()=>{currentPage=1;saveCurrentView();render()});
 $('progressCategoryFilter').addEventListener('change',render);$('progressBasis').addEventListener('change',()=>{progressBasis=$('progressBasis').value;persistSettings();render()});$('categoryTotals').addEventListener('change',e=>{const input=e.target.closest('input[data-category-goal]');if(!input)return;const category=input.dataset.category;const value=Number.parseInt(input.value,10);if(!input.value.trim()){delete categoryGoals[category];persistSettings();render();toast('Goal cleared.');return}if(!Number.isFinite(value)||value<1||value>99999){toast('Set a goal between 1 and 99,999.');input.value=categoryGoals[category]||'';return}categoryGoals[category]=value;persistSettings();render();toast('Collection goal saved.')});
-$('pageSizeSelect').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSelect').value);currentPage=1;persistSettings();applyAppearance();render()});$('pageSizeSetting').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSetting').value);currentPage=1;persistSettings();applyAppearance();render()});
+$('pageSizeSelect').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSelect').value);currentPage=1;saveCurrentView();applyAppearance();render()});$('pageSizeSetting').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSetting').value);currentPage=1;saveCurrentView();applyAppearance();render()});
 function setViewMode(mode){viewMode=mode==='list'?'list':'grid';persistSettings();applyAppearance();render()}
 $('viewModeBtn').addEventListener('click',()=>setViewMode(viewMode==='grid'?'list':'grid'));$('viewModeSetting').addEventListener('change',()=>setViewMode($('viewModeSetting').value));
 $('themeToggleBtn').addEventListener('click',()=>{darkMode=!darkMode;persistSettings();applyAppearance();toast(darkMode?'Dark mode enabled.':'Light mode enabled.')});
