@@ -60,4 +60,141 @@ $('itemPhoto').addEventListener('change',async e=>{const file=e.target.files?.[0
 form.addEventListener('submit',e=>{e.preventDefault();const name=$('itemName').value.trim(),category=$('itemCategory').value.trim();if(!name||!category)return;const old=items.find(i=>i.id===editingId),item={id:editingId||(crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())),name,category,status:$('itemStatus').value,notes:$('itemNotes').value.trim(),photo:pendingPhoto,createdAt:old?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};const previous=items;items=editingId?items.map(i=>i.id===editingId?item:i):[...items,item];if(!save()){items=previous;return}dialog.close();reset();render()});
 shelf.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const {action,id}=b.dataset,i=items.find(x=>x.id===id);if(!i)return;if(action==='edit')edit(id);if(action==='toggle'){const old=items;items=items.map(x=>x.id===id?{...x,status:x.status==='owned'?'wanted':'owned',updatedAt:new Date().toISOString()}:x);if(!save())items=old;render()}if(action==='delete'&&confirm(`Delete "${i.name}" from your binder?`)){const old=items;items=items.filter(x=>x.id!==id);if(!save())items=old;render()}});
 $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collection',version:1,exportedAt:new Date().toISOString(),items},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='my-collection-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importBtn').onclick=()=>$('importFile').click();$('importFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text()),incoming=Array.isArray(data)?data:data.items;if(!Array.isArray(incoming)||!incoming.every(i=>i&&typeof i.name==='string'&&typeof i.category==='string'))throw Error('Invalid');if(!confirm(`Import ${incoming.length} items? This replaces the collection currently saved in this browser.`))return;const old=items;items=incoming.map(i=>({...i,id:String(i.id||(crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random())),status:i.status==='wanted'?'wanted':'owned',notes:String(i.notes||''),photo:typeof i.photo==='string'?i.photo:''}));if(!save())items=old;else render()}catch{alert("Couldn't import that file. Choose a valid My Collection JSON backup.")}finally{e.target.value=''}});render()})();
+</script><script>
+(() => {
+  const SUPABASE_URL = 'https://yeiitvanmkqegixyeqok.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_nqQYvpgK_9M_Kc7F2wm43w_IJ7MICYn';
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const $ = id => document.getElementById(id);
+  const message = $('authMessage');
+
+  function showMessage(text) {
+    message.textContent = text;
+  }
+
+  function setBusy(busy) {
+    $('signInBtn').disabled = busy;
+    $('signUpBtn').disabled = busy;
+  }
+
+  async function updateAccountDisplay() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error) {
+      showMessage('Could not check sign-in status: ' + error.message);
+      return;
+    }
+
+    const user = data.session?.user;
+    $('signedOut').hidden = !!user;
+    $('signedIn').hidden = !user;
+
+    if (user) {
+      $('accountLine').textContent =
+        'Signed in as ' + user.email;
+      $('mergeBtn').disabled = true;
+      $('loadCloudBtn').disabled = true;
+      showMessage(
+        'You are signed in. Collection syncing will be added next.'
+      );
+    } else {
+      showMessage('Sign in or create an account to get started.');
+    }
+  }
+
+  $('signInBtn').addEventListener('click', async () => {
+    const email = $('authEmail').value.trim();
+    const password = $('authPassword').value;
+
+    if (!email || !password) {
+      showMessage('Enter your email address and password.');
+      return;
+    }
+
+    setBusy(true);
+    showMessage('Signing in…');
+
+    try {
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) throw error;
+
+      $('authPassword').value = '';
+      await updateAccountDisplay();
+      showMessage('Signed in successfully!');
+    } catch (error) {
+      showMessage('Sign-in failed: ' + error.message);
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  $('signUpBtn').addEventListener('click', async () => {
+    const email = $('authEmail').value.trim();
+    const password = $('authPassword').value;
+
+    if (!email || !password) {
+      showMessage('Enter your email address and choose a password.');
+      return;
+    }
+
+    if (password.length < 6) {
+      showMessage('Your password must be at least 6 characters.');
+      return;
+    }
+
+    setBusy(true);
+    showMessage('Creating your account…');
+
+    try {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        $('authPassword').value = '';
+        await updateAccountDisplay();
+        showMessage('Account created and signed in!');
+      } else {
+        showMessage(
+          'Account created. Check your email for a confirmation link, then sign in.'
+        );
+      }
+    } catch (error) {
+      showMessage('Account creation failed: ' + error.message);
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  $('signOutBtn').addEventListener('click', async () => {
+    showMessage('Signing out…');
+
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      showMessage('Sign-out failed: ' + error.message);
+      return;
+    }
+
+    await updateAccountDisplay();
+    showMessage('Signed out.');
+  });
+
+  supabaseClient.auth.onAuthStateChange(() => {
+    updateAccountDisplay();
+  });
+
+  updateAccountDisplay();
+})();
 </script></body></html>
