@@ -45,7 +45,9 @@
 <div class="form-row"><label for="itemStatus">Status</label><select class="field" id="itemStatus"><option value="owned">Collected</option><option value="wanted">Want to collect</option></select></div>
 <div class="form-row full"><label for="itemPhoto">Your photo</label><input class="field" id="itemPhoto" type="file" accept="image/*"><img class="preview" id="photoPreview" alt="Selected photo preview"><span class="help">Photos are stored in this browser. Large images use more storage.</span></div>
 <div class="form-row full"><label for="itemNotes">Notes (optional)</label><textarea class="field" id="itemNotes" rows="3" maxlength="1000" placeholder="Condition, edition, where you found it…"></textarea></div></div><div class="modal-actions"><button class="btn" type="button" id="cancelBtn">Cancel</button><button class="btn primary" type="submit">Save item</button></div><p class="notice">Tip: use “Want to collect” for items you’re still looking for. Mark them “Collected” when you get them.</p></form></dialog>
-<script>
+
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script>
 (()=>{const KEY='myCollection.items.v1';let items=[],editingId=null,pendingPhoto='';const $=id=>document.getElementById(id),shelf=$('shelf'),dialog=$('itemDialog'),form=$('itemForm');try{items=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(items))items=[]}catch{items=[]}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(items));return true}catch{alert("The browser couldn't save this item. Its photo may be too large. Try a smaller photo, then save again. Export a backup regularly.");return false}}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
