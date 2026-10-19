@@ -49,7 +49,7 @@
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
    <script>
 (()=>{const KEY='myCollection.items.v1';let items=[],editingId=null,pendingPhoto='';const $=id=>document.getElementById(id),shelf=$('shelf'),dialog=$('itemDialog'),form=$('itemForm');try{items=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(items))items=[]}catch{items=[]}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(items));return true}catch{alert("The browser couldn't save this item. Its photo may be too large. Try a smaller photo, then save again. Export a backup regularly.");return false}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items));window.dispatchEvent(new Event('collection-local-saved'));return true}catch{alert("The browser couldn't save this item. Its photo may be too large. Try a smaller photo, then save again. Export a backup regularly.");return false}}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function cats(){return [...new Set(items.map(i=>i.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
 function refreshCats(){const selected=$('categoryFilter').value,cs=cats();$('categoryFilter').innerHTML='<option value="">All categories</option>'+cs.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(cs.includes(selected))$('categoryFilter').value=selected;$('categorySuggestions').innerHTML=cs.map(c=>`<option value="${esc(c)}"></option>`).join('')}
