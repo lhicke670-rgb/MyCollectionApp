@@ -10,6 +10,32 @@
 </style></head>
 <body><main class="app">
 <header><div class="brand"><div class="logo" aria-hidden="true">▤</div><div><h1>My Collection</h1><p class="subtitle">Your personal digital binder</p></div></div><div class="actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import backup</button><button class="btn primary" id="addBtn">＋ Add item</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></header>
+<section class="auth-panel" style="padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:17px;margin-bottom:18px">
+  <strong>Cloud sync across devices</strong>
+  <p class="subtitle">Sign in with the same account on each device.</p>
+
+  <div id="signedOut">
+    <input class="field" id="authEmail" type="email" autocomplete="email" placeholder="Email address" style="width:100%;margin:8px 0">
+    <input class="field" id="authPassword" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)" style="width:100%;margin-bottom:8px">
+
+    <div class="actions">
+      <button class="btn primary" id="signInBtn" type="button">Sign in</button>
+      <button class="btn" id="signUpBtn" type="button">Create account</button>
+    </div>
+  </div>
+
+  <div id="signedIn" hidden>
+    <p id="accountLine"></p>
+    <div class="actions">
+      <button class="btn primary" id="mergeBtn" type="button">Merge this device into cloud</button>
+      <button class="btn" id="loadCloudBtn" type="button">Merge cloud items onto this device</button>
+      <button class="btn" id="signOutBtn" type="button">Sign out</button>
+    </div>
+  </div>
+
+  <p id="authMessage" class="subtitle" role="status" aria-live="polite"></p>
+</section>
+
 <section class="stats"><div class="stat"><div class="stat-label">Items in binder</div><div class="stat-number" id="totalStat">0</div></div><div class="stat"><div class="stat-label">Collected</div><div class="stat-number" id="ownedStat">0</div></div><div class="stat"><div class="stat-label">Collection completion</div><div class="stat-number" id="percentStat">0%</div><div class="progress"><div id="progressBar"></div></div></div></section>
 <div class="toolbar"><input class="field" id="search" type="search" placeholder="Search your collection…" aria-label="Search items"><select class="field" id="categoryFilter" aria-label="Filter by category"><option value="">All categories</option></select><select class="field" id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="owned">Collected</option><option value="wanted">Want to collect</option></select></div>
 <div class="section-heading"><h2>Your binder</h2><span class="count" id="shownCount">0 items</span></div><section id="shelf" class="shelf" aria-live="polite"></section><footer>Saved in this browser on this device. Export a backup regularly to keep your collection safe.</footer></main>
