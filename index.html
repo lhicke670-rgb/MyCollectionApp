@@ -64,11 +64,7 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
 (() => {
   const SUPABASE_URL = 'https://yeiitvanmkqegixyeqok.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_nqQYvpgK_9M_Kc7F2wm43w_IJ7MICYn';
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   const $ = id => document.getElementById(id);
   const message = $('authMessage');
 
@@ -83,7 +79,6 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
 
   async function updateAccountDisplay() {
     const { data, error } = await supabaseClient.auth.getSession();
-
     if (error) {
       showMessage('Could not check sign-in status: ' + error.message);
       return;
@@ -94,13 +89,10 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
     $('signedIn').hidden = !user;
 
     if (user) {
-      $('accountLine').textContent =
-        'Signed in as ' + user.email;
+      $('accountLine').textContent = 'Signed in as ' + user.email;
       $('mergeBtn').disabled = false;
-     loadCloudBtn.disabled = false;
-      showMessage(
-        'You are signed in. Collection syncing will be added next.'
-      );
+      $('loadCloudBtn').disabled = false;
+      showMessage('Signed in successfully.');
     } else {
       showMessage('Sign in or create an account to get started.');
     }
@@ -109,7 +101,6 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
   $('signInBtn').addEventListener('click', async () => {
     const email = $('authEmail').value.trim();
     const password = $('authPassword').value;
-
     if (!email || !password) {
       showMessage('Enter your email address and password.');
       return;
@@ -117,15 +108,9 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
 
     setBusy(true);
     showMessage('Signing in…');
-
     try {
-      const { error } = await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
-
+      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
       if (error) throw error;
-
       $('authPassword').value = '';
       await updateAccountDisplay();
       showMessage('Signed in successfully!');
@@ -139,12 +124,10 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
   $('signUpBtn').addEventListener('click', async () => {
     const email = $('authEmail').value.trim();
     const password = $('authPassword').value;
-
     if (!email || !password) {
       showMessage('Enter your email address and choose a password.');
       return;
     }
-
     if (password.length < 6) {
       showMessage('Your password must be at least 6 characters.');
       return;
@@ -152,13 +135,8 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
 
     setBusy(true);
     showMessage('Creating your account…');
-
     try {
-      const { data, error } = await supabaseClient.auth.signUp({
-        email,
-        password
-      });
-
+      const { data, error } = await supabaseClient.auth.signUp({ email, password });
       if (error) throw error;
 
       if (data.session) {
@@ -166,89 +144,54 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
         await updateAccountDisplay();
         showMessage('Account created and signed in!');
       } else {
-        showMessage(
-          'Account created. Check your email for a confirmation link, then sign in.'
-        );
+        showMessage('Account created. Check your email for a confirmation link, then sign in.');
       }
     } catch (error) {
       showMessage('Account creation failed: ' + error.message);
     } finally {
       setBusy(false);
     }
- });
+  });
 
-async function mergeLocalToCloud() {
+  async function mergeLocalToCloud() {
     const button = $('mergeBtn');
     button.disabled = true;
 
     try {
-      const { data: sessionData, error: sessionError } =
-        await supabaseClient.auth.getSession();
-
+      const { data, error: sessionError } = await supabaseClient.auth.getSession();
       if (sessionError) throw sessionError;
-
-      const user = sessionData.session?.user;
+      const user = data.session?.user;
       if (!user) throw new Error('Please sign in first.');
 
-      const localItems = JSON.parse(
-        localStorage.getItem('myCollection.items.v1') || '[]'
-      );
-
-      if (!Array.isArray(localItems)) {
-        throw new Error('Your local collection format was unexpected.');
-      }
-
+      const localItems = JSON.parse(localStorage.getItem('myCollection.items.v1') || '[]');
+      if (!Array.isArray(localItems)) throw new Error('Your local collection format was unexpected.');
       if (localItems.length === 0) {
         showMessage('There are no local items to upload.');
         return;
       }
 
       let completed = 0;
-
       for (const item of localItems) {
-        if (!item.id || !item.name) {
-          throw new Error('An item is missing its ID or name.');
-        }
+        if (!item.id || !item.name) throw new Error('An item is missing its ID or name.');
 
         let photoPath = null;
-
         if (item.photo && item.photo.startsWith('data:image/')) {
-          const blob = await fetch(item.photo).then(response => response.blob());
+          const blob = await fetch(item.photo).then(r => r.blob());
           const mime = blob.type.toLowerCase();
-
           const extensions = {
             'image/jpeg': 'jpg',
             'image/png': 'png',
             'image/webp': 'webp',
             'image/gif': 'gif'
           };
-
           const extension = extensions[mime];
+          if (!extension) throw new Error('Unsupported photo format on "' + item.name + '".');
+          if (blob.size > 8 * 1024 * 1024) throw new Error('The photo for "' + item.name + '" exceeds 8 MB.');
 
-          if (!extension) {
-            throw new Error(
-              'Unsupported photo format on "' + item.name +
-              '". Supported formats are JPEG, PNG, WebP and GIF.'
-            );
-          }
-
-          if (blob.size > 8 * 1024 * 1024) {
-            throw new Error(
-              'The photo for "' + item.name + '" exceeds 8 MB.'
-            );
-          }
-
-          photoPath = user.id + '/' +
-            String(item.id).replace(/[^a-zA-Z0-9_-]/g, '_') +
-            '.' + extension;
-
+          photoPath = user.id + '/' + String(item.id).replace(/[^a-zA-Z0-9_-]/g, '_') + '.' + extension;
           const { error: uploadError } = await supabaseClient.storage
             .from('collection-photos')
-            .upload(photoPath, blob, {
-              upsert: true,
-              contentType: mime
-            });
-
+            .upload(photoPath, blob, { upsert: true, contentType: mime });
           if (uploadError) throw uploadError;
         }
 
@@ -263,47 +206,29 @@ async function mergeLocalToCloud() {
           metadata: {
             createdAt: item.createdAt || null,
             updatedAt: item.updatedAt || null,
-            photoPath: photoPath
+            photoPath
           },
           updated_at: new Date().toISOString()
         };
 
-        const { data: existing, error: lookupError } =
-          await supabaseClient
-            .from('collection_items')
-            .select('id')
-            .eq('user_id', user.id)
-            .eq('local_id', String(item.id))
-            .maybeSingle();
-
+        const { data: existing, error: lookupError } = await supabaseClient
+          .from('collection_items')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('local_id', String(item.id))
+          .maybeSingle();
         if (lookupError) throw lookupError;
 
-        let saveResult;
-
-        if (existing) {
-          saveResult = await supabaseClient
-            .from('collection_items')
-            .update(row)
-            .eq('id', existing.id)
-            .eq('user_id', user.id);
-        } else {
-          saveResult = await supabaseClient
-            .from('collection_items')
-            .insert(row);
-        }
-
-        if (saveResult.error) throw saveResult.error;
+        const result = existing
+          ? await supabaseClient.from('collection_items').update(row).eq('id', existing.id).eq('user_id', user.id)
+          : await supabaseClient.from('collection_items').insert(row);
+        if (result.error) throw result.error;
 
         completed++;
-        showMessage(
-          'Uploading collection… ' + completed + ' of ' + localItems.length
-        );
+        showMessage('Uploading collection… ' + completed + ' of ' + localItems.length);
       }
 
-      showMessage(
-        'Upload complete! ' + completed +
-        ' items were copied to your cloud collection. Your local collection remains in place.'
-      );
+      showMessage('Upload complete! ' + completed + ' item(s) copied. Your local collection remains in place.');
     } catch (error) {
       showMessage('Upload stopped: ' + error.message);
     } finally {
@@ -311,11 +236,63 @@ async function mergeLocalToCloud() {
     }
   }
 
-  } else if (typeof renderItems === 'function') {
-        renderItems();
-      } else {
-        location.reload();
+  async function loadCloudItems() {
+    const button = $('loadCloudBtn');
+    button.disabled = true;
+
+    try {
+      const { data, error: sessionError } = await supabaseClient.auth.getSession();
+      if (sessionError) throw sessionError;
+      const user = data.session?.user;
+      if (!user) throw new Error('Please sign in first.');
+
+      const { data: cloudItems, error } = await supabaseClient
+        .from('collection_items')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      if (!Array.isArray(cloudItems)) throw new Error('The cloud collection could not be read.');
+
+      const localItems = JSON.parse(localStorage.getItem('myCollection.items.v1') || '[]');
+      if (!Array.isArray(localItems)) throw new Error('Your local collection format was unexpected.');
+
+      const mergedItems = [...localItems];
+      let added = 0;
+      let updated = 0;
+
+      for (const cloudItem of cloudItems) {
+        if (!cloudItem.local_id) continue;
+        const localId = String(cloudItem.local_id);
+        const index = mergedItems.findIndex(item => String(item.id) === localId);
+        const metadata = cloudItem.metadata || {};
+
+        const converted = {
+          id: localId,
+          name: cloudItem.name,
+          category: cloudItem.category || 'Other',
+          status: cloudItem.status === 'wanted' ? 'wanted' : 'owned',
+          notes: cloudItem.description || '',
+          createdAt: metadata.createdAt || cloudItem.created_at,
+          updatedAt: metadata.updatedAt || cloudItem.updated_at
+        };
+
+        if (index === -1) {
+          mergedItems.push({ ...converted, photo: '' });
+          added++;
+        } else {
+          mergedItems[index] = {
+            ...mergedItems[index],
+            ...converted,
+            photo: mergedItems[index].photo || ''
+          };
+          updated++;
+        }
       }
+
+      localStorage.setItem('myCollection.items.v1', JSON.stringify(mergedItems));
+      showMessage('Cloud merge complete! ' + added + ' item(s) added and ' + updated + ' matching item(s) updated. Other local items were preserved.');
+      location.reload();
     } catch (error) {
       showMessage('Cloud merge stopped: ' + error.message);
     } finally {
@@ -323,17 +300,15 @@ async function mergeLocalToCloud() {
     }
   }
 
+  $('mergeBtn').addEventListener('click', mergeLocalToCloud);
   $('loadCloudBtn').addEventListener('click', loadCloudItems);
 
   $('signOutBtn').addEventListener('click', async () => {
-
     const { error } = await supabaseClient.auth.signOut();
-
     if (error) {
       showMessage('Sign-out failed: ' + error.message);
       return;
     }
-
     await updateAccountDisplay();
     showMessage('Signed out.');
   });
@@ -344,4 +319,4 @@ async function mergeLocalToCloud() {
 
   updateAccountDisplay();
 })();
-</script></body></html>
+</script>
