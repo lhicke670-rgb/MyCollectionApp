@@ -175,7 +175,141 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
     } finally {
       setBusy(false);
     }
-  });
+  })  async function mergeLocalToCloud() {
+    const button = $('mergeBtn');
+    button.disabled = true;
+
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
+
+      if (sessionError) throw sessionError;
+
+      const user = sessionData.session?.user;
+      if (!user) throw new Error('Please sign in first.');
+
+      const localItems = JSON.parse(
+        localStorage.getItem('myCollection.items.v1') || '[]'
+      );
+
+      if (!Array.isArray(localItems)) {
+        throw new Error('Your local collection format was unexpected.');
+      }
+
+      if (localItems.length === 0) {
+        showMessage('There are no local items to upload.');
+        return;
+      }
+
+      let completed = 0;
+
+      for (const item of localItems) {
+        if (!item.id || !item.name) {
+          throw new Error('An item is missing its ID or name.');
+        }
+
+        let photoPath = null;
+
+        if (item.photo && item.photo.startsWith('data:image/')) {
+          const blob = await fetch(item.photo).then(response => response.blob());
+          const mime = blob.type.toLowerCase();
+
+          const extensions = {
+            'image/jpeg': 'jpg',
+            'image/png': 'png',
+            'image/webp': 'webp',
+            'image/gif': 'gif'
+          };
+
+          const extension = extensions[mime];
+
+          if (!extension) {
+            throw new Error(
+              'Unsupported photo format on "' + item.name +
+              '". Supported formats are JPEG, PNG, WebP and GIF.'
+            );
+          }
+
+          if (blob.size > 8 * 1024 * 1024) {
+            throw new Error(
+              'The photo for "' + item.name + '" exceeds 8 MB.'
+            );
+          }
+
+          photoPath = user.id + '/' +
+            String(item.id).replace(/[^a-zA-Z0-9_-]/g, '_') +
+            '.' + extension;
+
+          const { error: uploadError } = await supabaseClient.storage
+            .from('collection-photos')
+            .upload(photoPath, blob, {
+              upsert: true,
+              contentType: mime
+            });
+
+          if (uploadError) throw uploadError;
+        }
+
+        const row = {
+          user_id: user.id,
+          local_id: String(item.id),
+          name: item.name,
+          category: item.category || 'Other',
+          description: item.notes || '',
+          image_url: photoPath,
+          status: item.status === 'wanted' ? 'wanted' : 'collected',
+          metadata: {
+            createdAt: item.createdAt || null,
+            updatedAt: item.updatedAt || null,
+            photoPath: photoPath
+          },
+          updated_at: new Date().toISOString()
+        };
+
+        const { data: existing, error: lookupError } =
+          await supabaseClient
+            .from('collection_items')
+            .select('id')
+            .eq('user_id', user.id)
+            .eq('local_id', String(item.id))
+            .maybeSingle();
+
+        if (lookupError) throw lookupError;
+
+        let saveResult;
+
+        if (existing) {
+          saveResult = await supabaseClient
+            .from('collection_items')
+            .update(row)
+            .eq('id', existing.id)
+            .eq('user_id', user.id);
+        } else {
+          saveResult = await supabaseClient
+            .from('collection_items')
+            .insert(row);
+        }
+
+        if (saveResult.error) throw saveResult.error;
+
+        completed++;
+        showMessage(
+          'Uploading collection… ' + completed + ' of ' + localItems.length
+        );
+      }
+
+      showMessage(
+        'Upload complete! ' + completed +
+        ' items were copied to your cloud collection. Your local collection remains in place.'
+      );
+    } catch (error) {
+      showMessage('Upload stopped: ' + error.message);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  $('mergeBtn').addEventListener('click', mergeLocalToCloud);;
 
   $('signOutBtn').addEventListener('click', async () => {
     showMessage('Signing out…');
