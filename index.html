@@ -213,12 +213,14 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
 
         const { data: existing, error: lookupError } = await supabaseClient
           .from('collection_items')
-          .select('id')
+          .select('id, image_url')
           .eq('user_id', user.id)
           .eq('local_id', String(item.id))
           .maybeSingle();
         if (lookupError) throw lookupError;
-
+row.image_url = photoPath || existing?.image_url || null;
+row.metadata.photoPath = row.image_url;
+        
         const result = existing
           ? await supabaseClient.from('collection_items').update(row).eq('id', existing.id).eq('user_id', user.id)
           : await supabaseClient.from('collection_items').insert(row);
@@ -301,6 +303,45 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
   }
 
   $('mergeBtn').addEventListener('click', mergeLocalToCloud);
+   let autoSyncTimer = null;
+  let autoSyncRunning = false;
+  let autoSyncAgain = false;
+
+  window.addEventListener('collection-local-saved', () => {
+    clearTimeout(autoSyncTimer);
+
+    autoSyncTimer = setTimeout(async () => {
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+
+        if (!data.session) {
+          showMessage('Saved on this device. Sign in to sync to the cloud.');
+          return;
+        }
+
+        if (autoSyncRunning) {
+          autoSyncAgain = true;
+          return;
+        }
+
+        autoSyncRunning = true;
+
+        do {
+          autoSyncAgain = false;
+          await mergeLocalToCloud();
+        } while (autoSyncAgain);
+
+      } catch (error) {
+        showMessage(
+          'Saved on this device, but cloud sync could not start: ' +
+          error.message
+        );
+      } finally {
+        autoSyncRunning = false;
+      }
+    }, 800);
+  });
   $('loadCloudBtn').addEventListener('click', loadCloudItems);
 
   $('signOutBtn').addEventListener('click', async () => {
