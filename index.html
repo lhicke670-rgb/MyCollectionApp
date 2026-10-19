@@ -175,7 +175,9 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
     } finally {
       setBusy(false);
     }
-  })  async function mergeLocalToCloud() {
+ });
+
+async function mergeLocalToCloud() {
     const button = $('mergeBtn');
     button.disabled = true;
 
@@ -309,7 +311,7 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
     }
   }
 
-  $('mergeBtn').addEventListener('click', mergeLocalToCloud);;
+  $('mergeBtn').addEventListener('click', mergeLocalToCloud);
 
   $('signOutBtn').addEventListener('click', async () => {
     showMessage('Signing out…');
