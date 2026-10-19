@@ -97,7 +97,7 @@ $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'My Collect
       $('accountLine').textContent =
         'Signed in as ' + user.email;
       $('mergeBtn').disabled = false;
-      $('loadCloudBtn').disabled = true;
+     loadCloudBtn.disabled = false;
       showMessage(
         'You are signed in. Collection syncing will be added next.'
       );
