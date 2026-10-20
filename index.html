@@ -157,6 +157,100 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 .binder-dragging,.binder-dragging *{cursor:grabbing!important;user-select:none!important}
 @media(max-width:700px){.binder-page-left::after{border-width:14px 14px 0 0}.binder-page-right::after{border-width:0 0 14px 14px}}
 
+
+/* Category binder bookcase: the shelf is the Collection/Wishlist landing view. */
+.bookshelf-view{position:relative;isolation:isolate;overflow:hidden;margin:12px 0 22px;padding:clamp(18px,3vw,30px);border:1px solid #c3a77e;border-radius:22px;background:linear-gradient(180deg,#f0e2cc 0%,#e4cfb0 46%,#d3b58d 100%);box-shadow:0 18px 34px #35251120,inset 0 1px 0 #fff9,inset 0 -3px 0 #926a4120;color:#3b2a1c}
+.bookshelf-view::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;pointer-events:none;background:repeating-linear-gradient(7deg,transparent 0 25px,#956d4220 26px,#fff4 27px,transparent 29px),repeating-linear-gradient(92deg,transparent 0 170px,#9d70411c 171px,transparent 173px)}
+.bookshelf-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px;padding:0 2px 16px;border-bottom:1px solid #9a744a55}
+.bookshelf-eyebrow{font-size:10px;letter-spacing:2px;font-weight:900;color:#77532f;margin-bottom:5px}
+.bookshelf-intro h3{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.8px;color:#352619}
+.bookshelf-intro p{margin:5px 0 0;font-size:13px;line-height:1.45;color:#684b2f}
+.bookshelf-note{display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid #aa865d66;border-radius:12px;background:#fff5e4a8;font-size:11px;line-height:1.45;color:#6c4a2c;flex-shrink:0}
+.bookshelf-note-icon{display:grid;place-items:center;width:33px;height:33px;border-radius:9px;background:#946b3c;color:white;font-size:22px}
+.bookshelf-shelves{display:flex;flex-direction:column;gap:22px}
+.bookshelf-row{position:relative;padding:8px 8px 24px;min-width:0}
+.bookshelf-row::after{content:"";position:absolute;left:-3px;right:-3px;bottom:0;height:23px;border-radius:3px;background:linear-gradient(180deg,#f2d2a1 0%,#c48b4f 16%,#9d6838 40%,#d49b5e 48%,#b47b42 83%,#89592e 100%);border:1px solid #8a5c32;box-shadow:0 7px 10px #58371932,inset 0 2px 0 #fff7,inset 0 -3px 0 #6c421f55;z-index:0}
+.bookshelf-books{display:grid;grid-template-columns:repeat(var(--shelf-cols,6),minmax(0,1fr));align-items:end;gap:clamp(7px,1.5vw,17px);min-height:clamp(190px,24vw,260px);position:relative;z-index:1}
+.shelf-binder{--binder-color:#4e617b;position:relative;display:flex;align-items:stretch;justify-content:center;min-width:0;width:100%;height:clamp(178px,22vw,236px);padding:0;border:1px solid #16161b99;border-bottom:5px solid #17171b;border-radius:7px 5px 2px 2px;overflow:hidden;color:#fff;background:linear-gradient(90deg,#16161b 0%,color-mix(in srgb,var(--binder-color) 72%,#111 28%) 8%,var(--binder-color) 19%,var(--binder-color) 87%,color-mix(in srgb,var(--binder-color) 67%,#fff 33%) 100%);box-shadow:0 7px 9px #2b1b0e38,inset 2px 0 4px #fff2,inset -3px 0 4px #0005;transform:perspective(650px) rotateY(-3deg);transform-origin:bottom center;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;text-align:center}
+.shelf-binder::before{content:"";position:absolute;inset:7px 6px 8px 13px;border:1px dashed #ffffff64;border-radius:3px;pointer-events:none;box-shadow:inset 0 0 0 1px #0000000b}
+.shelf-binder::after{content:"";position:absolute;left:12px;top:0;bottom:0;width:3px;background:linear-gradient(90deg,#0005,#fff3,#0003);box-shadow:1px 0 1px #0005;pointer-events:none}
+.shelf-binder:hover,.shelf-binder:focus-visible{transform:perspective(650px) translateY(-8px) rotateY(-1deg);box-shadow:0 17px 18px #2b1b0e45,inset 2px 0 4px #fff2,inset -3px 0 4px #0005;filter:brightness(1.08);z-index:4;outline:2px solid #fff9;outline-offset:2px}
+.shelf-binder-spine{position:absolute;inset:13px 10px 13px 18px;display:flex;align-items:center;justify-content:center;min-width:0}
+.shelf-binder-label{max-height:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;writing-mode:vertical-rl;transform:rotate(180deg);font-size:clamp(11px,1.25vw,15px);font-weight:850;letter-spacing:1px;text-shadow:0 1px 2px #0006;text-transform:uppercase}
+.shelf-binder-top{position:absolute;top:15px;left:17px;right:4px;font-size:8px;font-weight:900;letter-spacing:1.4px;opacity:.82;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shelf-binder-meta{position:absolute;left:13px;right:3px;bottom:14px;font-size:8px;font-weight:850;letter-spacing:.2px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #0008}
+.shelf-binder-all{--binder-color:#29282e;background:linear-gradient(90deg,#101014 0%,#28272d 18%,#3e3b42 52%,#26252a 89%,#55515a 100%)}
+.shelf-binder-all .shelf-binder-label{font-size:12px;letter-spacing:1.5px}
+
+
+
+
+
+
+
+.bookshelf-bottom-caption{display:flex;justify-content:space-between;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid #9a744a55;font-size:9px;font-weight:900;letter-spacing:1.5px;color:#77532f}
+.bookshelf-empty-note{padding:18px;text-align:center;color:#765638;font-size:12px}
+.back-to-shelf{flex-shrink:0}
+#binderWorkspace.hidden{display:none!important}
+@media(max-width:760px){.bookshelf-view{padding:16px;border-radius:18px}.bookshelf-intro{align-items:flex-start}.bookshelf-note{display:none}.bookshelf-books{grid-template-columns:repeat(var(--shelf-cols,4),minmax(0,1fr));gap:9px;min-height:190px}.shelf-binder{height:clamp(155px,35vw,190px)}.shelf-binder-label{font-size:10px;letter-spacing:.5px}.shelf-binder-top{font-size:7px;letter-spacing:.7px}.shelf-binder-meta{font-size:7px;left:11px}}
+@media(max-width:480px){.bookshelf-view{padding:12px}.bookshelf-intro{margin-bottom:11px;padding-bottom:12px}.bookshelf-intro h3{font-size:21px}.bookshelf-intro p{font-size:11px}.bookshelf-shelves{gap:14px}.bookshelf-books{grid-template-columns:repeat(var(--shelf-cols,3),minmax(0,1fr));gap:8px;min-height:173px}.shelf-binder{height:165px}.shelf-binder::before{inset:6px 3px 7px 10px}.shelf-binder::after{left:9px}.shelf-binder-spine{inset:12px 5px 12px 13px}.shelf-binder-label{font-size:9px;letter-spacing:.3px}.shelf-binder-top{left:11px;top:12px;font-size:6px}.shelf-binder-meta{left:8px;bottom:11px;font-size:6px}}
+@media(prefers-reduced-motion:reduce){.shelf-binder{transition:none}}
+
+
+/* Spine-facing binder shelf and standalone list mode */
+.bookshelf-books{justify-items:center;align-items:end}
+.shelf-binder{width:clamp(48px,7.5vw,88px);max-width:88px;justify-self:center;height:clamp(180px,23vw,244px);border-radius:4px 3px 2px 2px;background:linear-gradient(90deg,#111116 0%,color-mix(in srgb,var(--binder-color) 58%,#101014 42%) 13%,var(--binder-color) 30%,color-mix(in srgb,var(--binder-color) 88%,#fff 12%) 83%,color-mix(in srgb,var(--binder-color) 58%,#fff 42%) 100%);transform:perspective(850px) rotateY(-1deg);box-shadow:0 8px 10px #2b1b0e38,inset 2px 0 4px #fff2,inset -3px 0 4px #0005}
+.shelf-binder::before{inset:6px 4px 8px 8px;border:1px solid #ffffff40;border-radius:2px;box-shadow:inset 0 0 0 1px #00000012}
+.shelf-binder::after{left:7px;width:3px;background:linear-gradient(90deg,#0008,#fff4,#0005)}
+.shelf-binder:hover,.shelf-binder:focus-visible{transform:perspective(850px) translateY(-7px) rotateY(-1deg);box-shadow:0 16px 18px #2b1b0e45,inset 2px 0 4px #fff2,inset -3px 0 4px #0005}
+.shelf-binder-spine{inset:32px 5px 31px 10px}
+.shelf-binder-label{font-size:clamp(10px,1.05vw,13px);letter-spacing:.6px;line-height:1.1;text-shadow:0 1px 2px #0008}
+.shelf-binder-top{top:9px;left:4px;right:4px;font-size:6px;letter-spacing:.45px;text-align:center;opacity:.76}
+.shelf-binder-meta{left:4px;right:4px;bottom:9px;font-size:6px;letter-spacing:0;text-align:center}
+.shelf-binder-all .shelf-binder-label{font-size:clamp(10px,1.05vw,13px);letter-spacing:.6px}
+.list-view-container{position:relative;margin:8px 0 22px;border:1px solid #c9c0b0;border-radius:16px;overflow:hidden;background:#f3eee4;box-shadow:0 12px 24px #1f1b1512;color:#2e2a25}
+.list-view-container.hidden{display:none!important}
+.list-view-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;background:linear-gradient(180deg,#f9f5ed,#e9e0d1);border-bottom:1px solid #d6ccbb;color:#75624c;font-size:10px;letter-spacing:1.5px}
+.list-view-heading span{font-size:11px;letter-spacing:0;font-weight:600}
+.list-items-view{display:flex;flex-direction:column;gap:8px;padding:14px;min-height:230px;background:#f7f4ed}
+.list-items-view .item-card{display:flex;flex-direction:row;align-items:stretch;min-height:100px;overflow:hidden;border:1px solid #d6cdbf;border-radius:10px;background:#fffdf8;box-shadow:0 3px 8px #3327190b}
+.list-items-view .photo{position:relative;width:112px;min-width:112px;flex:0 0 112px;height:auto;min-height:100px;aspect-ratio:unset;border-radius:0;background:#e8e2d8}
+.list-items-view .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.list-items-view .photo-placeholder{min-height:100px}
+.list-items-view .card-body{position:relative;flex:1;min-width:0;justify-content:center;padding:12px 14px 42px}
+.list-items-view .item-title{font-size:15px;line-height:1.3}
+.list-items-view .item-category,.list-items-view .item-notes{max-height:0;overflow:hidden;opacity:0;transition:max-height .18s ease,opacity .18s ease}
+.list-items-view .item-card:hover .item-category,.list-items-view .item-card:hover .item-notes,.list-items-view .item-card.options-open .item-category,.list-items-view .item-card.options-open .item-notes{max-height:80px;opacity:.86}
+.list-items-view .card-options-toggle{top:8px;right:8px;bottom:auto;left:auto}
+.list-items-view .card-actions{left:auto;right:8px;bottom:8px;top:auto;max-width:min(460px,calc(100% - 132px));justify-content:flex-end}
+.list-items-view .empty{margin:10px 0;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.list-pagination{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 16px;border-top:1px solid #ddd4c7;background:#f0e9dd}
+.list-pagination.hidden{display:none!important}
+.list-page-label{font-size:12px;color:#76634e;font-weight:750}
+.list-pagination button:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:600px){.list-items-view{padding:8px;gap:7px}.list-items-view .photo{width:78px;min-width:78px;flex-basis:78px;min-height:80px}.list-items-view .card-body{padding:10px 10px 42px 11px}.list-items-view .item-title{font-size:13px}.list-items-view .card-actions{max-width:calc(100% - 94px)}.shelf-binder{width:clamp(44px,10vw,66px);height:clamp(160px,42vw,190px)}.shelf-binder-top{font-size:5px}.shelf-binder-meta{font-size:5px}}
+
+
+
+/* Final interaction polish requested: compact shelf labels, click-open item menu, and selection via amount badge. */
+#categoryFilter{display:none!important}
+.bookshelf-books{display:flex!important;flex-wrap:wrap;justify-content:flex-start!important;align-items:flex-end;gap:3px!important;grid-template-columns:none!important}
+.shelf-binder{flex:0 0 clamp(48px,7.5vw,88px);margin:0}
+.shelf-binder-top{top:5px!important;left:14px!important;right:3px!important;height:6px;line-height:6px!important;font-size:clamp(3.5px,.4vw,4.5px)!important;letter-spacing:0!important;text-align:center!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;transform:scaleX(.68);transform-origin:center top;z-index:2;pointer-events:none}
+.shelf-binder-spine{overflow:hidden}
+.shelf-binder-label{max-width:100%;overflow:hidden;text-overflow:ellipsis;overflow-wrap:anywhere}
+.item-card{cursor:pointer}
+.item-card.selected{border-color:var(--purple)!important;box-shadow:0 0 0 2px #6d4aff30,0 5px 12px #34205d12!important}
+.item-card:not(.options-open) .item-category,.item-card:not(.options-open) .item-notes{display:none!important;opacity:0!important;visibility:hidden!important;max-height:0!important;margin:0!important;padding:0!important}
+.item-card.options-open .item-category,.item-card.options-open .item-notes{display:block!important;opacity:1!important;visibility:visible!important;max-height:140px!important;margin:0!important}
+.item-card:not(.options-open) .card-actions{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(4px)!important}
+.item-card.options-open .card-actions{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateY(0)!important}
+.item-card .quantity-chip{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;min-width:31px;min-height:26px;margin:0;font-family:inherit;line-height:1.1;cursor:pointer;pointer-events:auto;touch-action:manipulation;transition:opacity .14s ease,background .14s ease,color .14s ease,border-color .14s ease}
+.item-card .quantity-chip.is-selected{background:var(--purple)!important;color:#fff!important;border-color:var(--purple-dark)!important;box-shadow:0 0 0 2px #6d4aff42!important}
+.item-card .quantity-chip:focus-visible{opacity:1!important;visibility:visible!important;outline:2px solid var(--purple);outline-offset:2px}
+@media(hover:hover){.item-card:not(:hover):not(.options-open):not(:focus-within) .status-chip,.item-card:not(:hover):not(.options-open):not(:focus-within) .quantity-chip{opacity:0!important;visibility:hidden!important}.item-card:hover:not(.options-open) .status-chip,.item-card:hover:not(.options-open) .quantity-chip{opacity:1!important;visibility:visible!important}.item-card:hover:not(.options-open) .card-actions{opacity:0!important;visibility:hidden!important;pointer-events:none!important}}
+@media(hover:none){.bookshelf-books{gap:2px!important}.shelf-binder{flex-basis:clamp(44px,10vw,66px)}.item-card .status-chip,.item-card .quantity-chip{opacity:1!important;visibility:visible!important}.item-card:not(.options-open) .card-actions{opacity:0!important;visibility:hidden!important;pointer-events:none!important}}
+
 </style>
 </head>
 <body>
@@ -170,7 +264,12 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 </nav>
 <section class="content-page active" id="page-collection">
 <div class="page-heading"><div><h2 id="pageTitle">Collection</h2><p id="pageSubtitle">Browse the items you have collected.</p></div><button class="btn primary" id="addBtn">＋ Add item</button></div>
-<main class="workspace binder-workspace"><div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Open a category binder"><option value="all">All items binder</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per paper page"><option value="9">9 per page</option><option value="16">16 per page</option></select><button class="btn small view-mode-button" id="viewModeBtn" type="button">☷ List view</button><button class="btn small" id="selectVisibleBtn" type="button">Select page</button></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><div class="binder-book" id="binderBook" aria-label="Collection binder">
+<section class="bookshelf-view" id="bookshelfView" aria-label="Your binder bookshelf">
+  <div class="bookshelf-intro"><div><div class="bookshelf-eyebrow">YOUR COLLECTION LIBRARY</div><h3 id="bookshelfTitle">Your binder shelf</h3><p id="bookshelfSubtitle">Choose a binder to open it and browse its pages.</p></div><div class="bookshelf-note"><span class="bookshelf-note-icon" aria-hidden="true">▤</span><span>Each category has its own binder.<br>New categories appear here automatically.</span></div></div>
+  <div class="bookshelf-shelves" id="bookshelfShelves"></div>
+  <div class="bookshelf-bottom-caption"><span>MY COLLECTION</span><span id="bookshelfCount">0 binders</span></div>
+</section>
+<main id="binderWorkspace" class="workspace binder-workspace"><div class="toolbar"><button class="btn small back-to-shelf hidden" id="backToShelfBtn" type="button">← Bookshelf</button><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search your collection…" autocomplete="off"></div><select id="categoryFilter" aria-label="Open a category binder"><option value="all">All items binder</option></select><select id="sortSelect" aria-label="Sort items"><option value="recent">Recently updated</option><option value="name">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="category">Category</option><option value="oldest">Oldest first</option><option value="quantity-desc">Amount: high to low</option><option value="quantity-asc">Amount: low to high</option></select><select id="pageSizeSelect" aria-label="Items per paper page"><option value="9">9 per page</option><option value="16">16 per page</option></select></div><div id="bulkToolbar" class="bulk-toolbar hidden"><span id="selectedCount">0 selected</span><button class="btn small" id="bulkMoveOwned" type="button">Move to collection</button><button class="btn small" id="bulkMoveWanted" type="button">Move to wishlist</button><button class="btn small danger" id="bulkDeleteBtn" type="button">Delete selected</button><button class="btn small" id="clearSelectionBtn" type="button">Clear selection</button></div><section id="listViewContainer" class="list-view-container hidden" aria-label="Collection list"><div class="list-view-heading"><strong>COLLECTION LIST</strong><span id="listViewCount">0 items</span></div><div id="listItemsView" class="list-items-view" aria-live="polite"></div><div id="listPagination" class="list-pagination hidden" aria-label="List pages"></div></section><div class="binder-book" id="binderBook" aria-label="Collection binder">
 <div class="binder-cover-seam" aria-hidden="true"></div>
 <section class="binder-spread-grid" id="collectionGrid" aria-label="Open collection binder" aria-live="polite">
   <article class="binder-page binder-page-left" id="leftBinderPage">
@@ -197,7 +296,7 @@ body.dark-mode .photo{background:linear-gradient(135deg,#29233e,#1b172b)}
 <div class="page-heading"><div><h2>Settings</h2><p>Manage your cloud connection and collection backups.</p></div></div>
 <div class="settings-grid"><section class="settings-panel"><h3>Cloud sync</h3><p>Sign in on each device with the same account to keep your collection and wishlist synced.</p><div class="sync-state settings-sync-state"><span class="dot" id="settingsSyncDot"></span><span id="settingsSyncText">Saved on this device</span><span class="last-sync" id="settingsLastSyncLabel">Never synced yet</span></div><button class="btn primary" id="openAccountBtn" type="button">☁ Account & sync</button></section><section class="settings-panel"><h3>Backups</h3><p>Export a backup before making major changes, or import a backup you previously saved.</p><div class="settings-actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import backup</button></div></section></div>
 <div class="settings-grid settings-extra-grid">
-<section class="settings-panel"><h3>Appearance & browsing</h3><p>Choose how your collection looks and how many items appear on each page.</p><div class="field"><label for="viewModeSetting">Collection layout</label><select id="viewModeSetting"><option value="grid">Grid view</option><option value="list">List view</option></select></div><div class="field"><label for="pageSizeSetting">Items per page</label><select id="pageSizeSetting"><option value="9">9 items per paper page</option><option value="16">16 items per paper page</option></select></div><button class="btn" id="themeToggleBtn" type="button">Enable dark mode</button></section>
+<section class="settings-panel"><h3>Appearance & browsing</h3><p>Choose how your collection looks and how many items appear on each page.</p><div class="field"><label for="viewModeSetting">Collection display</label><select id="viewModeSetting"><option value="binder">Binder view</option><option value="list">List view</option></select></div><div class="field"><label for="pageSizeSetting">Items per page</label><select id="pageSizeSetting"><option value="9">9 items per page</option><option value="16">16 items per page</option></select></div><button class="btn" id="themeToggleBtn" type="button">Enable dark mode</button></section>
 <section class="settings-panel"><h3>Manage categories</h3><p>Add categories or rename/remove existing ones. Removing a category moves its items to Other.</p><div class="category-add"><input id="newCategoryInput" maxlength="80" placeholder="New category name" aria-label="New category name"><button class="btn primary" id="addCategoryBtn" type="button">Add category</button></div><div id="categoryManager" class="category-manager"></div><p class="category-sync-note">Categories used by items sync with those items. Empty custom categories are saved on this device.</p></section>
 </div>
 </section>
@@ -226,7 +325,7 @@ function readSettings(){try{const x=JSON.parse(localStorage.getItem(SETTINGS_KEY
 function readCustomCategories(){try{const x=JSON.parse(localStorage.getItem(CATEGORIES_KEY)||'[]');return Array.isArray(x)?x.filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim()):[]}catch(e){return []}}
 function normalizePageSize(value){const n=Number.parseInt(value,10);return [9,16].includes(n)?n:(n===12?9:16===n?16:9)}
 let userSettings=readSettings(), customCategories=readCustomCategories(), viewStates=userSettings.viewStates&&typeof userSettings.viewStates==='object'?userSettings.viewStates:{}, categoryGoals=userSettings.categoryGoals&&typeof userSettings.categoryGoals==='object'?userSettings.categoryGoals:{}, binderPageStates=userSettings.binderPageStates&&typeof userSettings.binderPageStates==='object'?userSettings.binderPageStates:{};
-let items=readItems(), tombstones=readTombstones(), activePage='collection', currentPage=1, pageSize=normalizePageSize(userSettings.pageSize||9), viewMode=userSettings.viewMode==='list'?'list':'grid', darkMode=!!userSettings.darkMode, progressBasis=userSettings.progressBasis==='pieces'?'pieces':'items', selectedIds=new Set(), lastVisibleIds=[], selectedPhoto=null, selectedPhotoHash="", photoWasRemoved=false, supabase=null, currentUser=null, realtimeChannel=null, syncTimer=null, syncInProgress=false, lastSyncAt=Number(userSettings.lastSyncAt)||0, lastDeletedItem=null;
+let items=readItems(), tombstones=readTombstones(), activePage='collection', shelfViewActive=true, currentPage=1, pageSize=normalizePageSize(userSettings.pageSize||9), viewMode=userSettings.viewMode==='list'?'list':'binder', darkMode=!!userSettings.darkMode, progressBasis=userSettings.progressBasis==='pieces'?'pieces':'items', selectedIds=new Set(), lastVisibleIds=[], selectedPhoto=null, selectedPhotoHash="", photoWasRemoved=false, supabase=null, currentUser=null, realtimeChannel=null, syncTimer=null, syncInProgress=false, lastSyncAt=Number(userSettings.lastSyncAt)||0, lastDeletedItem=null;
 function makeId(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'item-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
 function readItems(){try{const x=JSON.parse(localStorage.getItem(ITEMS_KEY)||'[]');return Array.isArray(x)?x.map(normalizeItem).filter(Boolean):[]}catch(e){return []}}
 function normalizeItem(x){if(!x||typeof x!=='object')return null;const id=String(x.id||makeId());const rawQuantity=Number.parseInt(x.quantity??x.amount??1,10);const quantity=Number.isFinite(rawQuantity)?Math.min(99999,Math.max(1,rawQuantity)):1;return {id,name:String(x.name||'Untitled item'),category:String(x.category||'Other'),status:x.status==='wanted'?'wanted':'owned',quantity,notes:String(x.notes??x.description??''),photo:typeof x.photo==='string'?x.photo:'',photoHash:String(x.photoHash||''),photoRemoved:!!x.photoRemoved,createdAt:x.createdAt||x.created_at||new Date().toISOString(),updatedAt:x.updatedAt||x.updated_at||x.createdAt||new Date().toISOString()}}
@@ -297,9 +396,32 @@ function persistTombstones(){localStorage.setItem(DELETED_KEY,JSON.stringify(tom
 function persistSettings(){userSettings={...userSettings,pageSize,viewMode,darkMode,progressBasis,lastSyncAt,viewStates,categoryGoals,binderPageStates};try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(userSettings))}catch(e){console.warn('Could not save preferences',e)}}
 function persistCategories(){try{localStorage.setItem(CATEGORIES_KEY,JSON.stringify(customCategories))}catch(e){console.warn('Could not save categories',e)}}
 function allCategories(){return [...new Set([...customCategories,...items.map(x=>String(x.category||'Other').trim()||'Other')])].sort((a,b)=>a.localeCompare(b))}
-function binderPageKey(page=activePage,category=$('categoryFilter')?.value||'all'){return `${page}::${category||'all'}`}
-function saveCurrentView(){const category=$('categoryFilter')?.value||'all';viewStates[activePage]={query:$('searchInput')?.value||'',category,sort:$('sortSelect')?.value||'recent',page:currentPage};binderPageStates[binderPageKey(activePage,category)]=currentPage;persistSettings()}
-function restoreCurrentView(){const state=viewStates[activePage]||{};$('searchInput').value=state.query||'';const requestedCategory=state.category||'all';$('categoryFilter').value=[...$('categoryFilter').options].some(o=>o.value===requestedCategory)?requestedCategory:'all';$('sortSelect').value=state.sort||'recent';const savedPage=binderPageStates[binderPageKey(activePage,$('categoryFilter').value)]??state.page;currentPage=Math.max(1,Number.parseInt(savedPage,10)||1)}
+function renderBookshelf(categories=allCategories()){
+  const container=$('bookshelfShelves');if(!container)return;
+  const status=activePage==='wishlist'?'wanted':'owned';
+  const statusItems=items.filter(item=>item.status===status);
+  const totalCopies=list=>list.reduce((sum,item)=>sum+Math.max(1,Number.parseInt(item.quantity??1,10)||1),0);
+  const palette=['#486b63','#4d617e','#7c4f73','#9b533e','#9c762f','#514777','#2c7775','#755943','#536b45','#5d5d77','#a34f65','#3f6f8e'];
+  const colorFor=value=>{let hash=0;for(const ch of String(value)){hash=((hash*31)+ch.charCodeAt(0))>>>0}return palette[hash%palette.length]};
+  const escape=escapeHtml;
+  const entries=[{type:'all',name:status==='wanted'?'All Wishlist':'All Collection',count:statusItems.length,copies:totalCopies(statusItems),color:'#29282e'}];
+  for(const category of categories){const group=statusItems.filter(item=>(item.category||'Other')===category);entries.push({type:'category',name:category,category,count:group.length,copies:totalCopies(group),color:colorFor(category)})}
+  const viewport=Math.min(window.innerWidth||1024,1240);const binderWidth=viewport<=600?Math.max(44,Math.min(66,viewport*.1)):Math.max(48,Math.min(88,viewport*.075));const columns=Math.max(3,Math.floor((viewport-(viewport<=480?60:90))/(binderWidth+(viewport<=600?2:3))));
+  const binderMarkup=(entry)=>{
+    const name=entry.name;
+    const target=entry.type==='all'?'data-shelf-all="true"':`data-shelf-category="${escape(entry.category)}"`;
+    const countLabel=`${entry.count} ${entry.count===1?'item':'items'}`;
+    return `<button type="button" class="shelf-binder${entry.type==='all'?' shelf-binder-all':''}" ${target} style="--binder-color:${entry.color}" aria-label="Open ${escape(name)} binder, ${countLabel}; ${entry.copies} copies"><span class="shelf-binder-top">MY COLLECTION</span><span class="shelf-binder-spine"><span class="shelf-binder-label">${escape(name)}</span></span><span class="shelf-binder-meta">${countLabel}</span></button>`;
+  };
+  const rows=[];for(let i=0;i<entries.length;i+=columns)rows.push(entries.slice(i,i+columns));
+  container.innerHTML=rows.map((row,index)=>`<div class="bookshelf-row" aria-label="Bookshelf row ${index+1}"><div class="bookshelf-books" style="--shelf-cols:${columns}">${row.map(binderMarkup).join('')}</div></div>`).join('');
+  $('bookshelfTitle').textContent=activePage==='wishlist'?'Wishlist binders':'Your binder shelf';
+  $('bookshelfSubtitle').textContent=activePage==='wishlist'?'Choose a category binder to browse the items you still want to collect.':'Choose a category binder to browse the items you have collected.';
+  $('bookshelfCount').textContent=`${entries.length} binder${entries.length===1?'':'s'} · ${statusItems.length} item${statusItems.length===1?'':'s'} · ${totalCopies(statusItems)} copies`;
+}
+function binderPageKey(page=activePage,category=$('categoryFilter')?.value||'all',mode=viewMode){return `${page}::${category||'all'}::${mode==='list'?'list':'binder'}`}
+function saveCurrentView(){const category=shelfViewActive?'all':($('categoryFilter')?.value||'all');viewStates[activePage]={query:$('searchInput')?.value||'',category,sort:$('sortSelect')?.value||'recent',page:currentPage,shelf:shelfViewActive};if(!shelfViewActive)binderPageStates[binderPageKey(activePage,category,viewMode)]=currentPage;persistSettings()}
+function restoreCurrentView(){const state=viewStates[activePage]||{};$('searchInput').value=state.query||'';const requestedCategory=state.category||'all';const categoryIsValid=[...$('categoryFilter').options].some(o=>o.value===requestedCategory);const validRequested=categoryIsValid?requestedCategory:'all';const savedShelf=categoryIsValid&&typeof state.shelf==='boolean'?state.shelf:true;shelfViewActive=viewMode==='binder'?savedShelf:false;$('categoryFilter').value=(viewMode==='binder'&&shelfViewActive)?'all':validRequested;$('sortSelect').value=state.sort||'recent';const category=$('categoryFilter').value;const savedPage=binderPageStates[binderPageKey(activePage,category,viewMode)]??binderPageStates[`${activePage}::${category||'all'}`]??state.page;currentPage=Math.max(1,Number.parseInt(savedPage,10)||1)}
 function applyAppearance(){document.body.classList.toggle('dark-mode',darkMode);if($('themeToggleBtn'))$('themeToggleBtn').textContent=darkMode?'Switch to light mode':'Enable dark mode';if($('viewModeSetting'))$('viewModeSetting').value=viewMode;if($('pageSizeSetting'))$('pageSizeSetting').value=String(pageSize);if($('pageSizeSelect'))$('pageSizeSelect').value=String(pageSize);if($('progressBasis'))$('progressBasis').value=progressBasis} 
 function updateLastSyncLabel(){const label=lastSyncAt?`Last synced ${new Date(lastSyncAt).toLocaleString([], {dateStyle:'medium',timeStyle:'short'})}`:'Never synced yet';for(const id of ['lastSyncLabel','settingsLastSyncLabel'])if($(id))$(id).textContent=label}
 function isoNow(){return new Date().toISOString()}
@@ -387,7 +509,10 @@ function render(){
 
   const cf=$('categoryFilter'),oldCategory=cf.value;
   cf.innerHTML='<option value="all">All items binder</option>'+categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
-  cf.value=categories.includes(oldCategory)?oldCategory:'all';
+  const oldCategoryStillExists=oldCategory==='all'||categories.includes(oldCategory);
+  cf.value=oldCategoryStillExists?oldCategory:'all';
+  if(!oldCategoryStillExists){shelfViewActive=true;currentPage=1;}
+  renderBookshelf(categories);
   const query=$('searchInput').value.trim().toLowerCase();
   let shown=items.filter(x=>(activePage==='wishlist'?x.status==='wanted':x.status==='owned')&&((cf.value==='all')||(String(x.category||'Other')===cf.value))&&(!query||[x.name,x.category,x.notes].join(' ').toLowerCase().includes(query)));
   const sort=$('sortSelect').value;
@@ -400,37 +525,50 @@ function render(){
   else shown.sort((a,b)=>timeOf(b.updatedAt)-timeOf(a.updatedAt));
 
   const totalPhysicalPages=Math.max(1,Math.ceil(shown.length/pageSize));
-  const totalPages=Math.max(1,Math.ceil(shown.length/(pageSize*2)));
+  const itemsPerViewPage=viewMode==='list'?pageSize:pageSize*2;
+  const totalPages=Math.max(1,Math.ceil(shown.length/itemsPerViewPage));
   if(currentPage>totalPages)currentPage=totalPages;
-  const start=(currentPage-1)*pageSize*2;
-  const pageItems=shown.slice(start,start+(pageSize*2));
+  const start=(currentPage-1)*itemsPerViewPage;
+  const pageItems=shown.slice(start,start+itemsPerViewPage);
   lastVisibleIds=pageItems.map(x=>x.id);
   const grid=$('collectionGrid');
-  grid.classList.toggle('list-view',viewMode==='list');
+  grid.classList.remove('list-view');
   grid.classList.toggle('density-9',pageSize===9);grid.classList.toggle('density-16',pageSize===16);
-  const oldCards=new Map([...grid.querySelectorAll('.binder-page-grid > .item-card[data-item-id]')].map(card=>[card.dataset.itemId,card]));
-  const leftGrid=$('leftCollectionGrid'),rightGrid=$('rightCollectionGrid');
-  leftGrid.classList.toggle('list-view',viewMode==='list');rightGrid.classList.toggle('list-view',viewMode==='list');
-  leftGrid.replaceChildren();rightGrid.replaceChildren();
+  const leftGrid=$('leftCollectionGrid'),rightGrid=$('rightCollectionGrid'),listView=$('listItemsView');
+  const oldCards=new Map([...document.querySelectorAll('#leftCollectionGrid > .item-card[data-item-id], #rightCollectionGrid > .item-card[data-item-id], #listItemsView > .item-card[data-item-id]')].map(card=>[card.dataset.itemId,card]));
+  leftGrid.replaceChildren();rightGrid.replaceChildren();listView.replaceChildren();
   if(!pageItems.length){
     const empty=document.createElement('div');empty.className='empty binder-empty';
-    empty.innerHTML=`<div class="symbol">${items.length?'⌕':'✦'}</div><h3>${shown.length===0&&items.length?'No matching items':activePage==='wishlist'?'Your wishlist is empty':'Your collection starts here'}</h3><p>${items.length?'Try another search or category.':activePage==='wishlist'?'Add an item and choose “Add to wishlist” to build your wishlist.':'Add your first item to start building your personal binder.'}</p>${activePage==='collection'&&!items.length?'<button class="btn primary" id="emptyAddBtn">＋ Add to collection</button>':''}`;
-    leftGrid.appendChild(empty);
-    const emptyAdd=$('emptyAddBtn');if(emptyAdd)emptyAdd.addEventListener('click',()=>openItemModal());
+    const selectedBinder=cf.value!=='all';const emptyTitle=query?'No matching items':selectedBinder?'This binder is empty':activePage==='wishlist'?'Your wishlist is empty':'Your collection starts here';const emptyText=query?'Try a different search.':selectedBinder?`Add an item to the ${cf.value} binder to start filling its pages.`:activePage==='wishlist'?'Add an item and choose “Add to wishlist” to build your wishlist.':'Add your first item to start building your personal binder.';
+    empty.innerHTML=`<div class="symbol">${items.length?'⌕':'✦'}</div><h3>${escapeHtml(emptyTitle)}</h3><p>${escapeHtml(emptyText)}</p>${!query&&(activePage==='collection'||activePage==='wishlist')?`<button class="btn primary" id="emptyAddBtn">＋ Add item</button>`:''}`;
+    (viewMode==='list'?listView:leftGrid).appendChild(empty);
+    const emptyAdd=$('emptyAddBtn');if(emptyAdd)emptyAdd.addEventListener('click',()=>{openItemModal();if(cf.value!=='all')$('itemCategory').value=cf.value});
   }else{
     const wrapper=document.createElement('div');
     wrapper.innerHTML=pageItems.map(x=>{
       const quantity=quantityOf(x),statusLabel=x.status==='owned'?'Collected':'Wishlist';
       const selected=selectedIds.has(x.id);
-      return `<article class="item-card${selected?' selected':''}${viewMode==='list'?' list-mode':''}${oldCards.get(x.id)?.classList.contains('options-open')?' options-open':''}" data-item-id="${escapeHtml(x.id)}"><div class="photo">${photoSrc(x)?`<img src="${escapeHtml(photoSrc(x))}" alt="${escapeHtml(x.name)}" loading="lazy" decoding="async">`:'<div class="photo-placeholder">✧</div>'}<span class="status-chip ${x.status}">${statusLabel}</span><span class="quantity-chip" title="Amount: ${quantity}">× ${quantity}</span><button type="button" class="card-options-toggle" data-action="options" data-id="${escapeHtml(x.id)}" aria-label="Show options for ${escapeHtml(x.name)}" aria-expanded="${oldCards.get(x.id)?.classList.contains('options-open')?'true':'false'}">⋯</button></div><div class="card-body"><div class="item-category">${escapeHtml(x.category||'Other')}</div><div class="item-title">${escapeHtml(x.name)}</div>${x.notes?`<div class="item-notes">${escapeHtml(x.notes)}</div>`:''}<div class="card-actions"><button type="button" class="icon-btn ${selected?'is-selected':''}" data-action="select" data-id="${escapeHtml(x.id)}">${selected?'Selected':'Select'}</button><button type="button" class="icon-btn quantity-step" data-action="quantity-minus" data-id="${escapeHtml(x.id)}" aria-label="Decrease quantity of ${escapeHtml(x.name)}">−</button><button type="button" class="icon-btn quantity-step" data-action="quantity-plus" data-id="${escapeHtml(x.id)}" aria-label="Increase quantity of ${escapeHtml(x.name)}">＋</button><button type="button" class="icon-btn" data-action="toggle" data-id="${escapeHtml(x.id)}">${x.status==='owned'?'Move to wishlist':'Add to collection'}</button><button type="button" class="icon-btn" data-action="edit" data-id="${escapeHtml(x.id)}" aria-label="Edit ${escapeHtml(x.name)}">Edit</button><button type="button" class="icon-btn delete" data-action="delete" data-id="${escapeHtml(x.id)}" aria-label="Delete ${escapeHtml(x.name)}">Delete</button></div></div></article>`;
+      return `<article class="item-card${selected?' selected':''}${viewMode==='list'?' list-mode':''}${oldCards.get(x.id)?.classList.contains('options-open')?' options-open':''}" data-item-id="${escapeHtml(x.id)}" tabindex="0" title="Click to open item options; click the amount badge to select or deselect" aria-label="${escapeHtml(x.name)}. Click to open options; click amount to select or deselect."><div class="photo">${photoSrc(x)?`<img src="${escapeHtml(photoSrc(x))}" alt="${escapeHtml(x.name)}" loading="lazy" decoding="async">`:'<div class="photo-placeholder">✧</div>'}<span class="status-chip ${x.status}">${statusLabel}</span><button type="button" class="quantity-chip${selected?' is-selected':''}" data-action="select" data-id="${escapeHtml(x.id)}" aria-pressed="${selected}" aria-label="${selected?'Deselect':'Select'} ${escapeHtml(x.name)}; amount ${quantity}" title="Click to select or deselect · Amount: ${quantity}">× ${quantity}</button></div><div class="card-body"><div class="item-category">${escapeHtml(x.category||'Other')}</div><div class="item-title">${escapeHtml(x.name)}</div>${x.notes?`<div class="item-notes">${escapeHtml(x.notes)}</div>`:''}<div class="card-actions"><button type="button" class="icon-btn quantity-step" data-action="quantity-minus" data-id="${escapeHtml(x.id)}" aria-label="Decrease quantity of ${escapeHtml(x.name)}">− Amount</button><button type="button" class="icon-btn quantity-step" data-action="quantity-plus" data-id="${escapeHtml(x.id)}" aria-label="Increase quantity of ${escapeHtml(x.name)}">＋ Amount</button><button type="button" class="icon-btn" data-action="toggle" data-id="${escapeHtml(x.id)}">${x.status==='owned'?'Move to wishlist':'Add to collection'}</button><button type="button" class="icon-btn" data-action="edit" data-id="${escapeHtml(x.id)}" aria-label="Edit ${escapeHtml(x.name)}">Edit</button><button type="button" class="icon-btn delete" data-action="delete" data-id="${escapeHtml(x.id)}" aria-label="Delete ${escapeHtml(x.name)}">Delete</button></div></div></article>`;
     }).join('');
     const newCards=[...wrapper.querySelectorAll('.item-card[data-item-id]')];
     for(const card of newCards){
       const previous=oldCards.get(card.dataset.itemId),next=card.querySelector('.photo img'),priorImage=previous?.querySelector('.photo img');
       if(priorImage&&next&&priorImage.getAttribute('src')===next.getAttribute('src')){priorImage.alt=next.alt;priorImage.loading='lazy';priorImage.decoding='async';next.replaceWith(priorImage)}
     }
-    const splitAt=Math.min(pageSize,newCards.length);
-    leftGrid.replaceChildren(...newCards.slice(0,splitAt));rightGrid.replaceChildren(...newCards.slice(splitAt,splitAt+pageSize));
+    if(viewMode==='list')listView.replaceChildren(...newCards);
+    else{const splitAt=Math.min(pageSize,newCards.length);leftGrid.replaceChildren(...newCards.slice(0,splitAt));rightGrid.replaceChildren(...newCards.slice(splitAt,splitAt+pageSize))}
+  }
+  const listCount=$('listViewCount');if(listCount)listCount.textContent=`${shown.length} item${shown.length===1?'':'s'} · ${quantitySum(shown)} copies`;
+  const listPagination=$('listPagination');
+  if(listPagination){
+    listPagination.replaceChildren();
+    if(viewMode==='list'&&totalPages>1){
+      const prev=document.createElement('button');prev.type='button';prev.className='btn small';prev.dataset.listPage=String(currentPage-1);prev.textContent='← Previous';prev.disabled=currentPage<=1;
+      const label=document.createElement('span');label.className='list-page-label';label.textContent=`Page ${currentPage} of ${totalPages}`;
+      const next=document.createElement('button');next.type='button';next.className='btn small';next.dataset.listPage=String(currentPage+1);next.textContent='Next →';next.disabled=currentPage>=totalPages;
+      listPagination.append(prev,label,next);
+    }
+    listPagination.classList.toggle('hidden',viewMode!=='list'||totalPages<=1);
   }
   const pageLeft=((currentPage-1)*2)+1,pageRight=pageLeft+1;
   const chosenCategory=cf.value;
@@ -441,17 +579,23 @@ function render(){
   $('binderLeftFolio').textContent=String(pageLeft).padStart(2,'0');$('binderRightFolio').textContent=pageRight<=totalPhysicalPages?String(pageRight).padStart(2,'0'):'';
   $('binderSpreadLabel').textContent=shown.length?`PAGES ${pageLeft}–${Math.min(pageRight,totalPhysicalPages)} OF ${totalPhysicalPages}`:'EMPTY BINDER';
   const pagination=$('pagination');if(pagination)pagination.replaceChildren();
-  $('itemCount').textContent=shown.length?`Showing ${start+1}–${Math.min(start+(pageSize*2),shown.length)} of ${shown.length} item${shown.length===1?'':'s'}`:'0 items shown';
+  $('itemCount').textContent=shown.length?`Showing ${start+1}–${Math.min(start+pageItems.length,shown.length)} of ${shown.length} item${shown.length===1?'':'s'}`:'0 items shown';
   $('selectedCount').textContent=`${selectedIds.size} selected`;
   $('bulkToolbar').classList.toggle('hidden',selectedIds.size===0);
-  $('selectVisibleBtn').textContent=lastVisibleIds.length&&lastVisibleIds.every(id=>selectedIds.has(id))?'Deselect spread':'Select spread';
-  $('viewModeBtn').textContent=viewMode==='grid'?'☷ List view':'▦ Grid view';
   $('pageSizeSelect').value=String(pageSize);
   document.querySelectorAll('.main-tab').forEach(t=>t.classList.toggle('active',t.dataset.page===activePage));
   document.querySelectorAll('.content-page').forEach(p=>p.classList.toggle('active',p.id==='page-'+activePage||(activePage==='wishlist'&&p.id==='page-collection')));
-  $('pageTitle').textContent=activePage==='wishlist'?'Wishlist':'Collection';
-  $('pageSubtitle').textContent=activePage==='wishlist'?'Items you are still hunting for.':'Browse the items you have collected.';
+  const browsingCollection=activePage==='collection'||activePage==='wishlist';
+  const showingShelf=browsingCollection&&viewMode==='binder'&&shelfViewActive;
+  $('bookshelfView').classList.toggle('hidden',!showingShelf);
+  $('binderWorkspace').classList.toggle('hidden',showingShelf);
+  $('binderBook').classList.toggle('hidden',viewMode==='list');
+  $('listViewContainer').classList.toggle('hidden',viewMode!=='list'||!browsingCollection);
+  $('backToShelfBtn').classList.toggle('hidden',!browsingCollection||shelfViewActive||viewMode==='list');
+  $('pageTitle').textContent=!browsingCollection?(activePage==='progress'?'Progress':'Settings'):(viewMode==='list'?(cf.value==='all'?(activePage==='wishlist'?'Wishlist list':'Collection list'):`${cf.value} list`):(showingShelf?(activePage==='wishlist'?'Wishlist':'Collection'):(cf.value==='all'?(activePage==='wishlist'?'All Wishlist':'All Collection'):cf.value)));
+  $('pageSubtitle').textContent=!browsingCollection?'':viewMode==='list'?(cf.value==='all'?'Browse your items in a simple list.':`Browsing ${cf.value} in list view.`):showingShelf?(activePage==='wishlist'?'Choose a binder to browse your wishlist.':'Choose a binder to browse your collection.'):(cf.value==='all'?'Browsing all categories in one binder.':`Browsing the ${cf.value} binder.`);
   $('addBtn').classList.toggle('hidden',activePage!=='collection'&&activePage!=='wishlist');
+  $('addBtn').textContent=activePage==='wishlist'?'＋ Add to wishlist':'＋ Add item';
   $('searchInput').placeholder=activePage==='wishlist'?'Search your wishlist…':'Search your collection…';
   if($('viewModeSetting'))$('viewModeSetting').value=viewMode;
   if($('pageSizeSetting'))$('pageSizeSetting').value=String(pageSize);
@@ -476,7 +620,7 @@ document.addEventListener('pointerup',e=>{const start=binderPointerStart;binderP
 let binderTouchStart=null;
 $('collectionGrid').addEventListener('touchstart',e=>{const t=e.changedTouches?.[0];if(!t)return;binderTouchStart={x:t.clientX,y:t.clientY,interactive:!!e.target.closest('button,input,select,textarea,.card-actions,.pagination')};},{passive:true});
 $('collectionGrid').addEventListener('touchend',e=>{const t=e.changedTouches?.[0],start=binderTouchStart;binderTouchStart=null;if(!t||!start||start.interactive)return;const dx=t.clientX-start.x,dy=t.clientY-start.y;if(Math.abs(dx)>72&&Math.abs(dx)>Math.abs(dy)*1.35){if(dx<0)turnToPage(currentPage+1);else turnToPage(currentPage-1)}},{passive:true});
-document.addEventListener('keydown',e=>{if(!['collection','wishlist'].includes(activePage)||document.querySelector('.modal-backdrop.open')||e.altKey||e.ctrlKey||e.metaKey)return;const tag=e.target?.tagName?.toLowerCase();if(['input','textarea','select'].includes(tag)||e.target?.isContentEditable)return;if(e.key==='ArrowRight'){e.preventDefault();turnToPage(currentPage+1)}else if(e.key==='ArrowLeft'){e.preventDefault();turnToPage(currentPage-1)}});
+document.addEventListener('keydown',e=>{if(viewMode!=='binder'||!['collection','wishlist'].includes(activePage)||shelfViewActive||document.querySelector('.modal-backdrop.open')||e.altKey||e.ctrlKey||e.metaKey)return;const tag=e.target?.tagName?.toLowerCase();if(['input','textarea','select'].includes(tag)||e.target?.isContentEditable)return;if(e.key==='ArrowRight'){e.preventDefault();turnToPage(currentPage+1)}else if(e.key==='ArrowLeft'){e.preventDefault();turnToPage(currentPage-1)}});
 
 function saveItemFromForm(e){
   e.preventDefault();
@@ -511,15 +655,43 @@ $('saveItemBtn').addEventListener('click',e=>{
   saveItemFromForm(e);
 });
 function deleteItem(id,skipConfirm=false){const item=items.find(x=>x.id===id);if(!item)return;if(!skipConfirm&&!confirm(`Delete “${item.name}” from your collection? This deletion will sync to your other devices when cloud sync is connected.`))return;const snapshot={...item},deletedAt=isoNow();items=items.filter(x=>x.id!==id);selectedIds.delete(id);tombstones[id]={deletedAt,updatedAt:deletedAt};lastDeletedItem={item:snapshot,deletedAt};persistItems();persistTombstones();render();dispatchLocalSave();toast('Item deleted.','Undo',()=>{const restored={...snapshot,updatedAt:new Date(Math.max(Date.now(),timeOf(deletedAt)+1)).toISOString()};items.unshift(restored);delete tombstones[id];persistItems();persistTombstones();render();dispatchLocalSave();toast('Deletion undone.')})}
-$('collectionGrid').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const item=items.find(x=>x.id===b.dataset.id);if(b.dataset.action==='options'){const card=b.closest('.item-card');if(card){const open=card.classList.toggle('options-open');b.setAttribute('aria-expanded',String(open))}return}if(!item)return;if(b.dataset.action==='select'){if(selectedIds.has(item.id))selectedIds.delete(item.id);else selectedIds.add(item.id);render();return}if(b.dataset.action==='quantity-plus'||b.dataset.action==='quantity-minus'){const old=Math.max(1,Number.parseInt(item.quantity??1,10)||1);item.quantity=b.dataset.action==='quantity-plus'?Math.min(99999,old+1):Math.max(1,old-1);item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(`Amount updated to ${item.quantity}.`);return}if(b.dataset.action==='edit')openItemModal(item);else if(b.dataset.action==='delete')deleteItem(item.id);else if(b.dataset.action==='toggle'){item.status=item.status==='owned'?'wanted':'owned';item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(item.status==='owned'?'Added to your collection.':'Moved to your wishlist.')}});
+function handleItemCardAction(e){
+  const b=e.target.closest('button[data-action]');
+  if(!b){
+    const card=e.target.closest('.item-card');
+    const root=e.currentTarget;
+    if(!card){root.querySelectorAll('.item-card.options-open').forEach(el=>el.classList.remove('options-open'));return}
+    const isOpen=card.classList.contains('options-open');
+    if(isOpen){if(e.target.closest('.photo,.item-title'))card.classList.remove('options-open')}
+    else{root.querySelectorAll('.item-card.options-open').forEach(el=>el.classList.remove('options-open'));card.classList.add('options-open')}
+    return;
+  }
+  const item=items.find(x=>x.id===b.dataset.id);if(!item)return;
+  if(b.dataset.action==='select'){if(selectedIds.has(item.id))selectedIds.delete(item.id);else selectedIds.add(item.id);render();return}
+  if(b.dataset.action==='quantity-plus'||b.dataset.action==='quantity-minus'){const old=Math.max(1,Number.parseInt(item.quantity??1,10)||1);item.quantity=b.dataset.action==='quantity-plus'?Math.min(99999,old+1):Math.max(1,old-1);item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(`Amount updated to ${item.quantity}.`);return}
+  if(b.dataset.action==='edit')openItemModal(item);else if(b.dataset.action==='delete')deleteItem(item.id);else if(b.dataset.action==='toggle'){item.status=item.status==='owned'?'wanted':'owned';item.updatedAt=isoNow();persistItems();render();dispatchLocalSave();toast(item.status==='owned'?'Added to your collection.':'Moved to your wishlist.')}
+}
+function handleItemCardKeydown(e){if(e.key==='Escape'){document.querySelectorAll('.item-card.options-open').forEach(card=>card.classList.remove('options-open'));return}const card=e.target.closest('.item-card');if(!card||e.target!==card)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();const root=e.currentTarget,isOpen=card.classList.contains('options-open');root.querySelectorAll('.item-card.options-open').forEach(el=>el.classList.remove('options-open'));if(!isOpen)card.classList.add('options-open')}}
+$('collectionGrid').addEventListener('click',handleItemCardAction);$('listItemsView').addEventListener('click',handleItemCardAction);$('collectionGrid').addEventListener('keydown',handleItemCardKeydown);$('listItemsView').addEventListener('keydown',handleItemCardKeydown);
 $('addBtn').addEventListener('click',()=>openItemModal());
-$('searchInput').addEventListener('input',()=>{currentPage=1;saveCurrentView();render()});$('categoryFilter').addEventListener('change',()=>{const category=$('categoryFilter').value||'all';currentPage=Math.max(1,Number.parseInt(binderPageStates[binderPageKey(activePage,category)],10)||1);saveCurrentView();render()});$('sortSelect').addEventListener('change',()=>{currentPage=1;saveCurrentView();render()});
+$('searchInput').addEventListener('input',()=>{currentPage=1;saveCurrentView();render()});$('categoryFilter').addEventListener('change',()=>{const category=$('categoryFilter').value||'all';shelfViewActive=false;currentPage=Math.max(1,Number.parseInt(binderPageStates[binderPageKey(activePage,category)],10)||1);saveCurrentView();render()});$('sortSelect').addEventListener('change',()=>{currentPage=1;saveCurrentView();render()});
+function openShelfBinder(category){if(!['collection','wishlist'].includes(activePage))return;const exists=[...$('categoryFilter').options].some(option=>option.value===category);if(!exists&&category!=='all'){toast('That category is no longer available.');render();return}shelfViewActive=false;$('categoryFilter').value=category;$('searchInput').value='';selectedIds.clear();currentPage=Math.max(1,Number.parseInt(binderPageStates[binderPageKey(activePage,category)],10)||1);saveCurrentView();render()}
+$('bookshelfShelves').addEventListener('click',event=>{const allBinder=event.target.closest('[data-shelf-all]');if(allBinder){openShelfBinder('all');return}const categoryBinder=event.target.closest('[data-shelf-category]');if(categoryBinder)openShelfBinder(categoryBinder.dataset.shelfCategory)});
+$('backToShelfBtn').addEventListener('click',()=>{shelfViewActive=true;$('categoryFilter').value='all';$('searchInput').value='';selectedIds.clear();currentPage=1;saveCurrentView();render()});
 $('progressCategoryFilter').addEventListener('change',render);$('progressBasis').addEventListener('change',()=>{progressBasis=$('progressBasis').value;persistSettings();render()});$('categoryTotals').addEventListener('change',e=>{const input=e.target.closest('input[data-category-goal]');if(!input)return;const category=input.dataset.category;const value=Number.parseInt(input.value,10);if(!input.value.trim()){delete categoryGoals[category];persistSettings();render();toast('Goal cleared.');return}if(!Number.isFinite(value)||value<1||value>99999){toast('Set a goal between 1 and 99,999.');input.value=categoryGoals[category]||'';return}categoryGoals[category]=value;persistSettings();render();toast('Collection goal saved.')});
+$('listPagination').addEventListener('click',event=>{const button=event.target.closest('button[data-list-page]');if(!button||button.disabled)return;currentPage=Math.max(1,Number.parseInt(button.dataset.listPage,10)||1);saveCurrentView();render()});
 $('pageSizeSelect').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSelect').value);currentPage=1;saveCurrentView();applyAppearance();render()});$('pageSizeSetting').addEventListener('change',()=>{pageSize=normalizePageSize($('pageSizeSetting').value);currentPage=1;saveCurrentView();applyAppearance();render()});
-function setViewMode(mode){viewMode=mode==='list'?'list':'grid';persistSettings();applyAppearance();render()}
-$('viewModeBtn').addEventListener('click',()=>setViewMode(viewMode==='grid'?'list':'grid'));$('viewModeSetting').addEventListener('change',()=>setViewMode($('viewModeSetting').value));
+function setViewMode(mode){
+  const next=mode==='list'?'list':'binder';if(next===viewMode){applyAppearance();return}
+  if(['collection','wishlist'].includes(activePage))saveCurrentView();
+  for(const page of ['collection','wishlist']){const state=viewStates[page]||{query:'',category:'all',sort:'recent',page:1,shelf:true};const wasShelf=state.shelf===true;viewStates[page]=next==='binder'?{...state,category:'all',page:1,shelf:true}:{...state,category:wasShelf?'all':(state.category||'all'),page:1,shelf:false};}
+  viewMode=next;currentPage=1;selectedIds.clear();
+  if(['collection','wishlist'].includes(activePage))restoreCurrentView();else{const state=viewStates.collection||{};const valid=[...$('categoryFilter').options].some(o=>o.value===(state.category||'all'));$('categoryFilter').value=next==='binder'?'all':(valid&&!state.shelf?(state.category||'all'):'all');$('searchInput').value=state.query||'';shelfViewActive=next==='binder';}
+  persistSettings();applyAppearance();render();toast(next==='binder'?'Binder view enabled.':'List view enabled.');
+}
+$('viewModeSetting').addEventListener('change',()=>setViewMode($('viewModeSetting').value));
 $('themeToggleBtn').addEventListener('click',()=>{darkMode=!darkMode;persistSettings();applyAppearance();toast(darkMode?'Dark mode enabled.':'Light mode enabled.')});
-$('selectVisibleBtn').addEventListener('click',()=>{const allSelected=lastVisibleIds.length&&lastVisibleIds.every(id=>selectedIds.has(id));for(const id of lastVisibleIds){if(allSelected)selectedIds.delete(id);else selectedIds.add(id)}render()});
+
 $('clearSelectionBtn').addEventListener('click',()=>{selectedIds.clear();render()});
 function bulkMove(status){const selected=items.filter(x=>selectedIds.has(x.id));if(!selected.length)return;const now=isoNow();selected.forEach(item=>{item.status=status;item.updatedAt=now});selectedIds.clear();persistItems();render();dispatchLocalSave();toast(`${selected.length} item${selected.length===1?'':'s'} moved to ${status==='owned'?'your collection':'your wishlist'}.`)}
 $('bulkMoveOwned').addEventListener('click',()=>bulkMove('owned'));$('bulkMoveWanted').addEventListener('click',()=>bulkMove('wanted'));
